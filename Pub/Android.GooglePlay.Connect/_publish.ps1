@@ -1,4 +1,5 @@
-# . "$PSScriptRoot/../Core/Common.ps1"
+$vhdir =  Split-Path -parent (Split-Path -parent (Split-Path -parent $PSScriptRoot));
+. "$vhdir/VpnHood/Pub/Core/Common.ps1"
 
 Write-Host "";
 Write-Host "*** Publishing VpnHood CONNECT of GooglePlay  ..." -BackgroundColor Blue -ForegroundColor White;
@@ -16,6 +17,7 @@ if ($null -eq $apkFileData )
 $apkFile = $apkFileData.FullName;
 $apkVersionCode = (Get-Item $apkFile).Basename;
 $versionTag = $apkVersionCode
+$versionParam = "$($version.ToString(2)).$apkVersionCode";
 
 # prepare module folders
 $moduleDir = "$projectDir/apk/$versionTag";
