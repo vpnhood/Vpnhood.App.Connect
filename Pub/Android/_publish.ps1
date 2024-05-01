@@ -1,8 +1,11 @@
-$vhdir =  Split-Path -parent (Split-Path -parent (Split-Path -parent $PSScriptRoot));
+$solutionDir = (Split-Path -parent (Split-Path -parent $PSScriptRoot))
+$vhdir =  Split-Path -parent $solutionDir;
 . "$vhdir/VpnHood/Pub/Core/Common.ps1"
+$solutionDir = (Split-Path -parent (Split-Path -parent $PSScriptRoot))
 
 Write-Host "";
-Write-Host "*** Publishing VpnHood CONNECT of GooglePlay  ..." -BackgroundColor Blue -ForegroundColor White;
+Write-Host "*** Publishing VpnHood CONNECT of GooglePlay ..." -BackgroundColor Blue -ForegroundColor White;
+
 
 $projectDir = $PSScriptRoot
 
