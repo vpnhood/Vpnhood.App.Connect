@@ -1,5 +1,6 @@
 {
-  "PreloadAds": { 
-    {"*", false},
-    {"AE", true}
+  "PreloadAds": {
+    "*": false,
+    "AE": true
+  }
 }
