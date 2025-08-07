@@ -1,6 +1,7 @@
 {
   "PreloadAds": {
-    "*": false,
-    "AE": true
+    "*": true,
+    "AE": true,
+    "BR": true
   }
 }
