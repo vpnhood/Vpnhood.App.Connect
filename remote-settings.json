@@ -1,7 +1,3 @@
 {
-  "PreloadAds": {
-    "*": true,
-    "AE": true,
-    "BR": true
-  }
+  "DetectAdBlocker": true
 }
