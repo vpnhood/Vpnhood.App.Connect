@@ -19,11 +19,11 @@ if ($null -eq $apkFileData )
 }
 $apkFile = $apkFileData.FullName;
 $apkVersionCode = (Get-Item $apkFile).Basename;
-$versionTag = $apkVersionCode
 $versionParam = "$($version.ToString(2)).$apkVersionCode";
+$versionTag = "v$($version.ToString(2)).$apkVersionCode";
 
 # prepare module folders
-$moduleDir = "$projectDir/apk/$versionTag";
+$moduleDir = "$projectDir/apk/$apkVersionCode";
 $moduleDirLatest = "$projectDir/apk/latest";
 $module_infoFile = "$moduleDir/VpnHoodConnect-android.json";
 $module_packageFile = "$moduleDir/VpnHoodConnect-android.apk";
@@ -50,7 +50,7 @@ $json = @{
 $json | ConvertTo-Json | Out-File "$module_infoFile" -Encoding ASCII;
 
 # move the apk
-Move-Item -Path $apkFile -Destination $module_packageFile -Force;
+Move-Item -Path $apkFile -Destination $module_packageFile -Force; 
 Copy-Item -path "$moduleDir/*" -Destination "$moduleDirLatest/" -Force -Recurse;
 
 # Publishing to GitHub
@@ -61,7 +61,7 @@ Push-Location -Path "$solutionDir";
 # Write-Host "*** Updating Android apk of GooglePlay to $versionTag ..." -BackgroundColor Blue -ForegroundColor White;
 # $latestVersion = (gh release list -R "vpnhood/vpnhood" --limit 1 --exclude-drafts  --exclude-pre-releases | ForEach-Object { $_.Split()[0] });
 
-Write-Output "Updating the Release ...";
-gh release upload "latest" $module_infoFile $module_packageFile --clobber;
+Write-Output "Updating the Release ($versionTag) ...";
+gh release upload $versionTag $module_infoFile $module_packageFile --clobber;
 
 Pop-Location
