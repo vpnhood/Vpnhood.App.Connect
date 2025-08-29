@@ -21,6 +21,7 @@ $apkFile = $apkFileData.FullName;
 $apkVersionCode = (Get-Item $apkFile).Basename;
 $versionParam = "$($version.ToString(2)).$apkVersionCode";
 $versionTag = "v$($version.ToString(2)).$apkVersionCode";
+$latestVersionTag = (gh release list -R "vpnhood/vpnhood" --limit 1 --exclude-drafts  --exclude-pre-releases | ForEach-Object { $_.Split()[0] });
 
 # prepare module folders
 $moduleDir = "$projectDir/apk/$apkVersionCode";
@@ -40,7 +41,7 @@ $module_packageFileName = $(Split-Path "$module_packageFile" -leaf);
 $json = @{
 	Version = $versionParam; 	
 	UpdateInfoUrl = "https://github.com/vpnhood/Vpnhood.Client.Connect/releases/latest/download/$module_infoFileName";
-	PackageUrl = "https://github.com/vpnhood/Vpnhood.Client.Connect/releases/latest/download/$module_packageFileName";
+	PackageUrl = "https://github.com/vpnhood/VpnHood.App.Connect/releases/download/$latestVersionTag/$module_packageFileName";
 	InstallationPageUrl = "https://github.com/vpnhood/Vpnhood.Client.Connect/wiki/Get-VpnHood-CONNECT";
 	GooglePlayUrl = "https://play.google.com/store/apps/details?id=com.vpnhood.connect.android";
 	ReleaseDate = "$releaseDate";
@@ -57,11 +58,8 @@ Copy-Item -path "$moduleDir/*" -Destination "$moduleDirLatest/" -Force -Recurse;
 Push-Location -Path "$solutionDir";
 
 # apk
-# Write-Host;
 # Write-Host "*** Updating Android apk of GooglePlay to $versionTag ..." -BackgroundColor Blue -ForegroundColor White;
-# $latestVersion = (gh release list -R "vpnhood/vpnhood" --limit 1 --exclude-drafts  --exclude-pre-releases | ForEach-Object { $_.Split()[0] });
-
-Write-Output "Updating the Release ($versionTag) ...";
-gh release upload $versionTag $module_infoFile $module_packageFile --clobber;
+Write-Output "Updating $versionTag as the Latest Release ($latestVersionTag)...";
+gh release upload $latestVersionTag $module_infoFile $module_packageFile --clobber;
 
 Pop-Location
