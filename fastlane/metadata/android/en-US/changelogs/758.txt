@@ -1,0 +1,3 @@
+* Feature: Add French & Italian languages
+* Update: Add badge information icon and dialog on home page
+* Update: Improve pages & UI
