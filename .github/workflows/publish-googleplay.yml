@@ -76,8 +76,21 @@ jobs:
           fi
           echo "PACKAGE_ID=$PACKAGE_ID" >> $GITHUB_ENV
           
-          # auto-generate a version code from version name if needed
-          VERSION_CODE=$(echo "$VERSION_NAME" | tr -cd '0-9' | tail -c 9)
+          # Derive VersionCode: for pattern X.Y.Z use Z (third component)
+          RAW_VERSION_CODE=$(jq -r '(.VersionCode // .Build // .BuildNumber // "")' "$META_PATH")
+          if [ -n "$RAW_VERSION_CODE" ] && [ "$RAW_VERSION_CODE" != "null" ]; then
+            VERSION_CODE=$RAW_VERSION_CODE
+          elif echo "$VERSION_NAME" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            VERSION_CODE=$(echo "$VERSION_NAME" | awk -F'.' '{print $3}')
+          else
+            # Fallback: digits only last up to 9 digits
+            VERSION_CODE=$(echo "$VERSION_NAME" | tr -cd '0-9' | tail -c 9)
+          fi
+
+          if [ -z "$VERSION_CODE" ]; then
+            echo "❌ Unable to determine VERSION_CODE"; exit 1
+          fi
+
           echo "VERSION_CODE=$VERSION_CODE" >> $GITHUB_ENV
           echo "Using VersionName=$VERSION_NAME, VersionCode=$VERSION_CODE, PackageId=$PACKAGE_ID"
 
@@ -116,16 +129,18 @@ jobs:
         env:
           PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
           SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
+          VERSION_CODE: ${{ env.VERSION_CODE }}
         run: |
-          fastlane android download_signed
+          echo "Attempting to download universal APK for version code $VERSION_CODE"
+          fastlane android download_signed version_code:"$VERSION_CODE"
 
-          # supply downloads APKs to fastlane/metadata/android/*/apks/
-          APK_PATH=$(find fastlane/metadata -type f -name "*.apk" | head -n1 || true)
+          # supply downloads APKs typically under fastlane/metadata/android/*/apks/
+          APK_PATH=$(find fastlane -type f -name "*.apk" | head -n1 || true)
           if [ -z "$APK_PATH" ]; then
             echo "❌ No APK found after download"
-            echo "Directory structure:"
-            find fastlane -type d -name "*apk*" 2>/dev/null || echo "No apk directories found"
-            find fastlane -type f -name "*.apk" 2>/dev/null || echo "No APK files found"
+            echo "Directory structure (fastlane):"
+            find fastlane -maxdepth 6 -type d -name "*apk*" 2>/dev/null || true
+            find fastlane -maxdepth 6 -type f -name "*.apk" 2>/dev/null || true
             exit 1
           fi
           echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
@@ -138,7 +153,7 @@ jobs:
         run: |
           ASSETS=$(gh release view "$TAG" --json assets -q '.assets[].name')
           echo "Assets before:"
-          echo "$ASSETS"
+            echo "$ASSETS"
 
           OLD_AAB=$(echo "$ASSETS" | grep -E '\.aab$' || true)
           if [ -n "$OLD_AAB" ]; then

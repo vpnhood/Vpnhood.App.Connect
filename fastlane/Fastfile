@@ -42,11 +42,16 @@ platform :android do
 
   desc "Download universal Play-signed APK"
   lane :download_signed do |options|
+    # Ensure version_code provided (Play API requires specifying to fetch generated universal apk)
+    unless options[:version_code]
+      UI.user_error!("version_code is required. Pass via 'fastlane android download_signed version_code:123'.")
+    end
     download_universal_apk_from_google_play(
         package_name: ENV['SUPPLY_PACKAGE_NAME'],
         json_key_data: ENV['PLAY_JSON_KEY'],
         version_code: options[:version_code],
         destination: './fastlane/downloaded.apk'
     )
+    UI.success("Downloaded universal APK for version code #{options[:version_code]}")
   end
 end
