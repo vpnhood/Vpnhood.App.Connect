@@ -8,10 +8,6 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        release_type: [prerelease, release]
     permissions:
       contents: write   # required for gh release upload/delete-asset
 
@@ -27,38 +23,37 @@ jobs:
       - name: Prepare GH token
         run: echo "GH_TOKEN=${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
 
-      - name: Resolve tag & track for ${{ matrix.release_type }}
+      - name: Resolve latest release and track
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
           set -e
-          echo "Resolving tag for release_type='${{ matrix.release_type }}'"
-          if [ "${{ matrix.release_type }}" = "release" ]; then
-            # Latest stable (non-prerelease) release
-            TAG=$(gh release view --json tagName,isPrerelease -q 'select(.isPrerelease==false) | .tagName')
-            TRACK=production
-          else
-            # Latest prerelease
-            TAG=$(gh api repos/${{ github.repository }}/releases --paginate --jq '[ .[] | select(.prerelease==true and .draft==false) ][0].tag_name')
-            TRACK=internal
-          fi
+          echo "Finding the absolute latest release (prerelease or stable)..."
+          
+          # Get the latest release (includes prereleases)
+          RELEASE_INFO=$(gh api repos/${{ github.repository }}/releases --paginate --jq '[ .[] | select(.draft==false) ][0]')
+          TAG=$(echo "$RELEASE_INFO" | jq -r '.tag_name')
+          IS_PRERELEASE=$(echo "$RELEASE_INFO" | jq -r '.prerelease')
 
           if [ -z "$TAG" ] || [ "$TAG" = "null" ]; then
-            echo "⚠️ No tag found for release_type='${{ matrix.release_type }}' -> skipping job";
-            echo "SKIP_JOB=true" >> $GITHUB_ENV
-            exit 0
+            echo "❌ No release found"; exit 1
           fi
+
+          # Determine track based on release type
+          if [ "$IS_PRERELEASE" = "true" ]; then
+            TRACK=internal
+            echo "📦 Latest release is a prerelease"
+          else
+            TRACK=production
+            echo "📦 Latest release is a stable release"
+          fi
+
           echo "TAG=$TAG" >> $GITHUB_ENV
           echo "TRACK=$TRACK" >> $GITHUB_ENV
           echo "✅ Using TAG=$TAG TRACK=$TRACK"
 
-      - name: Skip if no tag
-        if: env.SKIP_JOB == 'true'
-        run: echo "Skipping because no matching release found for ${{ matrix.release_type }}."
-
       # --- Download AAB and its metadata JSON ---
       - name: Download AAB + JSON from GitHub Release
-        if: env.SKIP_JOB != 'true'
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
@@ -82,7 +77,6 @@ jobs:
 
       # --- Extract version info from JSON ---
       - name: Read version info from JSON metadata
-        if: env.SKIP_JOB != 'true'
         run: |
           VERSION_NAME=$(jq -r '.Version' "$META_PATH")
           if [ -z "$VERSION_NAME" ] || [ "$VERSION_NAME" = "null" ]; then
@@ -117,28 +111,24 @@ jobs:
 
       # --- Setup dependencies ---
       - name: Set up Java
-        if: env.SKIP_JOB != 'true'
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "17"
 
       - name: Set up Ruby
-        if: env.SKIP_JOB != 'true'
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
           bundler-cache: false
 
       - name: Install Fastlane
-        if: env.SKIP_JOB != 'true'
         run: |
           gem install fastlane --no-document
 
       # --- Upload AAB to Google Play ---
       # TEMPORARILY DISABLED FOR TESTING
       # - name: Upload to Google Play via Fastlane
-      #   if: env.SKIP_JOB != 'true'
       #   env:
       #     PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
       #     SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
@@ -152,7 +142,6 @@ jobs:
 
       # --- Download Google Play–signed APK ---
       - name: Download Google Play–signed APK via Fastlane
-        if: env.SKIP_JOB != 'true'
         env:
           PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
           SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
@@ -175,7 +164,6 @@ jobs:
 
       # --- Replace only the .aab file with the Play-signed .apk ---
       - name: Delete old AAB asset (keep others)
-        if: env.SKIP_JOB != 'true'
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
@@ -192,7 +180,6 @@ jobs:
           fi
 
       - name: Upload Play-signed APK to release (others untouched)
-        if: env.SKIP_JOB != 'true'
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
@@ -202,7 +189,6 @@ jobs:
           echo "✅ Uploaded Play-signed APK as $RENAMED (track=$TRACK)"
 
       - name: List final assets
-        if: env.SKIP_JOB != 'true'
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
