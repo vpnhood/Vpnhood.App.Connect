@@ -2,7 +2,7 @@ name: Publish AAB to Google Play & Replace Release Asset with Play-Signed APK
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main"  ]
   workflow_dispatch:
 
 jobs:
