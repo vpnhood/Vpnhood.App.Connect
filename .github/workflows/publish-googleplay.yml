@@ -68,16 +68,13 @@ jobs:
             echo "❌ Could not read Version field from $META_PATH"; exit 1
           fi
           echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
-          
-          # Read PackageId from JSON
           PACKAGE_ID=$(jq -r '.PackageId' "$META_PATH")
           if [ -z "$PACKAGE_ID" ] || [ "$PACKAGE_ID" = "null" ]; then
             echo "❌ Could not read PackageId field from $META_PATH"; exit 1
           fi
           echo "PACKAGE_ID=$PACKAGE_ID" >> $GITHUB_ENV
-          
-          # auto-generate a version code from version name if needed
-          VERSION_CODE=$(echo "$VERSION_NAME" | tr -cd '0-9' | tail -c 9)
+          # Derive version code: remove dots -> numeric
+          VERSION_CODE=$(echo "$VERSION_NAME" | tr -cd '0-9')
           echo "VERSION_CODE=$VERSION_CODE" >> $GITHUB_ENV
           echo "Using VersionName=$VERSION_NAME, VersionCode=$VERSION_CODE, PackageId=$PACKAGE_ID"
 
@@ -99,34 +96,27 @@ jobs:
           gem install fastlane --no-document
 
       # --- Upload AAB to Google Play ---
-      # TEMPORARILY DISABLED FOR TESTING
-      # - name: Upload to Google Play via Fastlane
-      #   env:
-      #     PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
-      #     SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
-      #   run: |
-      #     fastlane android playstore \
-      #       version_name:"$VERSION_NAME" \
-      #       version_code:"$VERSION_CODE" \
-      #       aab:"$AAB_PATH" \
-      #       track:"$TRACK"
+      - name: Upload to Google Play via Fastlane
+        env:
+          PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
+          SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
+        run: |
+          fastlane android playstore \
+            version_name:"$VERSION_NAME" \
+            version_code:"$VERSION_CODE" \
+            aab:"$AAB_PATH" \
+            track:"$TRACK"
 
-      # --- Download Google Play–signed APK ---
+      # --- Download Google Play–signed universal APK ---
       - name: Download Google Play–signed APK via Fastlane
         env:
           PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
           SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
         run: |
-          fastlane android download_signed
-
-          # supply downloads APKs to fastlane/metadata/android/*/apks/
-          APK_PATH=$(find fastlane/metadata -type f -name "*.apk" | head -n1 || true)
-          if [ -z "$APK_PATH" ]; then
-            echo "❌ No APK found after download"
-            echo "Directory structure:"
-            find fastlane -type d -name "*apk*" 2>/dev/null || echo "No apk directories found"
-            find fastlane -type f -name "*.apk" 2>/dev/null || echo "No APK files found"
-            exit 1
+          fastlane android download_signed version_code:"$VERSION_CODE"
+          APK_PATH=fastlane/downloaded.apk
+          if [ ! -f "$APK_PATH" ]; then
+            echo "❌ Expected APK at $APK_PATH"; exit 1
           fi
           echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
           echo "✅ Found Play-signed APK: $APK_PATH"
