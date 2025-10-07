@@ -99,16 +99,17 @@ jobs:
           gem install fastlane --no-document
 
       # --- Upload AAB to Google Play ---
-      - name: Upload to Google Play via Fastlane
-        env:
-          PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
-          SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
-        run: |
-          fastlane android playstore \
-            version_name:"$VERSION_NAME" \
-            version_code:"$VERSION_CODE" \
-            aab:"$AAB_PATH" \
-            track:"$TRACK"
+      # TEMPORARILY DISABLED FOR TESTING
+      # - name: Upload to Google Play via Fastlane
+      #   env:
+      #     PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
+      #     SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
+      #   run: |
+      #     fastlane android playstore \
+      #       version_name:"$VERSION_NAME" \
+      #       version_code:"$VERSION_CODE" \
+      #       aab:"$AAB_PATH" \
+      #       track:"$TRACK"
 
       # --- Download Google Play–signed APK ---
       - name: Download Google Play–signed APK via Fastlane
