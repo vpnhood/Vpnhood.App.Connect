@@ -45,7 +45,6 @@ platform :android do
     download_universal_apk_from_google_play(
         package_name: ENV['SUPPLY_PACKAGE_NAME'],
         json_key_data: ENV['PLAY_JSON_KEY'],
-        version_code_override: 'latest',
         destination: './fastlane/downloaded.apk'
     )
   end
