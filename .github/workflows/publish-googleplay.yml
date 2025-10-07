@@ -119,9 +119,14 @@ jobs:
         run: |
           fastlane android download_signed
 
-          APK_PATH=$(find . -type f -name "*.apk" | head -n1 || true)
+          # supply downloads APKs to fastlane/metadata/android/*/apks/
+          APK_PATH=$(find fastlane/metadata -type f -name "*.apk" | head -n1 || true)
           if [ -z "$APK_PATH" ]; then
-            echo "❌ No APK found after download"; exit 1
+            echo "❌ No APK found after download"
+            echo "Directory structure:"
+            find fastlane -type d -name "*apk*" 2>/dev/null || echo "No apk directories found"
+            find fastlane -type f -name "*.apk" 2>/dev/null || echo "No APK files found"
+            exit 1
           fi
           echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
           echo "✅ Found Play-signed APK: $APK_PATH"

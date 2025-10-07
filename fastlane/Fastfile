@@ -42,10 +42,17 @@ platform :android do
 
   desc "Download Play-signed APK"
   lane :download_signed do
-    download_universal_apk_from_google_play(
+    supply(
         package_name: ENV['SUPPLY_PACKAGE_NAME'],
         json_key_data: ENV['PLAY_JSON_KEY'],
-        destination: './fastlane/downloaded.apk'
+        track: 'internal',
+        skip_upload_apk: true,
+        skip_upload_aab: true,
+        skip_upload_metadata: true,
+        skip_upload_changelogs: true,
+        skip_upload_images: true,
+        skip_upload_screenshots: true,
+        download_apks: true
     )
   end
 end
