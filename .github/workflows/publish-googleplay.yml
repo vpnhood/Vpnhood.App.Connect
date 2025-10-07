@@ -2,26 +2,19 @@ name: Publish AAB to Google Play & Replace Release Asset with Play-Signed APK
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main"  ]
   workflow_dispatch:
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # needed for gh release upload/delete-asset
+      contents: write   # required for gh release upload/delete-asset
 
     env:
-      # Which release to use as source for the AAB
       TAG: latest
-      # Pattern of the AAB asset name in that release:
       AAB_PATTERN: "*.aab"
-
-      # Where to read version info (plain text files in repo)
-      VERSION_NAME_FILE: ".release/version_name"
-      VERSION_CODE_FILE: ".release/version_code"
-
-      # Track / Rollout (change if needed)
+      AAB_META_PATTERN: "*.aab.json"
       TRACK: "internal"
       ROLLOUT: ""
 
@@ -44,36 +37,44 @@ jobs:
             echo "TAG=$TAG" >> $GITHUB_ENV
           fi
 
-      - name: Download AAB from GitHub Release
+      # --- Download AAB and its metadata JSON ---
+      - name: Download AAB + JSON from GitHub Release
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
           mkdir -p artifacts
           gh release download "$TAG" --pattern "$AAB_PATTERN" --dir artifacts
+          gh release download "$TAG" --pattern "$AAB_META_PATTERN" --dir artifacts
+
           AAB_FILE=$(ls artifacts/*.aab | head -n1 || true)
+          META_FILE=$(ls artifacts/*.aab.json | head -n1 || true)
+
           if [ -z "$AAB_FILE" ]; then
             echo "❌ No .aab found matching pattern '$AAB_PATTERN' in release '$TAG'"; exit 1
           fi
-          echo "AAB_PATH=$AAB_FILE" >> $GITHUB_ENV
-          echo "Downloaded AAB: $AAB_FILE"
-
-      - name: Read version info from repo files
-        run: |
-          if [ -f "$VERSION_NAME_FILE" ]; then
-            VERSION_NAME=$(cat "$VERSION_NAME_FILE" | tr -d '\r\n')
-          else
-            echo "❌ Missing $VERSION_NAME_FILE"; exit 1
+          if [ -z "$META_FILE" ]; then
+            echo "❌ No .aab.json metadata file found for $AAB_FILE"; exit 1
           fi
-          if [ -f "$VERSION_CODE_FILE" ]; then
-            VERSION_CODE=$(cat "$VERSION_CODE_FILE" | tr -d '\r\n')
-          else
-            echo "❌ Missing $VERSION_CODE_FILE"; exit 1
+
+          echo "AAB_PATH=$AAB_FILE" >> $GITHUB_ENV
+          echo "META_PATH=$META_FILE" >> $GITHUB_ENV
+          echo "Downloaded: $AAB_FILE and $META_FILE"
+
+      # --- Extract version info from JSON ---
+      - name: Read version info from JSON metadata
+        run: |
+          VERSION_NAME=$(jq -r '.Version' "$META_PATH")
+          if [ -z "$VERSION_NAME" ] || [ "$VERSION_NAME" = "null" ]; then
+            echo "❌ Could not read Version field from $META_PATH"; exit 1
           fi
           echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
+          # auto-generate a version code from version name if needed
+          VERSION_CODE=$(echo "$VERSION_NAME" | tr -cd '0-9' | tail -c 9)
           echo "VERSION_CODE=$VERSION_CODE" >> $GITHUB_ENV
           echo "Using VersionName=$VERSION_NAME, VersionCode=$VERSION_CODE"
 
-      - name: Set up Java (required by Play/fastlane pieces)
+      # --- Setup dependencies ---
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -91,7 +92,7 @@ jobs:
           echo 'gem "fastlane"' >> Gemfile
           bundle install --jobs 4 --retry 3
 
-      # --- Upload to Google Play via your Fastlane lane (expects the "playstore" lane) ---
+      # --- Upload AAB to Google Play ---
       - name: Upload to Google Play via Fastlane
         env:
           PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
@@ -104,53 +105,50 @@ jobs:
             track:"$TRACK" \
             rollout:"$ROLLOUT"
 
-      # --- Download Google Play–signed APK (no local signing; uses Play's signature) ---
+      # --- Download Google Play–signed APK ---
       - name: Download Google Play–signed APK via Fastlane
         env:
           PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
           SUPPLY_PACKAGE_NAME: ${{ secrets.SUPPLY_PACKAGE_NAME }}
         run: |
-          # This calls a lane that runs `supply` with `download_apks: true`
-          # Add the lane `download_signed` to your Fastfile, as shown previously.
           bundle exec fastlane android download_signed
 
-          # Find a downloaded APK (fastlane puts it under fastlane/metadata/android/.../apks)
           APK_PATH=$(find . -type f -name "*.apk" | head -n1 || true)
           if [ -z "$APK_PATH" ]; then
-            echo "❌ No APK found after download"; find . -maxdepth 4 -type d -name "*apks*" -print; exit 1
+            echo "❌ No APK found after download"; exit 1
           fi
           echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
-          echo "Play-signed APK: $APK_PATH"
+          echo "✅ Found Play-signed APK: $APK_PATH"
 
-      # --- Replace only the AAB asset with the Play-signed APK (others untouched) ---
-      - name: Delete existing AAB asset (keep others)
+      # --- Replace only the .aab file with the Play-signed .apk ---
+      - name: Delete old AAB asset (keep others)
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
           ASSETS=$(gh release view "$TAG" --json assets -q '.assets[].name')
-          echo "Assets before: "; echo "$ASSETS"
+          echo "Assets before:"
+          echo "$ASSETS"
+
           OLD_AAB=$(echo "$ASSETS" | grep -E '\.aab$' || true)
           if [ -n "$OLD_AAB" ]; then
-            echo "Deleting AAB: $OLD_AAB"
+            echo "Deleting old AAB asset: $OLD_AAB"
             gh release delete-asset "$TAG" "$OLD_AAB" -y
           else
-            echo "No .aab asset to delete."
+            echo "No .aab asset found to delete."
           fi
 
-      - name: Upload Play-signed APK (without touching other files)
+      - name: Upload Play-signed APK to release (others untouched)
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
-          # Optional: rename for clarity
-          RENAMED="PlaySigned-${{ env.TAG }}.apk"
+          RENAMED="$(basename "$AAB_PATH" .aab)-signed.apk"
           cp "$APK_PATH" "$RENAMED"
-
           gh release upload "$TAG" "$RENAMED" --clobber
-          echo "✅ Uploaded $RENAMED to release $TAG"
+          echo "✅ Uploaded Play-signed APK as $RENAMED"
 
       - name: List final assets
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
-          echo "Assets after:"
+          echo "Assets after upload:"
           gh release view "$TAG" --json assets -q '.assets[].name'
