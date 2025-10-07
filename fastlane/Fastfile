@@ -1,0 +1,34 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Upload AAB, sync metadata, and download universal APK"
+  lane :playstore do
+    # add actions here: https://docs.fastlane.tools/actions
+    skip_docs
+    upload_to_play_store(
+        skip_upload_apk: 'true',
+        release_status: 'completed'
+        track: 'production'
+        rollout:'0.2'
+        sync_image_upload: 'true'
+        )
+    download_universal_apk_from_google_play(
+        destination: './Pub/Android.GooglePlay/apk/VpnHoodConnect-android.apk'
+    )
+  end
+end
