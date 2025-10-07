@@ -68,10 +68,18 @@ jobs:
             echo "❌ Could not read Version field from $META_PATH"; exit 1
           fi
           echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
+          
+          # Read PackageId from JSON
+          PACKAGE_ID=$(jq -r '.PackageId' "$META_PATH")
+          if [ -z "$PACKAGE_ID" ] || [ "$PACKAGE_ID" = "null" ]; then
+            echo "❌ Could not read PackageId field from $META_PATH"; exit 1
+          fi
+          echo "PACKAGE_ID=$PACKAGE_ID" >> $GITHUB_ENV
+          
           # auto-generate a version code from version name if needed
           VERSION_CODE=$(echo "$VERSION_NAME" | tr -cd '0-9' | tail -c 9)
           echo "VERSION_CODE=$VERSION_CODE" >> $GITHUB_ENV
-          echo "Using VersionName=$VERSION_NAME, VersionCode=$VERSION_CODE"
+          echo "Using VersionName=$VERSION_NAME, VersionCode=$VERSION_CODE, PackageId=$PACKAGE_ID"
 
       # --- Setup dependencies ---
       - name: Set up Java
@@ -96,7 +104,7 @@ jobs:
       - name: Upload to Google Play via Fastlane
         env:
           PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
-          SUPPLY_PACKAGE_NAME: ${{ secrets.SUPPLY_PACKAGE_NAME }}
+          SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
         run: |
           bundle exec fastlane android playstore \
             version_name:"$VERSION_NAME" \
@@ -109,7 +117,7 @@ jobs:
       - name: Download Google Play–signed APK via Fastlane
         env:
           PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
-          SUPPLY_PACKAGE_NAME: ${{ secrets.SUPPLY_PACKAGE_NAME }}
+          SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
         run: |
           bundle exec fastlane android download_signed
 
