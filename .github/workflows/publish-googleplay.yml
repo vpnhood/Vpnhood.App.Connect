@@ -8,14 +8,16 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        release_type: [prerelease, release]
     permissions:
       contents: write   # required for gh release upload/delete-asset
 
     env:
-      TAG: latest
       AAB_PATTERN: "*.aab"
       AAB_META_PATTERN: "*.aab.json"
-      TRACK: "internal"
       ROLLOUT: ""
 
     steps:
@@ -25,29 +27,47 @@ jobs:
       - name: Prepare GH token
         run: echo "GH_TOKEN=${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
 
-      - name: Resolve release tag if 'latest'
+      - name: Resolve tag & track for ${{ matrix.release_type }}
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
-          if [ "$TAG" = "latest" ]; then
-            REAL_TAG=$(gh release view --json tagName -q .tagName)
-            echo "TAG=$REAL_TAG" >> $GITHUB_ENV
-            echo "Using latest release tag: $REAL_TAG"
+          set -e
+          echo "Resolving tag for release_type='${{ matrix.release_type }}'"
+          if [ "${{ matrix.release_type }}" = "release" ]; then
+            # Latest stable (non-prerelease) release
+            TAG=$(gh release view --json tagName,isPrerelease -q 'select(.isPrerelease==false) | .tagName')
+            TRACK=production
           else
-            echo "TAG=$TAG" >> $GITHUB_ENV
+            # Latest prerelease
+            TAG=$(gh api repos/${{ github.repository }}/releases --paginate --jq '[ .[] | select(.prerelease==true and .draft==false) ][0].tag_name')
+            TRACK=internal
           fi
+
+          if [ -z "$TAG" ] || [ "$TAG" = "null" ]; then
+            echo "⚠️ No tag found for release_type='${{ matrix.release_type }}' -> skipping job";
+            echo "SKIP_JOB=true" >> $GITHUB_ENV
+            exit 0
+          fi
+          echo "TAG=$TAG" >> $GITHUB_ENV
+          echo "TRACK=$TRACK" >> $GITHUB_ENV
+          echo "✅ Using TAG=$TAG TRACK=$TRACK"
+
+      - name: Skip if no tag
+        if: env.SKIP_JOB == 'true'
+        run: echo "Skipping because no matching release found for ${{ matrix.release_type }}."
 
       # --- Download AAB and its metadata JSON ---
       - name: Download AAB + JSON from GitHub Release
+        if: env.SKIP_JOB != 'true'
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
           mkdir -p artifacts
-          gh release download "$TAG" --pattern "$AAB_PATTERN" --dir artifacts
-          gh release download "$TAG" --pattern "$AAB_META_PATTERN" --dir artifacts
+          gh release download "$TAG" --pattern "$AAB_PATTERN" --dir artifacts || true
+          gh release download "$TAG" --pattern "$AAB_META_PATTERN" --dir artifacts || true
 
-          AAB_FILE=$(ls artifacts/*.aab | head -n1 || true)
-          META_FILE=$(ls artifacts/*.aab.json | head -n1 || true)
+          AAB_FILE=$(ls artifacts/*.aab 2>/dev/null | head -n1 || true)
+          META_FILE=$(ls artifacts/*.aab.json 2>/dev/null | head -n1 || true)
 
           if [ -z "$AAB_FILE" ]; then
             echo "❌ No .aab found matching pattern '$AAB_PATTERN' in release '$TAG'"; exit 1
@@ -62,6 +82,7 @@ jobs:
 
       # --- Extract version info from JSON ---
       - name: Read version info from JSON metadata
+        if: env.SKIP_JOB != 'true'
         run: |
           VERSION_NAME=$(jq -r '.Version' "$META_PATH")
           if [ -z "$VERSION_NAME" ] || [ "$VERSION_NAME" = "null" ]; then
@@ -92,32 +113,37 @@ jobs:
           fi
 
           echo "VERSION_CODE=$VERSION_CODE" >> $GITHUB_ENV
-          echo "Using VersionName=$VERSION_NAME, VersionCode=$VERSION_CODE, PackageId=$PACKAGE_ID"
+          echo "✅ Using VersionName=$VERSION_NAME, VersionCode=$VERSION_CODE, PackageId=$PACKAGE_ID, Track=$TRACK"
 
       # --- Setup dependencies ---
       - name: Set up Java
+        if: env.SKIP_JOB != 'true'
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "17"
 
       - name: Set up Ruby
+        if: env.SKIP_JOB != 'true'
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
           bundler-cache: false
 
       - name: Install Fastlane
+        if: env.SKIP_JOB != 'true'
         run: |
           gem install fastlane --no-document
 
       # --- Upload AAB to Google Play ---
       # TEMPORARILY DISABLED FOR TESTING
       # - name: Upload to Google Play via Fastlane
+      #   if: env.SKIP_JOB != 'true'
       #   env:
       #     PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
       #     SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
       #   run: |
+      #     echo "Uploading $AAB_PATH (versionCode=$VERSION_CODE) to track $TRACK"
       #     fastlane android playstore \
       #       version_name:"$VERSION_NAME" \
       #       version_code:"$VERSION_CODE" \
@@ -126,12 +152,13 @@ jobs:
 
       # --- Download Google Play–signed APK ---
       - name: Download Google Play–signed APK via Fastlane
+        if: env.SKIP_JOB != 'true'
         env:
           PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
           SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
           VERSION_CODE: ${{ env.VERSION_CODE }}
         run: |
-          echo "Attempting to download universal APK for version code $VERSION_CODE"
+          echo "Attempting to download universal APK for version code $VERSION_CODE (track=$TRACK)"
           fastlane android download_signed version_code:"$VERSION_CODE"
 
           # supply downloads APKs typically under fastlane/metadata/android/*/apks/
@@ -148,12 +175,13 @@ jobs:
 
       # --- Replace only the .aab file with the Play-signed .apk ---
       - name: Delete old AAB asset (keep others)
+        if: env.SKIP_JOB != 'true'
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
           ASSETS=$(gh release view "$TAG" --json assets -q '.assets[].name')
           echo "Assets before:"
-            echo "$ASSETS"
+          echo "$ASSETS"
 
           OLD_AAB=$(echo "$ASSETS" | grep -E '\.aab$' || true)
           if [ -n "$OLD_AAB" ]; then
@@ -164,17 +192,19 @@ jobs:
           fi
 
       - name: Upload Play-signed APK to release (others untouched)
+        if: env.SKIP_JOB != 'true'
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
           RENAMED="$(basename "$AAB_PATH" .aab)-signed.apk"
           cp "$APK_PATH" "$RENAMED"
           gh release upload "$TAG" "$RENAMED" --clobber
-          echo "✅ Uploaded Play-signed APK as $RENAMED"
+          echo "✅ Uploaded Play-signed APK as $RENAMED (track=$TRACK)"
 
       - name: List final assets
+        if: env.SKIP_JOB != 'true'
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
-          echo "Assets after upload:"
+          echo "Assets after upload (TAG=$TAG):"
           gh release view "$TAG" --json assets -q '.assets[].name'
