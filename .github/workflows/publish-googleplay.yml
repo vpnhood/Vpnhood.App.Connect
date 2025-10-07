@@ -91,14 +91,12 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.2"
+          ruby-version: "3.3"
           bundler-cache: false
 
       - name: Install Fastlane
         run: |
-          echo 'source "https://rubygems.org"' > Gemfile
-          echo 'gem "fastlane"' >> Gemfile
-          bundle install --jobs 4 --retry 3
+          gem install fastlane --no-document
 
       # --- Upload AAB to Google Play ---
       - name: Upload to Google Play via Fastlane
@@ -106,12 +104,11 @@ jobs:
           PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
           SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
         run: |
-          bundle exec fastlane android playstore \
+          fastlane android playstore \
             version_name:"$VERSION_NAME" \
             version_code:"$VERSION_CODE" \
             aab:"$AAB_PATH" \
-            track:"$TRACK" \
-            rollout:"$ROLLOUT"
+            track:"$TRACK"
 
       # --- Download Google Play–signed APK ---
       - name: Download Google Play–signed APK via Fastlane
@@ -119,7 +116,7 @@ jobs:
           PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
           SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
         run: |
-          bundle exec fastlane android download_signed
+          fastlane android download_signed
 
           APK_PATH=$(find . -type f -name "*.apk" | head -n1 || true)
           if [ -z "$APK_PATH" ]; then

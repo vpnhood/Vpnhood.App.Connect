@@ -18,7 +18,7 @@ default_platform(:android)
 platform :android do
   desc "Upload AAB to Google Play"
   lane :playstore do |options|
-    upload_to_play_store(
+    upload_params = {
         aab: options[:aab],
         package_name: ENV['SUPPLY_PACKAGE_NAME'],
         json_key_data: ENV['PLAY_JSON_KEY'],
@@ -29,9 +29,15 @@ platform :android do
         skip_upload_screenshots: true,
         skip_upload_images: true,
         skip_upload_metadata: false,
-        release_status: 'completed',
-        rollout: options[:rollout]
-    )
+        release_status: 'completed'
+    }
+    
+    # Only add rollout if it has a valid value
+    if options[:rollout] && !options[:rollout].to_s.empty?
+      upload_params[:rollout] = options[:rollout]
+    end
+    
+    upload_to_play_store(upload_params)
   end
 
   desc "Download Play-signed APK"
