@@ -16,19 +16,31 @@
 default_platform(:android)
 
 platform :android do
-  desc "Upload AAB, sync metadata, and download universal APK"
-  lane :playstore do
-    # add actions here: https://docs.fastlane.tools/actions
-    skip_docs
+  desc "Upload AAB to Google Play"
+  lane :playstore do |options|
     upload_to_play_store(
-        skip_upload_apk: 'true',
-        release_status: 'completed'
-        track: 'production'
-        rollout:'0.2'
-        sync_image_upload: 'true'
-        )
+        aab: options[:aab],
+        package_name: ENV['SUPPLY_PACKAGE_NAME'],
+        json_key_data: ENV['PLAY_JSON_KEY'],
+        track: options[:track] || 'internal',
+        version_name: options[:version_name],
+        version_code: options[:version_code],
+        skip_upload_apk: true,
+        skip_upload_screenshots: true,
+        skip_upload_images: true,
+        skip_upload_metadata: false,
+        release_status: 'completed',
+        rollout: options[:rollout]
+    )
+  end
+
+  desc "Download Play-signed APK"
+  lane :download_signed do
     download_universal_apk_from_google_play(
-        destination: './Pub/Android.GooglePlay/apk/VpnHoodConnect-android.apk'
+        package_name: ENV['SUPPLY_PACKAGE_NAME'],
+        json_key_data: ENV['PLAY_JSON_KEY'],
+        version_code_override: 'latest',
+        destination: './fastlane/downloaded.apk'
     )
   end
 end
