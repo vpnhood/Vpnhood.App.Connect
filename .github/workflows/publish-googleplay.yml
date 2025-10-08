@@ -1,8 +1,8 @@
 name: Publish AAB to Google Play & Replace Release Asset with Play-Signed APK
 
 on:
-  push:
-    branches: [ "main"  ]
+  release:
+    types: [published]
   workflow_dispatch:
 
 jobs:
@@ -127,18 +127,25 @@ jobs:
           gem install fastlane --no-document
 
       # --- Upload AAB to Google Play ---
-      # TEMPORARILY DISABLED FOR TESTING
-      # - name: Upload to Google Play via Fastlane
-      #   env:
-      #     PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
-      #     SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
-      #   run: |
-      #     echo "Uploading $AAB_PATH (versionCode=$VERSION_CODE) to track $TRACK"
-      #     fastlane android playstore \
-      #       version_name:"$VERSION_NAME" \
-      #       version_code:"$VERSION_CODE" \
-      #       aab:"$AAB_PATH" \
-      #       track:"$TRACK"
+      - name: Upload to Google Play via Fastlane
+        env:
+          PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
+          SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
+        run: |
+          echo "Uploading $AAB_PATH (versionCode=$VERSION_CODE) to track $TRACK"
+          fastlane android playstore \
+            version_name:"$VERSION_NAME" \
+            version_code:"$VERSION_CODE" \
+            aab:"$AAB_PATH" \
+            track:"$TRACK" || {
+              EXIT_CODE=$?
+              # Check if error is due to already uploaded version (ignore it)
+              if grep -qi "apkUpgradeVersionConflict\|apkNoUpgradePath\|already been uploaded" fastlane/fastlane.log 2>/dev/null; then
+                echo "⚠️ Version already uploaded to Google Play - continuing..."
+              else
+                exit $EXIT_CODE
+              fi
+            }
 
       # --- Download Google Play–signed APK ---
       - name: Download Google Play–signed APK via Fastlane
@@ -162,48 +169,24 @@ jobs:
           echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
           echo "✅ Found Play-signed APK: $APK_PATH"
 
-      # --- Replace .aab and .aab.json with .apk and .json ---
-      - name: Delete old AAB and JSON assets
+      # --- Add Play-signed APK and .apk.json (keep AAB and .aab.json) ---
+      - name: Upload Play-signed APK and .apk.json
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
-          ASSETS=$(gh release view "$TAG" --json assets -q '.assets[].name')
-          echo "Assets before:"
-          echo "$ASSETS"
-
-          OLD_AAB=$(echo "$ASSETS" | grep -E '\.aab$' || true)
-          OLD_JSON=$(echo "$ASSETS" | grep -E '\.aab\.json$' || true)
-          
-          if [ -n "$OLD_AAB" ]; then
-            echo "Deleting old AAB asset: $OLD_AAB"
-            gh release delete-asset "$TAG" "$OLD_AAB" -y
-          else
-            echo "No .aab asset found to delete."
-          fi
-          
-          if [ -n "$OLD_JSON" ]; then
-            echo "Deleting old JSON metadata asset: $OLD_JSON"
-            gh release delete-asset "$TAG" "$OLD_JSON" -y
-          else
-            echo "No .aab.json asset found to delete."
-          fi
-
-      - name: Upload Play-signed APK and renamed JSON
-        env:
-          GH_TOKEN: ${{ env.GH_TOKEN }}
-        run: |
-          # Rename APK: product.aab -> product.apk
           BASE_NAME=$(basename "$AAB_PATH" .aab)
+          
+          # Upload APK: product.aab -> product.apk
           APK_NAME="${BASE_NAME}.apk"
           cp "$APK_PATH" "$APK_NAME"
           gh release upload "$TAG" "$APK_NAME" --clobber
           echo "✅ Uploaded Play-signed APK as $APK_NAME (track=$TRACK)"
           
-          # Rename JSON: product.aab.json -> product.json
-          JSON_NAME="${BASE_NAME}.json"
-          cp "$META_PATH" "$JSON_NAME"
-          gh release upload "$TAG" "$JSON_NAME" --clobber
-          echo "✅ Uploaded renamed metadata as $JSON_NAME"
+          # Upload .apk.json: product.aab.json -> product.apk.json
+          APK_JSON_NAME="${BASE_NAME}.apk.json"
+          cp "$META_PATH" "$APK_JSON_NAME"
+          gh release upload "$TAG" "$APK_JSON_NAME" --clobber
+          echo "✅ Uploaded metadata as $APK_JSON_NAME"
 
       - name: List final assets
         env:
