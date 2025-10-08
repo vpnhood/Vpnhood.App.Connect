@@ -144,7 +144,6 @@ jobs:
           PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
           SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
         run: |
-          set +e
           echo "Uploading $AAB_PATH (versionCode=$VERSION_CODE rollout='$ROLLOUT') to track $TRACK"
           fastlane android playstore \
             version_name:"$VERSION_NAME" \
@@ -152,18 +151,6 @@ jobs:
             aab:"$AAB_PATH" \
             track:"$TRACK" \
             rollout:"$ROLLOUT"
-          EXIT_CODE=$?
-          
-          # Fastfile handles version conflicts internally by retrying with metadata-only update
-          # Only fail if it's a different error
-          if [ $EXIT_CODE -ne 0 ]; then
-            echo "::warning title=Google Play Upload::Fastlane exited with code $EXIT_CODE. Check if metadata was updated."
-          else
-            echo "✅ Upload/update succeeded"
-          fi
-          
-          # Always continue to download APK step
-          exit 0
 
       # --- Download Google Play–signed APK ---
       - name: Download Google Play–signed APK via Fastlane
