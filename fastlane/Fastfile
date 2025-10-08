@@ -26,8 +26,8 @@ platform :android do
         version_name: options[:version_name],
         version_code: options[:version_code],
         skip_upload_apk: true,
-        skip_upload_screenshots: true,
-        skip_upload_images: true,
+        skip_upload_screenshots: false,
+        skip_upload_images: false,
         skip_upload_metadata: false,
         release_status: 'completed'
     }
@@ -37,7 +37,41 @@ platform :android do
       upload_params[:rollout] = options[:rollout]
     end
     
-    upload_to_play_store(upload_params)
+    begin
+      UI.message("🚀 Uploading AAB with metadata, images, and screenshots...")
+      UI.message("   versionCode=#{options[:version_code]} track=#{upload_params[:track]} rollout=#{upload_params[:rollout] || 'none'}")
+      upload_to_play_store(upload_params)
+      UI.success("✅ Upload of AAB and metadata succeeded")
+    rescue => e
+      if /Version code .* has already been used/i.match?(e.message) || 
+         /already been uploaded/i.match?(e.message) || 
+         /apkUpgradeVersionConflict/i.match?(e.message) ||
+         /apkNoUpgradePath/i.match?(e.message)
+        
+        UI.important("⚠️ Version code #{options[:version_code]} already exists on Google Play")
+        UI.important("🔄 Retrying with metadata/images/screenshots update only (no AAB)...")
+        
+        # Second pass: update metadata, images, screenshots only - DO NOT upload AAB
+        metadata_params = upload_params.dup
+        metadata_params.delete(:aab)
+        metadata_params[:skip_upload_aab] = true
+        metadata_params[:skip_upload_apk] = true
+        metadata_params[:skip_upload_screenshots] = false
+        metadata_params[:skip_upload_images] = false
+        metadata_params[:skip_upload_metadata] = false
+        
+        begin
+          upload_to_play_store(metadata_params)
+          UI.success("✅ Metadata/images/screenshots update completed for existing versionCode #{options[:version_code]}")
+        rescue => inner_error
+          UI.error("❌ Metadata-only update failed: #{inner_error.message}")
+          raise inner_error
+        end
+      else
+        UI.error("❌ Upload failed with error: #{e.message}")
+        raise e
+      end
+    end
   end
 
   desc "Download universal Play-signed APK"
