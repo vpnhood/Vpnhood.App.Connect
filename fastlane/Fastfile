@@ -43,7 +43,7 @@ platform :android do
       upload_to_play_store(upload_params)
       UI.success("✅ Upload of AAB and metadata succeeded")
     rescue => e
-      # Only handle version conflict errors - all other errors should fail
+      # ONLY handle version conflict errors - let ALL other errors fail naturally
       if /Version code .* has already been used/i.match?(e.message) || 
          /already been uploaded/i.match?(e.message) || 
          /apkUpgradeVersionConflict/i.match?(e.message) ||
@@ -61,16 +61,10 @@ platform :android do
         metadata_params[:skip_upload_images] = false
         metadata_params[:skip_upload_metadata] = false
         
-        begin
-          upload_to_play_store(metadata_params)
-          UI.success("✅ Metadata/images/screenshots update completed for existing versionCode #{options[:version_code]}")
-        rescue => inner_error
-          UI.error("❌ Metadata-only update failed: #{inner_error.message}")
-          raise inner_error
-        end
+        upload_to_play_store(metadata_params)
+        UI.success("✅ Metadata/images/screenshots update completed for existing versionCode #{options[:version_code]}")
       else
-        # For all other errors, re-raise to fail the lane
-        UI.error("❌ Upload failed with error: #{e.message}")
+        # For ALL other errors, re-raise to fail the lane immediately
         raise e
       end
     end
