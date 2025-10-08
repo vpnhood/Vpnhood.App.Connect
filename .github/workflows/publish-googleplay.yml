@@ -23,17 +23,23 @@ jobs:
       - name: Prepare GH token
         run: echo "GH_TOKEN=${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
 
-      - name: Resolve latest release and track
+      - name: Resolve release tag and track
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
           set -e
-          echo "Finding the absolute latest release (prerelease or stable)..."
           
-          # Get the latest release (includes prereleases)
-          RELEASE_INFO=$(gh api repos/${{ github.repository }}/releases --paginate --jq '[ .[] | select(.draft==false) ][0]')
-          TAG=$(echo "$RELEASE_INFO" | jq -r '.tag_name')
-          IS_PRERELEASE=$(echo "$RELEASE_INFO" | jq -r '.prerelease')
+          # Use event context if triggered by release event, otherwise find latest
+          if [ "${{ github.event_name }}" = "release" ]; then
+            TAG="${{ github.event.release.tag_name }}"
+            IS_PRERELEASE="${{ github.event.release.prerelease }}"
+            echo "📦 Using release from event: $TAG (prerelease=$IS_PRERELEASE)"
+          else
+            echo "Finding the absolute latest release (prerelease or stable)..."
+            RELEASE_INFO=$(gh api repos/${{ github.repository }}/releases --paginate --jq '[ .[] | select(.draft==false) ][0]')
+            TAG=$(echo "$RELEASE_INFO" | jq -r '.tag_name')
+            IS_PRERELEASE=$(echo "$RELEASE_INFO" | jq -r '.prerelease')
+          fi
 
           if [ -z "$TAG" ] || [ "$TAG" = "null" ]; then
             echo "❌ No release found"; exit 1
@@ -42,10 +48,10 @@ jobs:
           # Determine track based on release type
           if [ "$IS_PRERELEASE" = "true" ]; then
             TRACK=internal
-            echo "📦 Latest release is a prerelease"
+            echo "📦 Release is a prerelease -> internal track"
           else
             TRACK=production
-            echo "📦 Latest release is a stable release"
+            echo "📦 Release is stable -> production track"
           fi
 
           echo "TAG=$TAG" >> $GITHUB_ENV
