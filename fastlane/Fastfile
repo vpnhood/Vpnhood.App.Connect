@@ -43,12 +43,13 @@ platform :android do
       upload_to_play_store(upload_params)
       UI.success("✅ Upload of AAB and metadata succeeded")
     rescue => e
+      # Only handle version conflict errors - all other errors should fail
       if /Version code .* has already been used/i.match?(e.message) || 
          /already been uploaded/i.match?(e.message) || 
          /apkUpgradeVersionConflict/i.match?(e.message) ||
          /apkNoUpgradePath/i.match?(e.message)
         
-        UI.important("⚠️ Version code #{options[:version_code]} already exists on Google Play")
+        UI.important("⚠️  Version code #{options[:version_code]} already exists on Google Play")
         UI.important("🔄 Retrying with metadata/images/screenshots update only (no AAB)...")
         
         # Second pass: update metadata, images, screenshots only - DO NOT upload AAB
@@ -68,6 +69,7 @@ platform :android do
           raise inner_error
         end
       else
+        # For all other errors, re-raise to fail the lane
         UI.error("❌ Upload failed with error: #{e.message}")
         raise e
       end
