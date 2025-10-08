@@ -2,7 +2,7 @@ name: Publish AAB to Google Play & Replace Release Asset with Play-Signed APK
 
 on:
   release:
-    types: [prereleased]
+    types: [published]
   workflow_dispatch:
 
 jobs:
@@ -138,20 +138,25 @@ jobs:
           PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
           SUPPLY_PACKAGE_NAME: ${{ env.PACKAGE_ID }}
         run: |
+          set +e
           echo "Uploading $AAB_PATH (versionCode=$VERSION_CODE) to track $TRACK"
-          fastlane android playstore \
+          OUTPUT=$(fastlane android playstore \
             version_name:"$VERSION_NAME" \
             version_code:"$VERSION_CODE" \
             aab:"$AAB_PATH" \
-            track:"$TRACK" || {
-              EXIT_CODE=$?
-              # Check if error is due to already uploaded version (ignore it)
-              if grep -qi "apkUpgradeVersionConflict\|apkNoUpgradePath\|already been uploaded" fastlane/fastlane.log 2>/dev/null; then
-                echo "⚠️ Version already uploaded to Google Play - continuing..."
-              else
-                exit $EXIT_CODE
-              fi
-            }
+            track:"$TRACK" 2>&1)
+          EXIT_CODE=$?
+          echo "$OUTPUT"
+          if [ $EXIT_CODE -ne 0 ]; then
+            if echo "$OUTPUT" | grep -qiE "version code [0-9]+ has already been used|already been uploaded|apkUpgradeVersionConflict|apkNoUpgradePath"; then
+              echo "::warning title=Google Play Upload::Version already exists on Google Play (continuing)."
+            else
+              echo "❌ Upload failed (exit $EXIT_CODE)"
+              exit $EXIT_CODE
+            fi
+          else
+            echo "✅ Upload succeeded"
+          fi
 
       # --- Download Google Play–signed APK ---
       - name: Download Google Play–signed APK via Fastlane
