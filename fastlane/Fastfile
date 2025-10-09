@@ -26,9 +26,10 @@ platform :android do
         version_name: options[:version_name],
         version_code: options[:version_code],
         skip_upload_apk: true,
-        skip_upload_screenshots: false,
-        skip_upload_images: false,
-        skip_upload_metadata: false,
+        skip_upload_screenshots: true,
+        skip_upload_images: true,
+        skip_upload_metadata: true,
+        skip_upload_changelogs: false,
         release_status: 'completed'
     }
     
@@ -38,10 +39,10 @@ platform :android do
     end
     
     begin
-      UI.message("🚀 Uploading AAB with metadata, images, and screenshots...")
+      UI.message("🚀 Uploading AAB with changelog...")
       UI.message("   versionCode=#{options[:version_code]} track=#{upload_params[:track]} rollout=#{upload_params[:rollout] || 'none'}")
       upload_to_play_store(upload_params)
-      UI.success("✅ Upload of AAB and metadata succeeded")
+      UI.success("✅ Upload of AAB and changelog succeeded")
     rescue => e
       # ONLY handle version conflict errors - let ALL other errors fail naturally
       if /Version code .* has already been used/i.match?(e.message) || 
@@ -50,9 +51,9 @@ platform :android do
          /apkNoUpgradePath/i.match?(e.message)
         
         UI.important("⚠️  Version code #{options[:version_code]} already exists on Google Play")
-        UI.important("🔄 Updating metadata/changelogs only (skipping images/screenshots)...")
+        UI.important("🔄 Updating changelog only...")
         
-        # Update metadata for existing version - skip images and screenshots since they haven't changed
+        # Update only changelog for existing version
         supply(
           package_name: ENV['SUPPLY_PACKAGE_NAME'],
           json_key_data: ENV['PLAY_JSON_KEY'],
@@ -62,14 +63,35 @@ platform :android do
           skip_upload_apk: true,
           skip_upload_screenshots: true,
           skip_upload_images: true,
-          skip_upload_metadata: false
+          skip_upload_metadata: true,
+          skip_upload_changelogs: false
         )
-        UI.success("✅ Metadata/changelogs updated for existing versionCode #{options[:version_code]}")
+        UI.success("✅ Changelog updated for existing versionCode #{options[:version_code]}")
       else
         # For ALL other errors, re-raise to fail the lane immediately
         raise e
       end
     end
+  end
+
+  desc "Publish store contents (metadata, images, screenshots) to Google Play"
+  lane :publish_contents do |options|
+    UI.message("🚀 Publishing store contents (metadata, images, screenshots)...")
+    UI.message("   track=#{options[:track]}")
+    
+    supply(
+      package_name: ENV['SUPPLY_PACKAGE_NAME'],
+      json_key_data: ENV['PLAY_JSON_KEY'],
+      track: options[:track],
+      skip_upload_aab: true,
+      skip_upload_apk: true,
+      skip_upload_screenshots: false,
+      skip_upload_images: false,
+      skip_upload_metadata: false,
+      skip_upload_changelogs: true
+    )
+    
+    UI.success("✅ Store contents published successfully to track #{options[:track]}")
   end
 
   desc "Download universal Play-signed APK"
