@@ -174,8 +174,8 @@ jobs:
           echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
           echo "✅ Found Play-signed APK: $APK_PATH"
 
-      # --- Add Play-signed APK and .apk.json (keep AAB and .aab.json) ---
-      - name: Upload Play-signed APK and .apk.json
+      # --- Add Play-signed APK and product.json (keep AAB and .aab.json) ---
+      - name: Upload Play-signed APK and product.json
         env:
           GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
@@ -187,8 +187,8 @@ jobs:
           gh release upload "$TAG" "$APK_NAME" --clobber
           echo "✅ Uploaded Play-signed APK as $APK_NAME (track=$TRACK)"
           
-          # Upload .apk.json: product.aab.json -> product.apk.json
-          APK_JSON_NAME="${BASE_NAME}.apk.json"
+          # Upload product.json: product.aab.json -> product.json
+          APK_JSON_NAME="${BASE_NAME}.json"
           cp "$META_PATH" "$APK_JSON_NAME"
           gh release upload "$TAG" "$APK_JSON_NAME" --clobber
           echo "✅ Uploaded metadata as $APK_JSON_NAME"
