@@ -85,4 +85,16 @@ platform :android do
     )
     UI.success("Downloaded universal APK for version code #{options[:version_code]}")
   end
+
+  desc "Determine track based on release type"
+  lane :determine_track do
+  # Determine track based on release type
+  if [ "$IS_PRERELEASE" = "true" ]; then
+    TRACK=alpha
+    echo "📦 Release is a prerelease -> alpha track (closed testing)"
+  else
+    TRACK=production
+    echo "📦 Release is stable -> production track"
+  fi
+  end
 end
