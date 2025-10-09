@@ -75,14 +75,13 @@ platform :android do
   end
 
   desc "Publish store contents (metadata, images, screenshots) to Google Play"
-  lane :publish_contents do |options|
+  lane :publish_contents do |_options|
     UI.message("🚀 Publishing store contents (metadata, images, screenshots)...")
-    UI.message("   track=#{options[:track]}")
-    
+
     supply(
       package_name: ENV['SUPPLY_PACKAGE_NAME'],
       json_key_data: ENV['PLAY_JSON_KEY'],
-      track: nil,
+      # Omit track entirely for metadata-only uploads
       skip_upload_aab: true,
       skip_upload_apk: true,
       skip_upload_screenshots: false,
@@ -90,9 +89,10 @@ platform :android do
       skip_upload_metadata: false,
       skip_upload_changelogs: true
     )
-    
-    UI.success("✅ Store contents published successfully to track #{options[:track]}")
+
+    UI.success("✅ Store contents published successfully")
   end
+
 
   desc "Download universal Play-signed APK"
   lane :download_signed do |options|
