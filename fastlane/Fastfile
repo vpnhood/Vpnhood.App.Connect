@@ -105,7 +105,8 @@ platform :android do
       skip_upload_screenshots: false,
       skip_upload_images: false,
       skip_upload_metadata: false,
-      skip_upload_changelogs: true
+      skip_upload_changelogs: true,
+      sync_image_upload: true
     )
     
     UI.success("✅ Store contents published successfully")
