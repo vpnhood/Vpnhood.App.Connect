@@ -22,7 +22,7 @@ platform :android do
         aab: options[:aab],
         package_name: ENV['SUPPLY_PACKAGE_NAME'],
         json_key_data: ENV['PLAY_JSON_KEY'],
-        track: options[:track] || 'internal',
+        track: options[:track] || 'alpha',
         version_name: options[:version_name],
         version_code: options[:version_code],
         skip_upload_apk: true,
@@ -50,7 +50,7 @@ platform :android do
          /apkNoUpgradePath/i.match?(e.message)
         
         UI.important("⚠️  Version code #{options[:version_code]} already exists on Google Play")
-        UI.important("🔄 Updating metadata/images/screenshots for existing version...");
+        UI.important("🔄 Updating metadata/images/screenshots for existing version...")
         
         # Update metadata for existing version using supply directly
         supply(
@@ -84,17 +84,5 @@ platform :android do
         destination: './fastlane/downloaded.apk'
     )
     UI.success("Downloaded universal APK for version code #{options[:version_code]}")
-  end
-
-  desc "Determine track based on release type"
-  lane :determine_track do
-  # Determine track based on release type
-  if [ "$IS_PRERELEASE" = "true" ]; then
-    TRACK=alpha
-    echo "📦 Release is a prerelease -> alpha track (closed testing)"
-  else
-    TRACK=production
-    echo "📦 Release is stable -> production track"
-  fi
   end
 end
