@@ -50,19 +50,20 @@ platform :android do
          /apkNoUpgradePath/i.match?(e.message)
         
         UI.important("⚠️  Version code #{options[:version_code]} already exists on Google Play")
-        UI.important("🔄 Retrying with metadata/images/screenshots update only (no AAB)...")
+        UI.important("🔄 Updating metadata/images/screenshots for existing version...");
         
-        # Second pass: update metadata, images, screenshots only - DO NOT upload AAB
-        metadata_params = upload_params.dup
-        metadata_params.delete(:aab)
-        metadata_params[:skip_upload_aab] = true
-        metadata_params[:skip_upload_apk] = true
-        metadata_params[:skip_upload_screenshots] = false
-        metadata_params[:skip_upload_images] = false
-        metadata_params[:skip_upload_metadata] = false
-        
-        upload_to_play_store(metadata_params)
-        UI.success("✅ Metadata/images/screenshots update completed for existing versionCode #{options[:version_code]}")
+        # Update metadata for existing version using supply directly
+        supply(
+          package_name: ENV['SUPPLY_PACKAGE_NAME'],
+          json_key_data: ENV['PLAY_JSON_KEY'],
+          track: upload_params[:track],
+          skip_upload_aab: true,
+          skip_upload_apk: true,
+          skip_upload_screenshots: false,
+          skip_upload_images: false,
+          skip_upload_metadata: false
+        )
+        UI.success("✅ Metadata/images/screenshots updated for existing versionCode #{options[:version_code]}")
       else
         # For ALL other errors, re-raise to fail the lane immediately
         raise e
