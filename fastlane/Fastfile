@@ -57,6 +57,7 @@ platform :android do
           package_name: ENV['SUPPLY_PACKAGE_NAME'],
           json_key_data: ENV['PLAY_JSON_KEY'],
           track: upload_params[:track],
+          version_code: options[:version_code],
           skip_upload_aab: true,
           skip_upload_apk: true,
           skip_upload_screenshots: false,
