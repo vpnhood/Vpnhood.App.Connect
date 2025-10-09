@@ -2,14 +2,14 @@
 # You can find the documentation at https://docs.fastlane.tools
 #
 # For a list of all available actions, check out
-#
 #     https://docs.fastlane.tools/actions
 #
 # For a list of all available plugins, check out
-#
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
-
+# Tip: place a Gemfile in your repo to pin fastlane versions for CI consistency.
+# See: https://docs.fastlane.tools/getting-started/ios/setup/#use-a-gemfile
+#
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
@@ -17,79 +17,121 @@ default_platform(:android)
 
 platform :android do
   desc "Upload AAB to Google Play"
+  #
+  # Behavior:
+  # - Tries to upload the AAB + metadata/images/screenshots to the target track (default: CLOSED TESTING).
+  # - If the upload fails with a known 'version already exists' error, it falls back to updating ONLY:
+  #     * Store listing (title/description/etc.)
+  #     * Images and screenshots
+  #   via `supply` WITHOUT touching tracks or changelogs, so it works even if there's no release on that track.
+  #
   lane :playstore do |options|
     upload_params = {
-      aab: options[:aab],
-      package_name: ENV['SUPPLY_PACKAGE_NAME'],
-      json_key_data: ENV['PLAY_JSON_KEY'],
-      track: options[:track] || 'internal',
-      version_name: options[:version_name],
-      version_code: options[:version_code],
-      metadata_path: './fastlane/metadata/android',
-      skip_upload_apk: true,
+      aab: options[:aab],                                 # Path to your .aab
+      package_name: ENV['SUPPLY_PACKAGE_NAME'],           # e.g., com.example.app
+      json_key_data: ENV['PLAY_JSON_KEY'],                # JSON contents or path (if using json_key: use that key instead)
+      track: options[:track] || 'closed',                 # DEFAULT TO CLOSED TESTING
+      version_name: options[:version_name],               # Optional: display version
+      version_code: options[:version_code],               # Strongly recommended you pass this in
+      metadata_path: './fastlane/metadata/android',       # Fastlane metadata folder
+      skip_upload_apk: true,                              # We upload AAB, not APK
       skip_upload_screenshots: false,
       skip_upload_images: false,
       skip_upload_metadata: false,
-      skip_upload_changelogs: false,
-      release_status: 'completed',
-      changes_not_sent_for_review: false,
+      skip_upload_changelogs: false,                      # Happy path: attach changelogs if release exists
+      release_status: 'completed',                        # completed | draft | inProgress | halted
+      changes_not_sent_for_review: false,                 # If you use Play’s “changes not sent for review”
       timeout: 300
     }
-    
-    # Only add rollout if it has a valid value
-    if options[:rollout] && !options[:rollout].to_s.empty?
+
+    # Only add rollout for PRODUCTION; Google uses staged rollout only there.
+    # For 'closed' (Closed testing) we ignore rollout to avoid confusion.
+    if options[:rollout] && !options[:rollout].to_s.empty? && (upload_params[:track] == 'production')
       upload_params[:rollout] = options[:rollout]
     end
-    
+
     begin
       UI.message("🚀 Uploading AAB with metadata, images, and screenshots...")
       UI.message("   versionCode=#{options[:version_code]} track=#{upload_params[:track]} rollout=#{upload_params[:rollout] || 'none'}")
+
+      # Primary path: upload AAB + metadata to the target track (Closed testing by default)
       upload_to_play_store(upload_params)
+
       UI.success("✅ Upload of AAB and metadata succeeded")
     rescue => e
-      # ONLY handle version conflict errors - let ALL other errors fail naturally
-      if /Version code .* has already been used/i.match?(e.message) || 
-         /already been uploaded/i.match?(e.message) || 
-         /apkUpgradeVersionConflict/i.match?(e.message) ||
-         /apkNoUpgradePath/i.match?(e.message)
-        
+      # ONLY handle 'already exists' style errors. Let all other errors bubble up and fail the lane.
+      already_exists =
+        /Version code .* has already been used/i.match?(e.message) ||
+        /already been uploaded/i.match?(e.message) ||
+        /apkUpgradeVersionConflict/i.match?(e.message) ||
+        /apkNoUpgradePath/i.match?(e.message)
+
+      if already_exists
         UI.important("⚠️  Version code #{options[:version_code]} already exists on Google Play")
-        UI.important("🔄 Updating metadata/images/screenshots for existing version...");
-        
-        # Fallback to supply for metadata update
+        UI.important("🖼  Updating store listing, images, and screenshots ONLY (no track, no changelogs)")
+
+        # IMPORTANT FALLBACK:
+        # - Use `supply` to update listing/media ONLY.
+        # - DO NOT pass :track, :version_code, :version_name, :rollout, or changelogs.
+        # - This prevents 'Unable to find the requested release on track' when no release exists.
         supply(
-          package_name: upload_params[:package_name],
-          json_key_data: upload_params[:json_key_data],
-          track: upload_params[:track],
-          metadata_path: upload_params[:metadata_path],
+          package_name: ENV['SUPPLY_PACKAGE_NAME'],
+          json_key_data: ENV['PLAY_JSON_KEY'],
+          metadata_path: './fastlane/metadata/android',
           skip_upload_aab: true,
           skip_upload_apk: true,
           skip_upload_metadata: false,
           skip_upload_images: false,
           skip_upload_screenshots: false,
-          skip_upload_changelogs: false,
-          check_superseded_tracks: true
+          skip_upload_changelogs: true,   # crucial: don't attempt changelogs without a release
+          timeout: 300
         )
-        UI.success("✅ Metadata/images/screenshots updated for existing versionCode #{options[:version_code]}")
+
+        UI.success("✅ Store listing, images, and screenshots updated successfully")
+
+        # OPTIONAL (commented out):
+        # If you keep per-locale changelog files and you KNOW a release exists on the target track,
+        # you can do a second pass to attach changelogs only.
+        #
+        # UI.important("📝 Optionally updating changelogs on existing release...")
+        # upload_to_play_store(
+        #   package_name: ENV['SUPPLY_PACKAGE_NAME'],
+        #   json_key_data: ENV['PLAY_JSON_KEY'],
+        #   track: upload_params[:track],       # e.g., 'closed'
+        #   skip_upload_aab: true,
+        #   skip_upload_apk: true,
+        #   skip_upload_metadata: true,
+        #   skip_upload_images: true,
+        #   skip_upload_screenshots: true,
+        #   skip_upload_changelogs: false,      # now attach changelogs
+        #   metadata_path: './fastlane/metadata/android',
+        #   check_superseded_tracks: true,
+        #   timeout: 300
+        # )
+        # UI.success("✅ Changelogs updated on existing release")
       else
-        # For ALL other errors, re-raise to fail the lane immediately
+        # Not an 'already exists' case — re-raise and fail the lane
         raise e
       end
     end
   end
 
   desc "Download universal Play-signed APK"
+  #
+  # Requires: a release generated by Play for the given version_code.
+  #
   lane :download_signed do |options|
-    # Ensure version_code provided (Play API requires specifying to fetch generated universal apk)
     unless options[:version_code]
       UI.user_error!("version_code is required. Pass via 'fastlane android download_signed version_code:123'.")
     end
+
     download_universal_apk_from_google_play(
-        package_name: ENV['SUPPLY_PACKAGE_NAME'],
-        json_key_data: ENV['PLAY_JSON_KEY'],
-        version_code: options[:version_code],
-        destination: './fastlane/downloaded.apk'
+      package_name: ENV['SUPPLY_PACKAGE_NAME'],
+      json_key_data: ENV['PLAY_JSON_KEY'],
+      version_code: options[:version_code],
+      destination: './fastlane/downloaded.apk'
     )
-    UI.success("Downloaded universal APK for version code #{options[:version_code]}")
+
+    UI.success("✅ Downloaded universal APK for version code #{options[:version_code]}")
   end
 end
