@@ -74,14 +74,32 @@ platform :android do
     end
   end
 
-  desc "Publish store contents (metadata, images, screenshots) to Google Play"
-  lane :publish_contents do |_options|
-    UI.message("🚀 Publishing store contents (metadata, images, screenshots)...")
+  desc "Publish store contents (metadata, images, screenshots) to Google Play - shared across all tracks"
+  lane :publish_contents do |options|
+    UI.message("🚀 Finding the latest version code on the production track...")
 
+    # Step 1: Fetch all active version codes from the production track
+    production_versions = google_play_track_version_codes(
+      package_name: ENV['SUPPLY_PACKAGE_NAME'],
+      json_key_data: ENV['PLAY_JSON_KEY'],
+      track: 'production'
+    )
+
+    # Step 2: Find the highest (latest) version code from the array
+    latest_version_code = production_versions.max
+    
+    if latest_version_code.nil?
+      UI.user_error!("Could not find any active version on the production track.")
+    end
+
+    UI.message("✅ Found latest version code: #{latest_version_code}")
+    UI.message("🚀 Publishing store contents (metadata, images, screenshots)...")
+    UI.message("   Note: Store contents are shared across all tracks")
+    
     supply(
       package_name: ENV['SUPPLY_PACKAGE_NAME'],
       json_key_data: ENV['PLAY_JSON_KEY'],
-      # Omit track entirely for metadata-only uploads
+      version_code: latest_version_code,
       skip_upload_aab: true,
       skip_upload_apk: true,
       skip_upload_screenshots: false,
@@ -89,10 +107,9 @@ platform :android do
       skip_upload_metadata: false,
       skip_upload_changelogs: true
     )
-
+    
     UI.success("✅ Store contents published successfully")
   end
-
 
   desc "Download universal Play-signed APK"
   lane :download_signed do |options|
