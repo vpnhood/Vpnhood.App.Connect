@@ -2,17 +2,6 @@
 
 on:
   workflow_dispatch:
-    inputs:
-      track:
-        description: 'Track to publish to'
-        required: true
-        default: 'production'
-        type: choice
-        options:
-          - internal
-          - alpha
-          - beta
-          - production
 
 jobs:
   publish-contents:
@@ -23,10 +12,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Validate track selection
-        run: |
-          echo "📦 Publishing store contents to track: ${{ inputs.track }}"
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -49,6 +34,6 @@ jobs:
           PLAY_JSON_KEY: ${{ secrets.PLAY_JSON_KEY }}
           SUPPLY_PACKAGE_NAME: com.vpnhood.connect.android
         run: |
-          echo "🚀 Publishing store contents (metadata, images, screenshots) to track ${{ inputs.track }}"
-          fastlane android publish_contents track:"${{ inputs.track }}"
+          echo "🚀 Publishing store contents (metadata, images, screenshots)"
+          fastlane android publish_contents
           echo "✅ Store contents published successfully"
