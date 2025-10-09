@@ -82,7 +82,7 @@ platform :android do
     supply(
       package_name: ENV['SUPPLY_PACKAGE_NAME'],
       json_key_data: ENV['PLAY_JSON_KEY'],
-      track: options[:track],
+      track: nil,
       skip_upload_aab: true,
       skip_upload_apk: true,
       skip_upload_screenshots: false,
