@@ -46,8 +46,8 @@ jobs:
 
           # Determine track based on release type
           if [ "$IS_PRERELEASE" = "true" ]; then
-            TRACK=closed
-            echo "📦 Release is a prerelease -> closed track"
+            TRACK=alpha
+            echo "📦 Release is a prerelease -> alpha track (closed testing)"
           else
             TRACK=production
             echo "📦 Release is stable -> production track"
