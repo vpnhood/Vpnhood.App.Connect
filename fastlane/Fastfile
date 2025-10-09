@@ -19,21 +19,17 @@ platform :android do
   desc "Upload AAB to Google Play"
   lane :playstore do |options|
     upload_params = {
-      aab: options[:aab],
-      package_name: ENV['SUPPLY_PACKAGE_NAME'],
-      json_key_data: ENV['PLAY_JSON_KEY'],
-      track: options[:track] || 'internal',
-      version_name: options[:version_name],
-      version_code: options[:version_code],
-      metadata_path: './fastlane/metadata/android',
-      skip_upload_apk: true,
-      skip_upload_screenshots: false,
-      skip_upload_images: false,
-      skip_upload_metadata: false,
-      skip_upload_changelogs: false,
-      release_status: 'completed',
-      changes_not_sent_for_review: false,
-      timeout: 300
+        aab: options[:aab],
+        package_name: ENV['SUPPLY_PACKAGE_NAME'],
+        json_key_data: ENV['PLAY_JSON_KEY'],
+        track: options[:track] || 'internal',
+        version_name: options[:version_name],
+        version_code: options[:version_code],
+        skip_upload_apk: true,
+        skip_upload_screenshots: false,
+        skip_upload_images: false,
+        skip_upload_metadata: false,
+        release_status: 'completed'
     }
     
     # Only add rollout if it has a valid value
@@ -56,40 +52,18 @@ platform :android do
         UI.important("⚠️  Version code #{options[:version_code]} already exists on Google Play")
         UI.important("🔄 Updating metadata/images/screenshots for existing version...");
         
-        metadata_params = upload_params.clone
-        metadata_params.delete(:aab)
-        metadata_params[:skip_upload_aab] = true
-        metadata_params[:skip_upload_apk] = true
-        metadata_params[:changes_not_sent_for_review] = true
-        metadata_params[:track_promote_release_status] = metadata_params[:release_status]
-
-        begin
-          upload_to_play_store(metadata_params)
-          UI.success("✅ Metadata/images/screenshots updated for existing versionCode #{options[:version_code]}")
-        rescue => metadata_error
-          if /Unable to find the requested release on track/i.match?(metadata_error.message)
-            UI.important("⚠️  Release not found on track '#{metadata_params[:track]}' – applying listing-only metadata update")
-            supply_options = {
-              package_name: metadata_params[:package_name],
-              json_key_data: metadata_params[:json_key_data],
-              metadata_path: metadata_params[:metadata_path],
-              skip_upload_aab: true,
-              skip_upload_apk: true,
-              skip_upload_metadata: metadata_params[:skip_upload_metadata],
-              skip_upload_images: metadata_params[:skip_upload_images],
-              skip_upload_screenshots: metadata_params[:skip_upload_screenshots],
-              skip_upload_changelogs: true,
-              changes_not_sent_for_review: true,
-              timeout: metadata_params[:timeout]
-            }
-            supply_options[:track] = metadata_params[:track] if metadata_params[:track]
-
-            supply(**supply_options)
-            UI.success("✅ Store listing metadata/images/screenshots uploaded without release association (changelogs skipped)")
-          else
-            raise metadata_error
-          end
-        end
+        # Update metadata for existing version using supply directly
+        supply(
+          package_name: ENV['SUPPLY_PACKAGE_NAME'],
+          json_key_data: ENV['PLAY_JSON_KEY'],
+          track: upload_params[:track],
+          skip_upload_aab: true,
+          skip_upload_apk: true,
+          skip_upload_screenshots: false,
+          skip_upload_images: false,
+          skip_upload_metadata: false
+        )
+        UI.success("✅ Metadata/images/screenshots updated for existing versionCode #{options[:version_code]}")
       else
         # For ALL other errors, re-raise to fail the lane immediately
         raise e
