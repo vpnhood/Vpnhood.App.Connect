@@ -1,0 +1,3 @@
+* Fix: Diagnoser shows a wrong NoErrorFoundException
+* Update: Upgrade to .NET 10
+* Improve: Speed and stability
