@@ -1,0 +1,4 @@
+* Fix: Diagnoser shows a wrong NoErrorFoundException
+* Fix: Back button does not work on some pages
+* Update: Upgrade to .NET 10
+* Improve: Speed and stability
