@@ -1,0 +1,1 @@
+Fix: Unable to connect to some servers when the client has IPv6 enabled
