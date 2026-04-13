@@ -1,0 +1,1 @@
+* Fix: freeze connection after network change or restroe from hypernation
