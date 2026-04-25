@@ -1,52 +1,37 @@
-VpnHood! CONNECT is a FREE, fast, and secure solution for all your internet needs. With unlimited bandwidth and speed, you can browse the web without any restrictions.
+VpnHood! CONNECT: Fast, Secure & Transparent
+VpnHood! CONNECT is a free, high-speed, and secure networking solution designed to prioritize your digital privacy. Powered by the open-source VpnHood ENGINE, it provides a reliable connection with unlimited bandwidth and no time restrictions.
 
-It’s powered by the open-source ★★VpnHood ENGINE★★, ensuring a reliable and robust connection.
+🛡️ Key Features
+Completely Free: Open access to secure networking.
 
-Key Features:
+User-Friendly: Connect with a single tap.
 
-★ Free to Use
+High Performance: Optimized for speed with unlimited data.
 
-★ Easy to Use: You can connect to VpnHood with a simple click of the connect button.
+Open Source & Transparent: Built on the VpnHood engine (available on GitHub), ensuring a trustworthy and verifiable codebase.
 
-★ Fast and Secure
+Broad Compatibility: Supports Android 7+, Android TV, and Windows.
 
-★ Unlimited Bandwidth, Speed, and Time
+Dual-Stack Support: Full compatibility with both IPv4 and IPv6.
 
-★ Open Source: Built on the open-source VpnHood engine (on GitHub), VpnHood! is transparent and trustworthy.
+⚙️ Advanced Customization
+App-Level Split Tunneling: Select specific apps to route through the secure tunnel or exclude them to optimize performance.
 
-★ Broad Compatibility: Android 7 and above, including Android TV and Windows.
+Geographic Filtering: Exclude local country traffic to maintain high-speed access to regional services and banking apps that require a local IP.
 
-★ IPv4 & IPv6 Support: Supports IPv4 and IPv6, ensuring maximum compatibility and performance.
+LAN Exclusion: Maintain access to local network resources (like printers or local servers) while staying protected online.
 
-★ Dynamic Servers
+Protocol Control: Toggle between UDP and TCP protocols based on your specific network environment.
 
-Customizable Options:
+💡 Why Choose VpnHood!?
+Privacy-First Protocol: VpnHood uses a sophisticated, fingerprint-resistant protocol. By mimicking standard HTTPS traffic patterns, it ensures your connection remains private and secure against deep packet inspection.
 
-✔ Split Tunneling for App: Choose which apps use VpnHood with flexible filter options. You can exclude, include, or select all apps.
+Innovative Core: As a pioneer in .NET-based VPN development, VpnHood offers a modern and robust architecture.
 
-✔ Split Tunneling for Country: This allows you to exclude your own country, ensuring that traffic to servers within your country does not pass through the VPN tunnel. This eliminates the need to disconnect VpnHood when accessing services in your country that do not accept connections from foreign IPs and improves connections to servers in your country.
+Security Audited: For your peace of mind, VpnHood has undergone a comprehensive security audit by the Open Tech Fund.
 
-✔ Split Tunneling for Local Network: Exclude your local network to maintain access to local resources while using VpnHood!.
+Community Driven: We are committed to continuous improvement, ensuring our technology evolves alongside modern networking standards to provide an unrestricted internet experience.
 
-✔ UDP/TCP Protocol: Select whether to enable or disable the UDP protocol based on your requirements.
-
-Why Choose VpnHood!?
-
-▶ Undetectable: The VpnHood protocol is designed to bypass censorship filters. It is a secure protocol without a fingerprint. Its traffic and protocol patterns resemble those of regular HTTPS websites, making it virtually indistinguishable.
-
-▶ Innovative Technology: As the first VPN app developed with .NET, VpnHood! is at the forefront of technological innovation.
-
-▶ Powered by VpnHood! ENGINE: VpnHood is powered by its own open-source VpnHood ENGINE, ensuring transparency and reliability.
-
-▶ User-Friendly: VpnHood is designed with simplicity in mind.
-
-▶ Customizable: With options to filter apps, exclude your country, exclude local networks, and toggle UDP protocol, you have complete control over your VPN usage.
-
-▶ Constantly Evolving: VpnHood is dedicated to developing a VPN solution that remains undetectable by any censorship filters. VpnHood’s commitment to continuous improvement and innovation ensures that you can experience the complete freedom of the internet. Try VpnHood today and explore without limits!
-
-VpnHood underwent a comprehensive security audit by the Open Tech Fund.
-
-We’re Here for You Around the Clock!
-
-VpnHood’s dedicated customer support team is available 24/7 to assist you. If you have any questions or concerns, please don’t hesitate to contact us at support@vpnhood.com. We’re always here to help!
-
+📞 24/7 Support
+Our dedicated team is here to help you at any time. For questions or technical assistance, reach out to us:
+📧 Email: support@vpnhood.com
