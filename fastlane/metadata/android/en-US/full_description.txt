@@ -1,5 +1,4 @@
-VpnHood! CONNECT: Fast, Secure & Transparent
-VpnHood! CONNECT is a free, high-speed, and secure networking solution designed to prioritize your digital privacy. Powered by the open-source VpnHood ENGINE, it provides a reliable connection with unlimited bandwidth and no time restrictions.
+VpnHood! CONNECT is a Fast, high-speed, and secure networking solution designed to prioritize your digital privacy. Powered by the open-source VpnHood ENGINE, it provides a reliable connection with unlimited bandwidth and no time restrictions.
 
 🛡️ Key Features
 Completely Free: Open access to secure networking.
