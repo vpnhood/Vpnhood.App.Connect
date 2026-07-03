@@ -21,8 +21,8 @@ name: Publish Connect (All Platforms)
 # Secrets/variables live in THIS repo (Connect):
 #   vars.APPSETTINGS, vars.PUBLISH                                  (Connect app config)
 #   secrets.ACCESS_KEY_DEFAULT_GOOGLE / _WEB                        (embedded default server key)
-#   secrets.ANDROID_KEYSTORE_CONNECT_GOOGLE_BASE64 / _PASSWORD      (Play signing)
-#   secrets.ANDROID_KEYSTORE_CONNECT_WEB_BASE64 / _PASSWORD         (web APK signing)
+#   secrets.ANDROID_KEYSTORE_GOOGLE_BASE64 / _PASSWORD             (Play signing)
+#   secrets.ANDROID_KEYSTORE_WEB_BASE64 / _PASSWORD                (web APK signing)
 # Shared org secrets are inherited: GOOGLE_PLAY_APIKEY, ADVANCED_INSTALLER_LICENSE,
 #   AZURE_SIGNING_CREDENTIAL, AZURE_SIGNING_TARGET.
 
@@ -196,12 +196,15 @@ jobs:
     env:
       DOTNET_NOLOGO: "1"
       DOTNET_CLI_TELEMETRY_OPTOUT: "1"
-      # Android signing keys (this repo's secrets). PrepareCiAndroidSigning.ps1 falls back to an
-      # ephemeral keystore when absent (not Play-grade) so a fork still builds end-to-end.
-      ANDROID_KEYSTORE_CONNECT_GOOGLE_BASE64: ${{ secrets.ANDROID_KEYSTORE_CONNECT_GOOGLE_BASE64 }}
-      ANDROID_KEYSTORE_CONNECT_GOOGLE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_CONNECT_GOOGLE_PASSWORD }}
-      ANDROID_KEYSTORE_CONNECT_WEB_BASE64: ${{ secrets.ANDROID_KEYSTORE_CONNECT_WEB_BASE64 }}
-      ANDROID_KEYSTORE_CONNECT_WEB_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_CONNECT_WEB_PASSWORD }}
+      # Android signing keys. The secret names are app-agnostic (this is a single-app repo), but the
+      # ENV names must stay ANDROID_KEYSTORE_CONNECT_* — that's the shared contract in the monorepo's
+      # android-signing.json, which maps CONNECT_GOOGLE/CONNECT_WEB -> the VpnHoodConnect .user store.
+      # PrepareCiAndroidSigning.ps1 falls back to an ephemeral keystore when absent (not Play-grade)
+      # so a fork still builds end-to-end.
+      ANDROID_KEYSTORE_CONNECT_GOOGLE_BASE64: ${{ secrets.ANDROID_KEYSTORE_GOOGLE_BASE64 }}
+      ANDROID_KEYSTORE_CONNECT_GOOGLE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_GOOGLE_PASSWORD }}
+      ANDROID_KEYSTORE_CONNECT_WEB_BASE64: ${{ secrets.ANDROID_KEYSTORE_WEB_BASE64 }}
+      ANDROID_KEYSTORE_CONNECT_WEB_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_WEB_PASSWORD }}
       # Default server access keys embedded as the access_key_default.txt resource (per store).
       ACCESS_KEY_DEFAULT_GOOGLE: ${{ secrets.ACCESS_KEY_DEFAULT_GOOGLE }}
       ACCESS_KEY_DEFAULT_WEB: ${{ secrets.ACCESS_KEY_DEFAULT_WEB }}
