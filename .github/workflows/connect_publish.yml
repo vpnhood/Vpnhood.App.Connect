@@ -23,8 +23,11 @@ name: Publish Connect (All Platforms)
 #   secrets.ACCESS_KEY_DEFAULT_GOOGLE / _WEB                        (embedded default server key)
 #   secrets.ANDROID_KEYSTORE_GOOGLE_BASE64 / _PASSWORD             (Play signing)
 #   secrets.ANDROID_KEYSTORE_WEB_BASE64 / _PASSWORD                (web APK signing)
+#   secrets.IOS_PROVISION_APP_BASE64 / _EXT_BASE64                 (iOS App Store provisioning profiles)
 # Shared org secrets are inherited: GOOGLE_PLAY_API_KEY, ADVANCED_INSTALLER_LICENSE,
-#   AZURE_SIGNING_CREDENTIAL, AZURE_SIGNING_TARGET.
+#   AZURE_SIGNING_CREDENTIAL, AZURE_SIGNING_TARGET,
+#   APPLE_DISTRIBUTION_CERT_BASE64 / _PASSWORD (iOS signing cert),
+#   APPSTORE_CONNECT_API_KEY / _API_KEY_ID / _ISSUER_ID (App Store upload).
 
 on:
   workflow_dispatch:
@@ -49,10 +52,20 @@ on:
         required: false
         default: true
       only_aab:
-        description: "Only build the Android AAB (+ Play publish); skip Linux/Windows. Fast Play iteration."
+        description: "Only build the Android AAB (+ Play publish); skip Linux/Windows/iOS. Fast Play iteration."
         type: boolean
         required: false
         default: false
+      build_ios:
+        description: "Build the iOS app (.ipa). Off by default."
+        type: boolean
+        required: false
+        default: false
+      publish_appstore:
+        description: "Upload the built .ipa to TestFlight (prerelease) / App Store (stable). Only applies when build_ios is on."
+        type: boolean
+        required: false
+        default: true
       rollout:
         description: "Google Play audience ratio (%) for a PRODUCTION release (1-100; 100 = full). Ignored on prerelease/alpha."
         required: false
@@ -383,15 +396,177 @@ jobs:
           retention-days: 1
           path: play-signed/**
 
+  # iOS build. Mirrors build-android: checkout the monorepo into code/, run Connect.Ios/_publish.ps1 ->
+  # code/Pub/bin/<tag>/VpnHoodConnect/ios/ (<title>-ios.ipa + <title>-ios.json), upload as connect-ios.
+  # Signing is materialized by PrepareCiIosSigning.ps1 -appFolder VpnHoodConnect from the per-app IOS_*
+  # (this repo) + shared APPLE_DISTRIBUTION_CERT_* (org) secrets. Any absent -> UNSIGNED build (compile
+  # check + sidecar json only, no .ipa) and the job stays green — the App Store upload then finds no .ipa.
+  build-ios:
+    # iOS is OFF by default; dispatch with build_ios=true. Skipped by the only_aab fast path.
+    if: ${{ github.event.inputs.build_ios == 'true' && github.event.inputs.only_aab != 'true' }}
+    # macos-26 ships Xcode 26.5 (+26.6) — the toolchain this net11.0-ios project needs — on a hosted runner.
+    runs-on: macos-26
+    env:
+      DOTNET_NOLOGO: "1"
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      # Per-app App Store profiles (THIS repo's secrets) + shared org Distribution cert (inherited).
+      # Any of these absent -> PrepareCiIosSigning writes { Signed:false } and the build goes UNSIGNED.
+      APPLE_DISTRIBUTION_CERT_BASE64: ${{ secrets.APPLE_DISTRIBUTION_CERT_BASE64 }}
+      APPLE_DISTRIBUTION_CERT_PASSWORD: ${{ secrets.APPLE_DISTRIBUTION_CERT_PASSWORD }}
+      IOS_PROVISION_APP_BASE64: ${{ secrets.IOS_PROVISION_APP_BASE64 }}
+      IOS_PROVISION_EXT_BASE64: ${{ secrets.IOS_PROVISION_EXT_BASE64 }}
+      # Default server key embedded by Connect.Ios as access_key_default.txt (from the web .user file).
+      ACCESS_KEY_DEFAULT_WEB: ${{ secrets.ACCESS_KEY_DEFAULT_WEB }}
+    steps:
+      - name: Checkout monorepo code
+        uses: actions/checkout@v5
+        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'development' }}", path: code }
+      # net11.0-ios (preview SDK); global.json pins 10.x, so install 11 explicitly.
+      - uses: actions/setup-dotnet@v5
+        with: { dotnet-version: "11.0.100-preview.5.26302.115" }
+      - name: Install .NET iOS workload
+        shell: pwsh
+        run: dotnet workload install ios
+      - name: Select Xcode 26.5
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: "26.5"
+      - name: Resolve module dir
+        shell: pwsh
+        run: |
+          $v = Get-Content "$env:GITHUB_WORKSPACE/code/Pub/PubVersion.json" | ConvertFrom-Json
+          $tag = "v$($v.Version)" + ($(if ($v.Prerelease) { "-prerelease" } else { "" }))
+          "MODULE_DIR=code/Pub/bin/$tag/VpnHoodConnect" | Out-File -FilePath $env:GITHUB_ENV -Append
+      # Default server access key -> the web .user file Connect.Ios embeds as access_key_default.txt.
+      - name: Write default access key
+        shell: pwsh
+        run: |
+          $u = Join-Path $env:GITHUB_WORKSPACE ".user/VpnHoodConnect"
+          if (-not [string]::IsNullOrWhiteSpace($env:ACCESS_KEY_DEFAULT_WEB)) {
+            $d = Join-Path $u "web"; New-Item -ItemType Directory -Path $d -Force | Out-Null
+            $env:ACCESS_KEY_DEFAULT_WEB | Out-File (Join-Path $d "access_key_default_web.txt") -Encoding ascii -Force -NoNewline
+          } else { Write-Host "::warning::ACCESS_KEY_DEFAULT_WEB not set; the iOS build has no default access key." }
+      # publish.json turns on strict mode (real bundle id + required appsettings); materialize it first.
+      - name: Write publish.json
+        if: vars.PUBLISH != ''
+        shell: pwsh
+        env:
+          PUBLISH: ${{ vars.PUBLISH }}
+        run: |
+          $u = Join-Path $env:GITHUB_WORKSPACE ".user/VpnHoodConnect"
+          New-Item -ItemType Directory -Path $u -Force | Out-Null
+          $env:PUBLISH | Out-File (Join-Path $u "publish.json") -Encoding utf8 -Force
+      - name: Write Connect appsettings
+        shell: pwsh
+        env:
+          APPSETTINGS: ${{ vars.APPSETTINGS }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:APPSETTINGS)) {
+            throw "APPSETTINGS variable is not set, but a strict iOS publish requires .user/VpnHoodConnect/appsettings.json."
+          }
+          $u = Join-Path $env:GITHUB_WORKSPACE ".user/VpnHoodConnect"
+          New-Item -ItemType Directory -Path $u -Force | Out-Null
+          $env:APPSETTINGS | Out-File (Join-Path $u "appsettings.json") -Encoding utf8 -Force
+      # Import the Distribution cert into a keychain + install the App Store profiles (skip -> unsigned).
+      - name: Prepare iOS signing
+        shell: pwsh
+        run: |
+          & "$env:GITHUB_WORKSPACE/code/Pub/Lib/PrepareCiIosSigning.ps1" -appFolder VpnHoodConnect
+      - name: Build iOS Connect (.ipa)
+        shell: pwsh
+        run: |
+          & "$env:GITHUB_WORKSPACE/code/Src/Apps/Connect.Ios/_publish.ps1"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: connect-ios
+          # Unsigned build -> only the sidecar json (no .ipa); a missing file is a warning, not an error.
+          if-no-files-found: warn
+          retention-days: 1
+          path: ${{ env.MODULE_DIR }}/ios/**
+
+  # Upload the built .ipa to App Store Connect from the CI artifact, mirroring publish-play-android.
+  # Track from code/Pub/PubVersion.json: prerelease -> TestFlight (beta), stable -> App Store. Gated on
+  # the inherited APPSTORE_CONNECT_API_KEY: absent -> warn + skip (release proceeds); present + a genuine
+  # Fastlane failure -> red, which BLOCKS the release. No-op (warn) when build-ios produced no .ipa.
+  publish-appstore-ios:
+    needs: [build-ios]
+    if: needs.build-ios.result == 'success' && github.event.inputs.publish_appstore != 'false'
+    runs-on: macos-26
+    env:
+      # The .p8 private-key CONTENTS, plus its key id and the ASC issuer id (all inherited org secrets).
+      APPSTORE_CONNECT_API_KEY: ${{ secrets.APPSTORE_CONNECT_API_KEY }}
+      APPSTORE_CONNECT_API_KEY_ID: ${{ secrets.APPSTORE_CONNECT_API_KEY_ID }}
+      APPSTORE_CONNECT_ISSUER_ID: ${{ secrets.APPSTORE_CONNECT_ISSUER_ID }}
+    steps:
+      - name: Checkout monorepo code
+        uses: actions/checkout@v5
+        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'development' }}", path: code }
+      - name: Warn if App Store Connect API key is missing
+        if: env.APPSTORE_CONNECT_API_KEY == ''
+        run: |
+          echo "::warning title=App Store publish skipped::APPSTORE_CONNECT_API_KEY is not set; the .ipa will NOT be uploaded to TestFlight/App Store."
+      - name: Download iOS artifact
+        if: env.APPSTORE_CONNECT_API_KEY != ''
+        uses: actions/download-artifact@v8
+        with: { name: connect-ios, path: ios }
+      - name: Resolve ipa + track
+        if: env.APPSTORE_CONNECT_API_KEY != ''
+        shell: bash
+        run: |
+          set -e
+          IPA=$(ls ios/*.ipa 2>/dev/null | head -n1 || true)
+          if [ -z "$IPA" ]; then
+            echo "::warning title=No .ipa to upload::build-ios produced no .ipa (unsigned build) — nothing to send to App Store Connect."
+            echo "IPA_PATH=" >> $GITHUB_ENV
+          else
+            echo "IPA_PATH=$IPA" >> $GITHUB_ENV
+          fi
+          # prerelease -> TestFlight; stable -> App Store (mirrors the Android alpha/production split).
+          PRERELEASE=$(jq -r '.Prerelease' code/Pub/PubVersion.json)
+          if [ "$PRERELEASE" = "true" ] || [ "$PRERELEASE" = "True" ]; then echo "LANE=testflight" >> $GITHUB_ENV; else echo "LANE=appstore" >> $GITHUB_ENV; fi
+      - name: Set up Ruby
+        if: env.APPSTORE_CONNECT_API_KEY != '' && env.IPA_PATH != ''
+        uses: ruby/setup-ruby@v1
+        with: { ruby-version: "3.3", bundler-cache: false }
+      - name: Install Fastlane
+        if: env.APPSTORE_CONNECT_API_KEY != '' && env.IPA_PATH != ''
+        run: gem install fastlane --no-document
+      # Build the fastlane App Store Connect API-key JSON from the three secrets (never echoed).
+      - name: Write ASC API key
+        if: env.APPSTORE_CONNECT_API_KEY != '' && env.IPA_PATH != ''
+        shell: bash
+        run: |
+          mkdir -p asc
+          jq -n --arg kid "$APPSTORE_CONNECT_API_KEY_ID" --arg iss "$APPSTORE_CONNECT_ISSUER_ID" --arg key "$APPSTORE_CONNECT_API_KEY" \
+            '{key_id:$kid, issuer_id:$iss, key:$key, in_house:false}' > asc/api_key.json
+      - name: Upload to TestFlight / App Store (Fastlane)
+        if: env.APPSTORE_CONNECT_API_KEY != '' && env.IPA_PATH != ''
+        run: |
+          if [ "$LANE" = "testflight" ]; then
+            echo "Uploading $IPA_PATH to TestFlight"
+            if ! fastlane run upload_to_testflight ipa:"$IPA_PATH" api_key_path:asc/api_key.json skip_waiting_for_build_processing:true; then
+              echo "::error title=TestFlight upload failed::Fastlane pilot could not upload the .ipa. A common cause is a CFBundleVersion that is not higher than the last build (ApplicationVersion in PublishIosApp.ps1)."
+              exit 1
+            fi
+          else
+            echo "Uploading $IPA_PATH to App Store Connect (App Store track)"
+            if ! fastlane run upload_to_app_store ipa:"$IPA_PATH" api_key_path:asc/api_key.json skip_metadata:true skip_screenshots:true submit_for_review:false force:true precheck_include_in_app_purchases:false; then
+              echo "::error title=App Store upload failed::Fastlane deliver could not upload the .ipa. Verify App Store signing and that CFBundleVersion is higher than the last build."
+              exit 1
+            fi
+          fi
+
   release:
-    needs: [build-linux, build-windows, build-android, publish-play-android]
+    needs: [build-linux, build-windows, build-android, publish-play-android, build-ios, publish-appstore-ios]
     if: >-
       ${{ always()
         && github.event.inputs.publish_release == 'true'
         && needs.build-linux.result == 'success'
         && needs.build-windows.result != 'failure'
         && needs.build-android.result != 'failure'
-        && needs.publish-play-android.result != 'failure' }}
+        && needs.publish-play-android.result != 'failure'
+        && needs.build-ios.result != 'failure'
+        && needs.publish-appstore-ios.result != 'failure' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -427,6 +602,10 @@ jobs:
       - uses: actions/download-artifact@v8
         continue-on-error: true
         with: { name: connect-android-play-signed, path: "${{ env.MODULE_DIR }}/android-google" }
+      # iOS .ipa + sidecar from build-ios. Best-effort: absent when iOS was disabled or built unsigned.
+      - uses: actions/download-artifact@v8
+        continue-on-error: true
+        with: { name: connect-ios, path: "${{ env.MODULE_DIR }}/ios" }
       - name: Create GitHub release (Connect repo)
         shell: pwsh
         env:
