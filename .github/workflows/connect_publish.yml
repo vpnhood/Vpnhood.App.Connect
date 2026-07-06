@@ -23,7 +23,7 @@ name: Publish Connect (All Platforms)
 #   secrets.ACCESS_KEY_DEFAULT_GOOGLE / _WEB                        (embedded default server key)
 #   secrets.ANDROID_KEYSTORE_GOOGLE_BASE64 / _PASSWORD             (Play signing)
 #   secrets.ANDROID_KEYSTORE_WEB_BASE64 / _PASSWORD                (web APK signing)
-# Shared org secrets are inherited: GOOGLE_PLAY_APIKEY, ADVANCED_INSTALLER_LICENSE,
+# Shared org secrets are inherited: GOOGLE_PLAY_API_KEY, ADVANCED_INSTALLER_LICENSE,
 #   AZURE_SIGNING_CREDENTIAL, AZURE_SIGNING_TARGET.
 
 on:
@@ -279,14 +279,14 @@ jobs:
           path: ${{ env.MODULE_DIR }}/${{ matrix.outdir }}/**
 
   # Publish the Android AAB to Google Play from the CI artifact, using THIS repo's fastlane config +
-  # the (org) GOOGLE_PLAY_APIKEY. This repo is checked out at ROOT, so fastlane (run from root) loads
+  # the (org) GOOGLE_PLAY_API_KEY. This repo is checked out at ROOT, so fastlane (run from root) loads
   # THIS repo's fastlane/ (com.vpnhood.connect.android) — never the monorepo's code/fastlane.
   publish-play-android:
     needs: [build-android]
     if: needs.build-android.result == 'success' && github.event.inputs.publish_play != 'false'
     runs-on: ubuntu-latest
     env:
-      GOOGLE_PLAY_APIKEY: ${{ secrets.GOOGLE_PLAY_APIKEY }}
+      GOOGLE_PLAY_API_KEY: ${{ secrets.GOOGLE_PLAY_API_KEY }}
     steps:
       - name: Checkout this repo (fastlane config, at root)
         uses: actions/checkout@v5
@@ -294,14 +294,14 @@ jobs:
         uses: actions/checkout@v5
         with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'development' }}", path: code }
       - name: Warn if Google Play API key is missing
-        if: env.GOOGLE_PLAY_APIKEY == ''
-        run: echo "::warning title=Google Play publish skipped::GOOGLE_PLAY_APIKEY is not set; the AAB will NOT be uploaded to Google Play. The release proceeds without a Play-signed APK."
+        if: env.GOOGLE_PLAY_API_KEY == ''
+        run: echo "::warning title=Google Play publish skipped::GOOGLE_PLAY_API_KEY is not set; the AAB will NOT be uploaded to Google Play. The release proceeds without a Play-signed APK."
       - name: Download built AAB artifact
-        if: env.GOOGLE_PLAY_APIKEY != ''
+        if: env.GOOGLE_PLAY_API_KEY != ''
         uses: actions/download-artifact@v8
         with: { name: connect-android-google-aab, path: aab }
       - name: Resolve version, track, and paths
-        if: env.GOOGLE_PLAY_APIKEY != ''
+        if: env.GOOGLE_PLAY_API_KEY != ''
         shell: bash
         run: |
           set -e
@@ -337,19 +337,19 @@ jobs:
           } >> $GITHUB_ENV
           echo "✅ VersionName=$VERSION_NAME VersionCode=$VERSION_CODE Track=$TRACK Rollout='$ROLLOUT'"
       - name: Set up Java
-        if: env.GOOGLE_PLAY_APIKEY != ''
+        if: env.GOOGLE_PLAY_API_KEY != ''
         uses: actions/setup-java@v5
         with: { distribution: temurin, java-version: "17" }
       - name: Set up Ruby
-        if: env.GOOGLE_PLAY_APIKEY != ''
+        if: env.GOOGLE_PLAY_API_KEY != ''
         uses: ruby/setup-ruby@v1
         with: { ruby-version: "3.3", bundler-cache: false }
       - name: Install Fastlane
-        if: env.GOOGLE_PLAY_APIKEY != ''
+        if: env.GOOGLE_PLAY_API_KEY != ''
         run: gem install fastlane --no-document
       # fastlane runs from the workspace ROOT -> loads THIS repo's fastlane/ (Connect's Appfile).
       - name: Upload AAB to Google Play (Fastlane)
-        if: env.GOOGLE_PLAY_APIKEY != ''
+        if: env.GOOGLE_PLAY_API_KEY != ''
         run: |
           echo "Uploading $AAB_PATH (versionCode=$VERSION_CODE rollout='$ROLLOUT') to track $TRACK"
           # TEMP-CI-BINARY-ONLY: skip_metadata:"true" uploads only the AAB and leaves the live store
@@ -365,7 +365,7 @@ jobs:
             exit 1
           fi
       - name: Download Play-signed universal APK (Fastlane)
-        if: env.GOOGLE_PLAY_APIKEY != ''
+        if: env.GOOGLE_PLAY_API_KEY != ''
         run: |
           fastlane android download_signed version_code:"$VERSION_CODE"
           SIGNED=$(find fastlane -type f -name "*.apk" | head -n1 || true)
@@ -375,7 +375,7 @@ jobs:
           cp "$SIGNED" "$GITHUB_WORKSPACE/play-signed/${BASE}.apk"
           echo "✅ Play-signed APK staged: play-signed/${BASE}.apk"
       - name: Upload Play-signed APK artifact
-        if: env.GOOGLE_PLAY_APIKEY != ''
+        if: env.GOOGLE_PLAY_API_KEY != ''
         uses: actions/upload-artifact@v7
         with:
           name: connect-android-play-signed
