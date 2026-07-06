@@ -33,7 +33,7 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        description: "Monorepo branch or commit to build (blank = development)"
+        description: "Monorepo branch or commit to build (blank = develop)"
         required: false
         default: ""
       publish_release:
@@ -86,7 +86,7 @@ jobs:
     steps:
       - name: Checkout monorepo code
         uses: actions/checkout@v5
-        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'development' }}", path: code }
+        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'develop' }}", path: code }
       - uses: actions/setup-dotnet@v5
         with: { global-json-file: code/global.json }
       - name: Resolve module dir
@@ -139,7 +139,7 @@ jobs:
     steps:
       - name: Checkout monorepo code
         uses: actions/checkout@v5
-        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'development' }}", path: code }
+        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'develop' }}", path: code }
       - uses: actions/setup-dotnet@v5
         with: { global-json-file: code/global.json }
       - name: Resolve module dir
@@ -224,7 +224,7 @@ jobs:
     steps:
       - name: Checkout monorepo code
         uses: actions/checkout@v5
-        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'development' }}", path: code }
+        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'develop' }}", path: code }
       - uses: actions/setup-dotnet@v5
         with: { global-json-file: code/global.json }
       - uses: actions/setup-java@v5
@@ -305,7 +305,7 @@ jobs:
         uses: actions/checkout@v5
       - name: Checkout monorepo code
         uses: actions/checkout@v5
-        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'development' }}", path: code }
+        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'develop' }}", path: code }
       - name: Warn if Google Play API key is missing
         if: env.GOOGLE_PLAY_API_KEY == ''
         run: echo "::warning title=Google Play publish skipped::GOOGLE_PLAY_API_KEY is not set; the AAB will NOT be uploaded to Google Play. The release proceeds without a Play-signed APK."
@@ -420,7 +420,7 @@ jobs:
     steps:
       - name: Checkout monorepo code
         uses: actions/checkout@v5
-        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'development' }}", path: code }
+        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'develop' }}", path: code }
       # net11.0-ios (preview SDK); global.json pins 10.x, so install 11 explicitly.
       - uses: actions/setup-dotnet@v5
         with: { dotnet-version: "11.0.100-preview.5.26302.115" }
@@ -500,7 +500,7 @@ jobs:
     steps:
       - name: Checkout monorepo code
         uses: actions/checkout@v5
-        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'development' }}", path: code }
+        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'develop' }}", path: code }
       - name: Warn if App Store Connect API key is missing
         if: env.APPSTORE_CONNECT_API_KEY == ''
         run: |
@@ -567,7 +567,7 @@ jobs:
     steps:
       - name: Checkout monorepo code
         uses: actions/checkout@v5
-        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'development' }}", path: code }
+        with: { repository: "${{ env.CODE_REPO }}", ref: "${{ github.event.inputs.ref || 'develop' }}", path: code }
       - uses: actions/setup-dotnet@v5
         with: { global-json-file: code/global.json }
       - name: Resolve module dir
