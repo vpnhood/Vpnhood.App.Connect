@@ -62,7 +62,7 @@ on:
         required: false
         default: false
       publish_appstore:
-        description: "Upload the built .ipa to TestFlight (prerelease) / App Store (stable). Only applies when build_ios is on."
+        description: "Upload the built .ipa to TestFlight. Connect is TestFlight-ONLY (never App Store) pending policy compliance. Only applies when build_ios is on."
         type: boolean
         required: false
         default: true
@@ -484,10 +484,10 @@ jobs:
           retention-days: 1
           path: ${{ env.MODULE_DIR }}/ios/**
 
-  # Upload the built .ipa to App Store Connect from the CI artifact, mirroring publish-play-android.
-  # Track from code/Pub/PubVersion.json: prerelease -> TestFlight (beta), stable -> App Store. Gated on
-  # the inherited APPSTORE_CONNECT_API_KEY: absent -> warn + skip (release proceeds); present + a genuine
-  # Fastlane failure -> red, which BLOCKS the release. No-op (warn) when build-ios produced no .ipa.
+  # Upload the built .ipa to TestFlight from the CI artifact, mirroring publish-play-android. Connect is
+  # TestFlight-ONLY (never App Store) until it complies with App Store review policy — see the upload step.
+  # Gated on the inherited APPSTORE_CONNECT_API_KEY: absent -> warn + skip (release proceeds); present + a
+  # genuine Fastlane failure -> red, which BLOCKS the release. No-op (warn) when build-ios produced no .ipa.
   publish-appstore-ios:
     needs: [build-ios]
     if: needs.build-ios.result == 'success' && github.event.inputs.publish_appstore != 'false'
@@ -509,7 +509,7 @@ jobs:
         if: env.APPSTORE_CONNECT_API_KEY != ''
         uses: actions/download-artifact@v8
         with: { name: connect-ios, path: ios }
-      - name: Resolve ipa + track
+      - name: Resolve ipa
         if: env.APPSTORE_CONNECT_API_KEY != ''
         shell: bash
         run: |
@@ -521,9 +521,6 @@ jobs:
           else
             echo "IPA_PATH=$IPA" >> $GITHUB_ENV
           fi
-          # prerelease -> TestFlight; stable -> App Store (mirrors the Android alpha/production split).
-          PRERELEASE=$(jq -r '.Prerelease' code/Pub/PubVersion.json)
-          if [ "$PRERELEASE" = "true" ] || [ "$PRERELEASE" = "True" ]; then echo "LANE=testflight" >> $GITHUB_ENV; else echo "LANE=appstore" >> $GITHUB_ENV; fi
       - name: Set up Ruby
         if: env.APPSTORE_CONNECT_API_KEY != '' && env.IPA_PATH != ''
         uses: ruby/setup-ruby@v1
@@ -539,21 +536,17 @@ jobs:
           mkdir -p asc
           jq -n --arg kid "$APPSTORE_CONNECT_API_KEY_ID" --arg iss "$APPSTORE_CONNECT_ISSUER_ID" --arg key "$APPSTORE_CONNECT_API_KEY" \
             '{key_id:$kid, issuer_id:$iss, key:$key, in_house:false}' > asc/api_key.json
-      - name: Upload to TestFlight / App Store (Fastlane)
+      # TestFlight-ONLY. VpnHood Connect does NOT yet comply with App Store review policy, so EVERY build
+      # (prerelease AND stable) goes only to TestFlight — we never call upload_to_app_store and never
+      # submit for review. TestFlight upload does not trigger public App Store review. When Connect is
+      # compliant, restore the prerelease->TestFlight / stable->App Store split (see the Client pipeline).
+      - name: Upload to TestFlight (Fastlane)
         if: env.APPSTORE_CONNECT_API_KEY != '' && env.IPA_PATH != ''
         run: |
-          if [ "$LANE" = "testflight" ]; then
-            echo "Uploading $IPA_PATH to TestFlight"
-            if ! fastlane run upload_to_testflight ipa:"$IPA_PATH" api_key_path:asc/api_key.json skip_waiting_for_build_processing:true; then
-              echo "::error title=TestFlight upload failed::Fastlane pilot could not upload the .ipa. A common cause is a CFBundleVersion that is not higher than the last build (ApplicationVersion in PublishIosApp.ps1)."
-              exit 1
-            fi
-          else
-            echo "Uploading $IPA_PATH to App Store Connect (App Store track)"
-            if ! fastlane run upload_to_app_store ipa:"$IPA_PATH" api_key_path:asc/api_key.json skip_metadata:true skip_screenshots:true submit_for_review:false force:true precheck_include_in_app_purchases:false; then
-              echo "::error title=App Store upload failed::Fastlane deliver could not upload the .ipa. Verify App Store signing and that CFBundleVersion is higher than the last build."
-              exit 1
-            fi
+          echo "Uploading $IPA_PATH to TestFlight (Connect is TestFlight-only pending App Store policy compliance)"
+          if ! fastlane run upload_to_testflight ipa:"$IPA_PATH" api_key_path:asc/api_key.json skip_waiting_for_build_processing:true; then
+            echo "::error title=TestFlight upload failed::Fastlane pilot could not upload the .ipa. A common cause is a CFBundleVersion that is not higher than the last build (ApplicationVersion in PublishIosApp.ps1)."
+            exit 1
           fi
 
   release:
