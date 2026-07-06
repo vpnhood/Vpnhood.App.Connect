@@ -1,6 +1,6 @@
 name: Publish Connect (All Platforms)
 
-# Builds VpnHood CONNECT from the monorepo code (vpnhood/VpnHood-deploytest) and releases it to THIS
+# Builds VpnHood CONNECT from the monorepo code (vpnhood/VpnHood) and releases it to THIS
 # repo (vpnhood/Vpnhood.App.Connect). The code is NOT forked here — it is checked out at build time
 # into code/; this repo only holds the release plumbing (this workflow + fastlane/ config + metadata)
 # and the Connect-specific secrets/variables. The monorepo remains the single source of code + version.
@@ -76,7 +76,7 @@ on:
 env:
   VH_CONNECT_PUBLISH_REPO: ${{ github.repository }}
   # The monorepo that holds the Connect source (public -> no checkout token needed).
-  CODE_REPO: vpnhood/VpnHood-deploytest
+  CODE_REPO: vpnhood/VpnHood
 
 jobs:
   build-linux:
