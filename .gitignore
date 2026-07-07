@@ -1,2 +1,5 @@
 ﻿/.idea/
 /.vs
+.DS_Store
+
+/asc/
