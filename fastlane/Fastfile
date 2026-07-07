@@ -105,3 +105,31 @@ platform :android do
     UI.success("Downloaded universal APK for version code #{options[:version_code]}")
   end
 end
+
+platform :ios do
+  desc "Push the iOS App Store listing (metadata + screenshots) via deliver — NO binary"
+  lane :upload_metadata do |options|
+    # iOS twin of android:publish_contents. Refreshes the App Store listing text + screenshots for
+    # the current editable version WITHOUT uploading a build (the build ships to TestFlight via
+    # connect_publish.yml). Listing assets live under fastlane/metadata/ios/** + fastlane/screenshots/ios/**.
+    upload_to_app_store(
+      app_identifier: options[:app_identifier] || "com.vpnhood.connect.ios",
+      api_key_path: options[:api_key_path] || "asc/api_key.json",
+      metadata_path: options[:metadata_path] || "./fastlane/metadata/ios",
+      # NOTE: screenshots must live OUTSIDE metadata_path — deliver treats every metadata_path subdir as a locale.
+      screenshots_path: options[:screenshots_path] || "./fastlane/screenshots/ios",
+      skip_binary_upload: true,          # metadata-only; the build ships via connect_publish.yml -> TestFlight
+      # Toggleable so a brand-new app's FIRST version can push screenshots on their own pass:
+      # deliver has a spaceship bug (#20538) where the very first version's text update returns
+      # `No data` and aborts before screenshots. Run once with skip_metadata:true to land the
+      # screenshots; later updates can do both in one pass. Options arrive as strings from the CLI.
+      skip_metadata: options[:skip_metadata].to_s == "true",
+      skip_screenshots: options[:skip_screenshots].to_s == "true",
+      overwrite_screenshots: true,       # replace whatever screenshots are on the listing
+      submit_for_review: false,          # never auto-submit; promote from App Store Connect
+      force: true,                       # no interactive HTML preview (CI is non-interactive)
+      run_precheck_before_submit: false, # precheck only matters for a submission
+      precheck_include_in_app_purchases: false
+    )
+  end
+end
