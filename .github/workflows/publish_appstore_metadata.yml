@@ -68,6 +68,7 @@ jobs:
         run: |
           fastlane ios upload_metadata \
             skip_metadata:"${{ github.event.inputs.skip_metadata }}" \
-            skip_screenshots:"${{ github.event.inputs.skip_screenshots }}"
+            skip_screenshots:"${{ github.event.inputs.skip_screenshots }}" \
+            --verbose
 
 # Workflow not appearing after a fresh fork/import? See connect_publish.yml / the monorepo .github/DEPLOYMENT.md.
