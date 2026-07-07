@@ -1,0 +1,73 @@
+name: Publish App Store Listing (Connect iOS)
+
+# Pushes the VpnHood! CONNECT iOS App Store LISTING (metadata text + screenshots) to App Store Connect
+# via Fastlane `deliver` — NO binary. This runs on GitHub Actions on purpose: fastlane publishing is
+# NEVER run from a developer machine. The TestFlight BUILD ships separately through connect_publish.yml
+# (build-ios -> publish-appstore-ios). This workflow only refreshes the store listing text/images for
+# the current editable App Store version; it never submits for review (promote from App Store Connect).
+#
+# Listing assets are repo content, consumed by the `ios upload_metadata` lane in fastlane/Fastfile:
+#   fastlane/metadata/ios/en-US/*.txt        subtitle, keywords, promotional_text, description, urls, release_notes
+#   fastlane/screenshots/ios/en-US/*.png     6.9" iPhone (1290x2796) screenshots
+#
+# Secrets (App Store Connect API key — account-level, inherited org secrets, same as connect_publish.yml):
+#   APPSTORE_CONNECT_API_KEY       the .p8 private-key CONTENTS
+#   APPSTORE_CONNECT_API_KEY_ID    its Key ID (e.g. YZHR77ZQ68)
+#   APPSTORE_CONNECT_ISSUER_ID     the account Issuer ID
+#
+# First-version note: App Store Connect's brand-new (never-published) version hits a fastlane/spaceship
+# bug (#20538) where a combined text+screenshot push aborts before screenshots. For the FIRST push, run
+# this workflow TWICE: once with skip_metadata=true (lands screenshots), then once with skip_screenshots=true
+# (lands the text). After the first version is published, a single default run does both.
+
+on:
+  workflow_dispatch:
+    inputs:
+      skip_metadata:
+        description: "Skip the text metadata (push screenshots only). Use for the FIRST-version screenshots pass."
+        type: boolean
+        required: false
+        default: false
+      skip_screenshots:
+        description: "Skip screenshots (push text only). Use for the FIRST-version text pass."
+        type: boolean
+        required: false
+        default: false
+
+jobs:
+  upload-metadata:
+    runs-on: ubuntu-latest
+    env:
+      # Mapped to env so the guard step can test presence in `if:` (the `secrets` context isn't allowed there).
+      APPSTORE_CONNECT_API_KEY: ${{ secrets.APPSTORE_CONNECT_API_KEY }}
+      APPSTORE_CONNECT_API_KEY_ID: ${{ secrets.APPSTORE_CONNECT_API_KEY_ID }}
+      APPSTORE_CONNECT_ISSUER_ID: ${{ secrets.APPSTORE_CONNECT_ISSUER_ID }}
+    steps:
+      # Checkout THIS repo at root so fastlane (run from root) loads THIS repo's fastlane/ (Connect's
+      # metadata + screenshots + the ios upload_metadata lane).
+      - uses: actions/checkout@v5
+      # No key -> fail: unlike the release legs, this workflow's ONLY purpose is the listing push, so a
+      # missing key is an error, not a benign skip.
+      - name: Require App Store Connect API key
+        if: env.APPSTORE_CONNECT_API_KEY == ''
+        run: |
+          echo "::error title=App Store Connect API key missing::APPSTORE_CONNECT_API_KEY/_API_KEY_ID/ISSUER_ID must be set on this repo to push the App Store listing."
+          exit 1
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with: { ruby-version: "3.3", bundler-cache: false }
+      - name: Install Fastlane
+        run: gem install fastlane --no-document
+      # Build the fastlane App Store Connect API-key JSON from the three secrets (never echoed).
+      - name: Write ASC API key
+        run: |
+          mkdir -p asc
+          jq -n --arg kid "$APPSTORE_CONNECT_API_KEY_ID" --arg iss "$APPSTORE_CONNECT_ISSUER_ID" --arg key "$APPSTORE_CONNECT_API_KEY" \
+            '{key_id:$kid, issuer_id:$iss, key:$key, in_house:false}' > asc/api_key.json
+      - name: Push App Store listing (Fastlane deliver)
+        run: |
+          fastlane ios upload_metadata \
+            skip_metadata:"${{ github.event.inputs.skip_metadata }}" \
+            skip_screenshots:"${{ github.event.inputs.skip_screenshots }}"
+
+# Workflow not appearing after a fresh fork/import? See connect_publish.yml / the monorepo .github/DEPLOYMENT.md.
