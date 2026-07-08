@@ -1,7 +1,7 @@
 name: Publish Connect (All Platforms)
 
 # Thin entry point: publishes VpnHood CONNECT via the shared reusable workflow in the monorepo
-# (vpnhood/VpnHood/.github/workflows/_publish_app.yml). A reusable workflow runs in the CALLER's
+# (vpnhood/VpnHood/.github/workflows/publish_app.yml). A reusable workflow runs in the CALLER's
 # context, so this releases to THIS repo (vpnhood/Vpnhood.App.Connect) with THIS repo's fastlane +
 # secrets/vars. The monorepo holds the code + version and the single build/store/release definition;
 # it is checked out at build time into code/ (this repo has no source of its own).
@@ -59,7 +59,7 @@ on:
 
 jobs:
   publish:
-    uses: vpnhood/VpnHood/.github/workflows/_publish_app.yml@develop
+    uses: vpnhood/VpnHood/.github/workflows/publish_app.yml@develop
     with:
       app: connect
       code_ref: ${{ inputs.ref }}
