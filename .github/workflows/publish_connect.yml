@@ -1,0 +1,75 @@
+name: Publish Connect (All Platforms)
+
+# Thin entry point: publishes VpnHood CONNECT via the shared reusable workflow in the monorepo
+# (vpnhood/VpnHood/.github/workflows/_publish_app.yml). A reusable workflow runs in the CALLER's
+# context, so this releases to THIS repo (vpnhood/Vpnhood.App.Connect) with THIS repo's fastlane +
+# secrets/vars. The monorepo holds the code + version and the single build/store/release definition;
+# it is checked out at build time into code/ (this repo has no source of its own).
+#
+# Secrets/vars live in THIS repo (standardized names, shared with the client):
+#   vars.APPSETTINGS, vars.PUBLISH
+#   secrets.ANDROID_KEYSTORE_GOOGLE_* / _WEB_*  (Play + web signing)
+#   secrets.ACCESS_KEY_DEFAULT_GOOGLE / _WEB    (embedded default server key)
+#   secrets.IOS_PROVISION_APP_BASE64 / _EXT_BASE64  (iOS App Store profiles)
+# Org secrets inherited: ADVANCED_INSTALLER_LICENSE, AZURE_SIGNING_*, APPLE_DISTRIBUTION_CERT_*,
+#   APPSTORE_CONNECT_* . iOS uploads go to TestFlight only (Connect isn't App Store-review compliant yet).
+# NOTE: Google Play publishing additionally needs GOOGLE_PLAY_API_KEY — only when publish_play is on.
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Monorepo (vpnhood/VpnHood) branch or commit to build (blank = its default branch)"
+        required: false
+        default: ""
+      publish_release:
+        description: "Create the GitHub release (on this Connect repo)"
+        type: boolean
+        required: false
+        default: false
+      build_android:
+        description: "Build the Android apps (Google AAB + Web APKs). Off by default."
+        type: boolean
+        required: false
+        default: false
+      publish_play:
+        description: "Publish the built AAB to Google Play (only applies when build_android is on)"
+        type: boolean
+        required: false
+        default: true
+      only_aab:
+        description: "Only build the Android AAB (+ Play publish); skip Linux/Windows/iOS. Fast Play iteration."
+        type: boolean
+        required: false
+        default: false
+      build_ios:
+        description: "Build the iOS app (.ipa). Off by default."
+        type: boolean
+        required: false
+        default: false
+      publish_appstore:
+        description: "Upload the built .ipa to TestFlight (only applies when build_ios is on)"
+        type: boolean
+        required: false
+        default: true
+      rollout:
+        description: "Google Play audience ratio (%) for a PRODUCTION release (1-100; 100 = full). Ignored on prerelease/alpha."
+        required: false
+        default: "100"
+
+jobs:
+  publish:
+    uses: vpnhood/VpnHood/.github/workflows/_publish_app.yml@develop
+    with:
+      app: connect
+      code_ref: ${{ inputs.ref }}
+      publish_release: ${{ inputs.publish_release }}
+      build_android: ${{ inputs.build_android }}
+      publish_play: ${{ inputs.publish_play }}
+      only_aab: ${{ inputs.only_aab }}
+      build_ios: ${{ inputs.build_ios }}
+      publish_appstore: ${{ inputs.publish_appstore }}
+      rollout: ${{ inputs.rollout }}
+    secrets: inherit
+
+# Workflow not appearing after a fresh fork/import? See the monorepo's .github/DEPLOYMENT.md.
