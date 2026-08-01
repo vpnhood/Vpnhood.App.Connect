@@ -1,0 +1,36 @@
+VpnHood! CONNECT est une solution réseau rapide et sécurisée conçue pour protéger votre vie privée numérique. Propulsé par le moteur open source VpnHood ENGINE, il offre une connexion fiable avec une bande passante illimitée et sans restriction de temps.
+
+🛡️ Fonctionnalités clés
+Totalement gratuit : Accès libre à un réseau sécurisé.
+
+Facile à utiliser : Connectez-vous en un seul geste.
+
+Haute performance : Optimisé pour la vitesse avec données illimitées.
+
+Open source et transparent : Basé sur le moteur VpnHood (disponible sur GitHub), garantissant un code fiable et vérifiable.
+
+Large compatibilité : Compatible avec Android 7+, Android TV et Windows.
+
+Support Dual-Stack : Compatibilité totale avec IPv4 et IPv6.
+
+⚙️ Personnalisation avancée
+Split Tunneling par application : Choisissez les applications à acheminer via le tunnel sécurisé ou excluez-les pour optimiser les performances.
+
+Filtrage géographique : Excluez le trafic local pour conserver un accès rapide aux services régionaux et applications bancaires nécessitant une IP locale.
+
+Exclusion du réseau local (LAN) : Conservez l'accès à vos appareils locaux (imprimantes, serveurs) tout en restant protégé en ligne.
+
+Contrôle du protocole : Basculez entre UDP et TCP selon votre environnement réseau.
+
+💡 Pourquoi choisir VpnHood! ?
+Protocole axé sur la confidentialité : VpnHood utilise un protocole sophistiqué résistant au marquage (fingerprinting). En imitant le trafic HTTPS standard, il garantit la confidentialité de votre connexion face à l'inspection profonde des paquets (DPI).
+
+Cœur innovant : Pionnier du développement VPN basé sur .NET, VpnHood offre une architecture moderne et robuste.
+
+Audité pour la sécurité : Pour votre tranquillité d'esprit, VpnHood a fait l'objet d'un audit de sécurité complet par l'Open Tech Fund.
+
+Axé sur la communauté : Nous nous engageons à nous améliorer continuellement pour offrir une expérience internet sans restriction.
+
+📞 Support 24/7
+Notre équipe dédiée est là pour vous aider à tout moment. Pour toute question ou assistance technique, contactez-nous :
+📧 E-mail : support@vpnhood.com

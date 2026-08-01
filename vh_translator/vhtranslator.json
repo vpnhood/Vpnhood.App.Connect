@@ -2,5 +2,5 @@
   "base": "store-i18n/en-US",
   "model": "gemini-flash-lite-latest",
   "batch": 20,
-  "languages": ["fa"]
+  "languages": ["ar", "de-DE", "es-ES", "fa", "fr-FR", "hi-IN", "it-IT", "pt-BR", "pt-PT", "ru-RU", "tr-TR", "zh-CN"]
 }

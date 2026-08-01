@@ -1,6 +1,17 @@
 {
   "locales": [
     { "tag": "en-US" },
-    { "tag": "fa", "stores": { "appStore": null } }
+    { "tag": "ar", "stores": { "appStore": "ar-SA" } },
+    { "tag": "de-DE" },
+    { "tag": "es-ES" },
+    { "tag": "fa", "stores": { "appStore": null } },
+    { "tag": "fr-FR" },
+    { "tag": "hi-IN", "stores": { "appStore": "hi" } },
+    { "tag": "it-IT", "stores": { "appStore": "it" } },
+    { "tag": "pt-BR" },
+    { "tag": "pt-PT" },
+    { "tag": "ru-RU", "stores": { "appStore": "ru" } },
+    { "tag": "tr-TR", "stores": { "appStore": "tr" } },
+    { "tag": "zh-CN", "stores": { "appStore": "zh-Hans" } }
   ]
 }
