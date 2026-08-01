@@ -10,8 +10,6 @@ High Performance: Optimized for speed with unlimited data.
 
 Open Source & Transparent: Built on the VpnHood! engine (available on GitHub), ensuring a trustworthy and verifiable codebase.
 
-Broad Compatibility: Works across iOS, Android, Android TV, and Windows.
-
 Dual-Stack Support: Full compatibility with both IPv4 and IPv6.
 
 Advanced Customization

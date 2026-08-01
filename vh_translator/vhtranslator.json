@@ -1,0 +1,6 @@
+{
+  "base": "store-i18n/en-US",
+  "model": "gemini-flash-lite-latest",
+  "batch": 20,
+  "languages": ["fa"]
+}
