@@ -47,5 +47,32 @@ This single command performs the following critical tasks:
 > ./Pub/Android.GooglePlay/apk/VpnHoodConnect-android.apk
 
 ---
+
+## 📝 Store listing texts
+
+The fastlane text files (`title.txt`, `description.txt`, …) are compiler OUTPUT — never edit them
+and never hand them to a translator. The source of truth is [`store-i18n/`](../store-i18n/):
+
+- `locales.json` — this app's store locales; the FIRST entry is the source language. A locale a
+  store does not offer declares it here (`"stores": { "appStore": null }`) and that store skips it.
+- `<locale>/store.json` — the texts, one folder per locale, as a FLAT map of `"<store>.<field>"`
+  keys (`"android.title"`, `"ios.keywords"`, …). Only the source folder is written by humans;
+  `vhtranslator` generates every sibling folder. The translator's config and the CONNECT-specific
+  store-copy prompt live in [`vh_translator/`](../vh_translator/).
+
+Translate and compile:
+
+```bash
+dotnet tool restore && dotnet vhtranslator      # in this repo; needs GEMINI_API_KEY
+cd ../VpnHood.Client.WebUI
+node e2e/store-metadata.mjs --root ../Vpnhood.App.Connect    # --check validates without writing
+```
+
+The compiler enforces the stores' hard character limits, per-store locale availability, complete
+key sets per locale, and the App Store rule that metadata must not name another platform
+(Guideline 2.3.10). Per-version files (`changelogs/`, `release_notes.txt`) belong to the release
+pipeline; URLs and `video.txt` are copied from the source locale into every other locale.
+
+---
 ## Further Information
 For a comprehensive understanding of the Fastlane toolchain, its configuration, and how lanes are defined, please refer to the official documentation [Fastlane Android Setup Guide](https://docs.fastlane.tools/getting-started/android/setup/) website.

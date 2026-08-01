@@ -1,0 +1,6 @@
+{
+  "locales": [
+    { "tag": "en-US" },
+    { "tag": "fa", "stores": { "appStore": null } }
+  ]
+}
