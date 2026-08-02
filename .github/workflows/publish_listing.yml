@@ -1,0 +1,56 @@
+name: Publish Store Listing (Connect)
+
+# Thin entry point: publishes the VpnHood! CONNECT store LISTING — localized texts and screenshots —
+# through the shared reusable workflow in the main repo, which is the single source of truth for how
+# a listing reaches each store. No binaries: those ship through connect_publish.yml.
+#
+# The shared workflow runs in THIS repo's context, so it reads this repo's fastlane/ tree and records
+# the published fingerprints back here with this repo's own token — no PAT anywhere.
+#
+# Listing content is compiled, never hand-edited:
+#   store-i18n/<locale>/store.json   the source texts (only en-US is written by hand)
+#   fastlane/metadata/**             compiled by store-metadata.mjs
+#
+# First-version note: a brand-new App Store version trips a fastlane/spaceship bug (#20538) where a
+# combined text+screenshot push aborts before the screenshots. For the FIRST publish only, run this
+# twice — once with skip_metadata=true (lands screenshots), then once with skip_screenshots=true
+# (lands the text). Afterwards a single default run does both.
+
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Publish even when a store's listing is byte-identical to the last published one."
+        type: boolean
+        required: false
+        default: false
+      skip_metadata:
+        description: "App Store only: push screenshots without text (FIRST-version pass 1)."
+        type: boolean
+        required: false
+        default: false
+      skip_screenshots:
+        description: "App Store only: push text without screenshots (FIRST-version pass 2)."
+        type: boolean
+        required: false
+        default: false
+      webui_ref:
+        description: "vpnhood/VpnHood.Client.WebUI ref supplying the store tooling."
+        type: string
+        required: false
+        default: develop
+
+jobs:
+  publish:
+    uses: vpnhood/VpnHood/.github/workflows/publish_listing.yml@develop
+    permissions:
+      contents: write # the shared workflow records the published fingerprints back into this repo
+    with:
+      app_identifier: com.vpnhood.connect.ios
+      force: ${{ inputs.force }}
+      skip_metadata: ${{ inputs.skip_metadata }}
+      skip_screenshots: ${{ inputs.skip_screenshots }}
+      webui_ref: ${{ inputs.webui_ref }}
+    secrets: inherit
+
+# Workflow not appearing after a fresh fork/import? See the main repo's .github/DEPLOYMENT.md.
