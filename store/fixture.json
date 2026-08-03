@@ -1,0 +1,1110 @@
+{
+  "features": {
+    "appId": "com.vpnhood.connect.windows",
+    "appName": "VpnHood! CONNECT",
+    "isExcludeAppsSupported": false,
+    "isIncludeAppsSupported": false,
+    "uiName": "VpnHoodConnect",
+    "isPremiumFlagSupported": true,
+    "isAddAccessKeySupported": false,
+    "isAccountSupported": false,
+    "isBillingSupported": false,
+    "isTcpProxySupported": true,
+    "isQuicSupported": true,
+    "isSplitDomainSupported": true,
+    "isUserReviewSupported": false,
+    "isAnonymousTrackerSupported": true,
+    "isTv": false,
+    "osType": "Windows",
+    "gaMeasurementId": null,
+    "clientId": "00000000-0000-4000-8000-000000000001",
+    "isDebugMode": false,
+    "debugCommands": [
+      "/capture-context",
+      "/drop-udp",
+      "/log:debug",
+      "/log:trace",
+      "/kill-spa-server",
+      "/no-channel-reuse",
+      "/null-capture",
+      "/user-review",
+      "/windivert",
+      "/remote-access",
+      "/disable-websocket",
+      "/os-tcp-stack"
+    ],
+    "isProxySupported": true,
+    "adjustForSystemBars": true,
+    "allowEndPointStrategy": false,
+    "autoRemoveExpiredPremium": false,
+    "isAdSupported": false,
+    "isRewardedAdSupported": false,
+    "webUiPort": 4700,
+    "premiumFeatures": [
+      "CustomDns",
+      "AlwaysOn",
+      "QuickLaunch",
+      "SplitIpViaApp",
+      "SplitIpViaDevice",
+      "SplitDomain"
+    ],
+    "channelProtocols": [
+      "Tcp",
+      "Udp",
+      "Quic"
+    ],
+    "customData": {
+      "firebaseOptions": null
+    },
+    "version": "8.1.838.0"
+  },
+  "intentFeatures": {
+    "isUserReviewSupported": false,
+    "isQuickLaunchSupported": false,
+    "isRequestQuickLaunchSupported": false,
+    "isRequestNotificationSupported": false,
+    "isPrivateDnsSettingsSupported": false,
+    "isKillSwitchSettingsSupported": false,
+    "isAlwaysOnSettingsSupported": false,
+    "isSettingsSupported": false,
+    "isAppSettingsSupported": false,
+    "isAppNotificationSettingsSupported": false
+  },
+  "state": {
+    "configTime": "2026-07-31T02:37:24.3124913-07:00",
+    "connectionState": "Connected",
+    "sessionInfo": {
+      "accessInfo": {
+        "isNew": false,
+        "createdTime": "2024-11-24T22:10:07",
+        "lastUsedTime": "2026-07-31T09:37:22.2789437Z",
+        "expirationTime": null,
+        "isPremium": true,
+        "maxCycleTraffic": 0,
+        "maxTotalTraffic": 0,
+        "maxDeviceCount": 2,
+        "maxSpeedMbps": null,
+        "deviceLifeSpan": 90,
+        "devicesSummary": {
+          "deviceCount": 10,
+          "hasMoreDevices": true,
+          "devices": [
+            {
+              "lastUsedTime": "2025-01-31T22:26:36",
+              "operatingSystem": "Android 8.0.0",
+              "ipAddress": null
+            },
+            {
+              "lastUsedTime": "2025-02-02T19:26:37",
+              "operatingSystem": "Windows NT 10.0",
+              "ipAddress": null
+            },
+            {
+              "lastUsedTime": "2025-02-20T03:11:43",
+              "operatingSystem": "Android 9",
+              "ipAddress": null
+            },
+            {
+              "lastUsedTime": "2025-02-20T19:39:44",
+              "operatingSystem": "Android 8.0.0",
+              "ipAddress": null
+            },
+            {
+              "lastUsedTime": "2025-03-06T05:54:36",
+              "operatingSystem": "Android 13",
+              "ipAddress": null
+            },
+            {
+              "lastUsedTime": "2025-03-14T23:14:22",
+              "operatingSystem": "Android 8.0.0",
+              "ipAddress": null
+            },
+            {
+              "lastUsedTime": "2025-08-05T04:26:49",
+              "operatingSystem": "Windows NT 10.0",
+              "ipAddress": null
+            },
+            {
+              "lastUsedTime": "2025-08-11T00:34:47",
+              "operatingSystem": "Android 15",
+              "ipAddress": null
+            },
+            {
+              "lastUsedTime": "2025-10-15T08:50:15",
+              "operatingSystem": "Unknown OS",
+              "ipAddress": null
+            },
+            {
+              "lastUsedTime": "2025-12-08T06:44:55",
+              "operatingSystem": "Unknown OS",
+              "ipAddress": null
+            }
+          ]
+        }
+      },
+      "dnsConfig": {
+        "dnsSelection": "ServerDns",
+        "isIncludedInVpn": true,
+        "isUserSuppressed": false,
+        "dnsServers": [
+          "8.8.8.8",
+          "8.8.4.4",
+          "2001:4860:4860::8888",
+          "2001:4860:4860::8844"
+        ]
+      },
+      "isLocalNetworkAllowed": false,
+      "isTrafficSplitByServer": false,
+      "isIpV6SupportedByServer": true,
+      "serverLocationInfo": {
+        "hasMultipleRegions": false,
+        "translatedCountryName": "United States",
+        "countryCode": "US",
+        "regionName": "Oregon",
+        "tags": [],
+        "serverLocation": "US/Oregon",
+        "countryName": "United States",
+        "isAuto": false,
+        "hasRegion": true
+      },
+      "isPremiumSession": true,
+      "suppressedTo": "None",
+      "serverVersion": "8.0.833",
+      "clientPublicIpAddress": null,
+      "createdTime": "2026-07-31T09:37:23.3308173Z",
+      "channelProtocols": [
+        "Tcp",
+        "Udp",
+        "Quic"
+      ],
+      "isTcpProxySupported": true,
+      "isTcpPacketSupported": true
+    },
+    "sessionStatus": {
+      "connectorStat": {
+        "freeConnectionCount": 0,
+        "reusedConnectionFailedCount": 0,
+        "reusedConnectionSucceededCount": 4,
+        "createdConnectionCount": 14,
+        "requestCount": 18
+      },
+      "speed": {
+        "sent": 180135,
+        "received": 7233
+      },
+      "sessionTraffic": {
+        "sent": 5204531,
+        "received": 199138
+      },
+      "sessionSplitTraffic": {
+        "sent": 1152,
+        "received": 0
+      },
+      "cycleTraffic": {
+        "sent": 24574571755,
+        "received": 49307736830
+      },
+      "totalTraffic": {
+        "sent": 112978356843,
+        "received": 272711995729
+      },
+      "streamTunnelledCount": 13,
+      "streamPassthruCount": 0,
+      "packetChannelCount": 4,
+      "unstableCount": 0,
+      "waitingCount": 0,
+      "canExtendByRewardedAd": false,
+      "sessionMaxTraffic": 0,
+      "sessionExpirationTime": null,
+      "activeClientCount": 1,
+      "isTcpProxy": true,
+      "canChangeTcpProxy": true,
+      "isDropQuic": false,
+      "channelProtocol": "Tcp"
+    },
+    "proxyConnectorStatus": null,
+    "serverLocationInfo": {
+      "hasMultipleRegions": false,
+      "translatedCountryName": "United States",
+      "countryCode": "US",
+      "regionName": "Oregon",
+      "tags": [],
+      "serverLocation": "US/Oregon",
+      "countryName": "United States",
+      "isAuto": false,
+      "hasRegion": true
+    },
+    "connectRequestTime": "2026-07-31T02:37:23.0216873-07:00",
+    "lastError": null,
+    "clientProfile": {
+      "clientProfileId": "00000000-0000-4000-8000-000000000301",
+      "clientProfileName": "VpnHood Global Servers",
+      "supportId": "1000",
+      "customData": null,
+      "isPremiumLocationSelected": false,
+      "isPremium": false,
+      "hasAccessCode": false,
+      "isAccessCodeFromAccount": false,
+      "canGoPremium": true,
+      "canTryPremium": true,
+      "selectedLocationInfo": {
+        "isNestedCountry": false,
+        "isDefault": true,
+        "translatedCountryName": "Auto Select",
+        "options": {
+          "normal": 0,
+          "normalByRewardedAd": null,
+          "premiumByTrial": 10,
+          "premiumByRewardedAd": null,
+          "premiumByPurchase": true,
+          "premiumByCode": true,
+          "canGoPremium": true,
+          "hasFree": true,
+          "hasPremium": true,
+          "hasUnblockable": true,
+          "prompt": true
+        },
+        "countryCode": "*",
+        "regionName": "*",
+        "tags": [
+          "~#premium",
+          "~#unblockable"
+        ],
+        "serverLocation": "*/*",
+        "countryName": "Auto Select",
+        "isAuto": true,
+        "hasRegion": false
+      },
+      "customServerEndpoints": null,
+      "isCustomServerEndpointsEnabled": false
+    },
+    "isIdle": false,
+    "promptForLog": false,
+    "logExists": true,
+    "hasDiagnoseRequested": false,
+    "isReconnectRequired": false,
+    "updaterStatus": {
+      "checkedTime": "2026-07-31T01:14:43.3731402-07:00",
+      "versionStatus": "Latest",
+      "publishInfo": {
+        "version": "7.9.812",
+        "updateInfoUrl": "https://github.com/vpnhood/VpnHood/releases/latest/download/VpnHoodClient-win-x64.json",
+        "packageUrl": "https://github.com/vpnhood/VpnHood/releases/download/v7.9.812/VpnHoodClient-win-x64.msi",
+        "googlePlayUrl": null,
+        "installationPageUrl": "https://github.com/vpnhood/VpnHood/wiki/Install-VpnHood-Client",
+        "releaseDate": "2026-05-14T08:19:46",
+        "deprecatedVersion": "7.0.0",
+        "notificationDelay": "03:00:00"
+      },
+      "prompt": false
+    },
+    "canDisconnect": true,
+    "canConnect": false,
+    "canDiagnose": true,
+    "userReviewRecommended": 0,
+    "isQuickLaunchRecommended": false,
+    "clientCountryInfo": {
+      "englishName": "United States",
+      "translatedName": "United States",
+      "countryCode": "US"
+    },
+    "currentUiCultureInfo": {
+      "code": "en",
+      "nativeName": "English"
+    },
+    "systemUiCultureInfo": {
+      "code": "en",
+      "nativeName": "English"
+    },
+    "purchaseState": null,
+    "systemBarsInfo": {
+      "topHeight": 0,
+      "bottomHeight": 0
+    },
+    "isNotificationEnabled": false,
+    "systemPrivateDns": null,
+    "isWaitingForInternalAd": false,
+    "stateProgress": null,
+    "isDiagnosing": false,
+    "channelProtocol": "Tcp",
+    "isProxyEndPointActive": false,
+    "promotionExists": false,
+    "tcpProxyUsageReason": "None",
+    "splitTunnelingState": {
+      "isEnabled": true,
+      "isSplittingTraffic": false,
+      "isAppSplit": false,
+      "isCountrySplit": false,
+      "isIpViaAppSplit": false,
+      "isIpViaDeviceSplit": false,
+      "isDomainSplit": false,
+      "isLocalNetworkSplit": false,
+      "isIpV6Split": false,
+      "isSplitByServer": false,
+      "countryMode": "IncludeAll",
+      "countries": [],
+      "dnsMode": "IncludeAll",
+      "unsupportedIpV6Mode": "Block"
+    },
+    "clientProfileId": "00000000-0000-4000-8000-000000000301"
+  },
+  "userSettings": {
+    "isLicenseAccepted": true,
+    "isTcpProxyPrompted": true,
+    "isQuickLaunchPrompted": false,
+    "cultureCode": null,
+    "countryCode": null,
+    "clientProfileId": "00000000-0000-4000-8000-000000000301",
+    "maxPacketChannelCount": 4,
+    "splitTunneling": {
+      "enabled": true,
+      "appMode": "All",
+      "apps": [],
+      "countryMode": "IncludeAll",
+      "countries": [],
+      "useIpViaApp": false,
+      "useIpViaDevice": false,
+      "useDomain": false,
+      "useLocalNetwork": false,
+      "dnsMode": "IncludeAll",
+      "unroutedIpMode": "Exclude",
+      "unsupportedIpV6Mode": "Block"
+    },
+    "channelProtocol": "Tcp",
+    "dropUdp": false,
+    "useTcpProxy": true,
+    "dropQuic": false,
+    "allowAnonymousTracker": true,
+    "debugData1": null,
+    "debugData2": null,
+    "logAnonymous": true,
+    "endPointStrategy": 0,
+    "dnsMode": "Default",
+    "proxySettings": {
+      "mode": "NoProxy",
+      "autoUpdateOptions": {
+        "url": null,
+        "interval": null,
+        "maxPenalty": null,
+        "maxItemCount": null,
+        "removeDuplicateIps": true
+      }
+    },
+    "allowRemoteAccess": false,
+    "customData": null,
+    "dnsServers": []
+  },
+  "clientProfileInfos": [
+    {
+      "clientProfileId": "00000000-0000-4000-8000-000000000301",
+      "clientProfileName": "VpnHood Global Servers",
+      "supportId": "1000",
+      "customData": null,
+      "isPremiumLocationSelected": false,
+      "isPremium": false,
+      "tokenId": "00000000-0000-4000-8000-000000000302",
+      "hostNames": [],
+      "isValidHostName": false,
+      "isBuiltIn": true,
+      "accessCode": null,
+      "isAccessCodeFromAccount": false,
+      "locationInfos": [
+        {
+          "isNestedCountry": false,
+          "isDefault": true,
+          "translatedCountryName": "Auto Select",
+          "options": {
+            "normal": 0,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": true,
+            "hasPremium": true,
+            "hasUnblockable": true,
+            "prompt": true
+          },
+          "countryCode": "*",
+          "regionName": "*",
+          "tags": [
+            "~#premium",
+            "~#unblockable"
+          ],
+          "serverLocation": "*/*",
+          "countryName": "Auto Select",
+          "isAuto": true,
+          "hasRegion": false
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "United Arab Emirates",
+          "options": {
+            "normal": null,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": false,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "AE",
+          "regionName": "Dubai",
+          "tags": [
+            "#premium"
+          ],
+          "serverLocation": "AE/Dubai",
+          "countryName": "United Arab Emirates",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "Argentina",
+          "options": {
+            "normal": null,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": false,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "AR",
+          "regionName": "Ciudad Autonoma de Buenos Aires",
+          "tags": [
+            "#premium"
+          ],
+          "serverLocation": "AR/Ciudad Autonoma de Buenos Aires",
+          "countryName": "Argentina",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "Australia",
+          "options": {
+            "normal": null,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": false,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "AU",
+          "regionName": "New South Wales",
+          "tags": [
+            "#premium"
+          ],
+          "serverLocation": "AU/New South Wales",
+          "countryName": "Australia",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "Brazil",
+          "options": {
+            "normal": null,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": false,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "BR",
+          "regionName": "Sao Paulo",
+          "tags": [
+            "#premium"
+          ],
+          "serverLocation": "BR/Sao Paulo",
+          "countryName": "Brazil",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "Canada",
+          "options": {
+            "normal": 0,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": true,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "CA",
+          "regionName": "Quebec",
+          "tags": [
+            "~#premium"
+          ],
+          "serverLocation": "CA/Quebec",
+          "countryName": "Canada",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "Germany",
+          "options": {
+            "normal": 0,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": true,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "DE",
+          "regionName": "*",
+          "tags": [
+            "~#premium"
+          ],
+          "serverLocation": "DE/*",
+          "countryName": "Germany",
+          "isAuto": false,
+          "hasRegion": false
+        },
+        {
+          "isNestedCountry": true,
+          "isDefault": false,
+          "translatedCountryName": "Germany",
+          "options": {
+            "normal": null,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": false,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "DE",
+          "regionName": "Berlin",
+          "tags": [
+            "#premium"
+          ],
+          "serverLocation": "DE/Berlin",
+          "countryName": "Germany",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": true,
+          "isDefault": false,
+          "translatedCountryName": "Germany",
+          "options": {
+            "normal": 0,
+            "normalByRewardedAd": null,
+            "premiumByTrial": null,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": true,
+            "hasPremium": false,
+            "hasUnblockable": false,
+            "prompt": false
+          },
+          "countryCode": "DE",
+          "regionName": "Hesse",
+          "tags": [],
+          "serverLocation": "DE/Hesse",
+          "countryName": "Germany",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "Spain",
+          "options": {
+            "normal": 0,
+            "normalByRewardedAd": null,
+            "premiumByTrial": null,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": true,
+            "hasPremium": false,
+            "hasUnblockable": false,
+            "prompt": false
+          },
+          "countryCode": "ES",
+          "regionName": "Madrid",
+          "tags": [],
+          "serverLocation": "ES/Madrid",
+          "countryName": "Spain",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "France",
+          "options": {
+            "normal": 0,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": true,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "FR",
+          "regionName": "Grand Est",
+          "tags": [
+            "~#premium"
+          ],
+          "serverLocation": "FR/Grand Est",
+          "countryName": "France",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "United Kingdom",
+          "options": {
+            "normal": 0,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": true,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "GB",
+          "regionName": "England",
+          "tags": [
+            "~#premium"
+          ],
+          "serverLocation": "GB/England",
+          "countryName": "United Kingdom",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "Iraq",
+          "options": {
+            "normal": null,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": false,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "IQ",
+          "regionName": "Arbil",
+          "tags": [
+            "#premium"
+          ],
+          "serverLocation": "IQ/Arbil",
+          "countryName": "Iraq",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "Mexico",
+          "options": {
+            "normal": null,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": false,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "MX",
+          "regionName": "Queretaro",
+          "tags": [
+            "#premium"
+          ],
+          "serverLocation": "MX/Queretaro",
+          "countryName": "Mexico",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "Pakistan",
+          "options": {
+            "normal": null,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": false,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "PK",
+          "regionName": "Islamabad",
+          "tags": [
+            "#premium"
+          ],
+          "serverLocation": "PK/Islamabad",
+          "countryName": "Pakistan",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "Poland",
+          "options": {
+            "normal": 0,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": true,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "PL",
+          "regionName": "Mazovia",
+          "tags": [
+            "~#premium"
+          ],
+          "serverLocation": "PL/Mazovia",
+          "countryName": "Poland",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "Russia",
+          "options": {
+            "normal": null,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": false,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "RU",
+          "regionName": "Moscow",
+          "tags": [
+            "#premium"
+          ],
+          "serverLocation": "RU/Moscow",
+          "countryName": "Russia",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "Singapore",
+          "options": {
+            "normal": null,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": false,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "SG",
+          "regionName": "Singapore",
+          "tags": [
+            "#premium"
+          ],
+          "serverLocation": "SG/Singapore",
+          "countryName": "Singapore",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": false,
+          "isDefault": false,
+          "translatedCountryName": "United States",
+          "options": {
+            "normal": 0,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": true,
+            "hasPremium": true,
+            "hasUnblockable": true,
+            "prompt": true
+          },
+          "countryCode": "US",
+          "regionName": "*",
+          "tags": [
+            "~#premium",
+            "~#unblockable"
+          ],
+          "serverLocation": "US/*",
+          "countryName": "United States",
+          "isAuto": false,
+          "hasRegion": false
+        },
+        {
+          "isNestedCountry": true,
+          "isDefault": false,
+          "translatedCountryName": "United States",
+          "options": {
+            "normal": 0,
+            "normalByRewardedAd": null,
+            "premiumByTrial": null,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": true,
+            "hasPremium": false,
+            "hasUnblockable": false,
+            "prompt": false
+          },
+          "countryCode": "US",
+          "regionName": "California",
+          "tags": [],
+          "serverLocation": "US/California",
+          "countryName": "United States",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": true,
+          "isDefault": false,
+          "translatedCountryName": "United States",
+          "options": {
+            "normal": 0,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": true,
+            "hasPremium": true,
+            "hasUnblockable": true,
+            "prompt": true
+          },
+          "countryCode": "US",
+          "regionName": "Oregon",
+          "tags": [
+            "~#premium",
+            "~#unblockable"
+          ],
+          "serverLocation": "US/Oregon",
+          "countryName": "United States",
+          "isAuto": false,
+          "hasRegion": true
+        },
+        {
+          "isNestedCountry": true,
+          "isDefault": false,
+          "translatedCountryName": "United States",
+          "options": {
+            "normal": null,
+            "normalByRewardedAd": null,
+            "premiumByTrial": 10,
+            "premiumByRewardedAd": null,
+            "premiumByPurchase": true,
+            "premiumByCode": true,
+            "canGoPremium": true,
+            "hasFree": false,
+            "hasPremium": true,
+            "hasUnblockable": false,
+            "prompt": true
+          },
+          "countryCode": "US",
+          "regionName": "Virginia",
+          "tags": [
+            "#premium"
+          ],
+          "serverLocation": "US/Virginia",
+          "countryName": "United States",
+          "isAuto": false,
+          "hasRegion": true
+        }
+      ],
+      "canGoPremium": true,
+      "canTryPremium": true,
+      "customServerEndpoints": null,
+      "isCustomServerEndpointsEnabled": false,
+      "selectedLocationInfo": {
+        "isNestedCountry": false,
+        "isDefault": true,
+        "translatedCountryName": "Auto Select",
+        "options": {
+          "normal": 0,
+          "normalByRewardedAd": null,
+          "premiumByTrial": 10,
+          "premiumByRewardedAd": null,
+          "premiumByPurchase": true,
+          "premiumByCode": true,
+          "canGoPremium": true,
+          "hasFree": true,
+          "hasPremium": true,
+          "hasUnblockable": true,
+          "prompt": true
+        },
+        "countryCode": "*",
+        "regionName": "*",
+        "tags": [
+          "~#premium",
+          "~#unblockable"
+        ],
+        "serverLocation": "*/*",
+        "countryName": "Auto Select",
+        "isAuto": true,
+        "hasRegion": false
+      },
+      "clientPolicy": {
+        "ccs": [
+          "*"
+        ],
+        "free": [],
+        "ao": false,
+        "uo": false,
+        "n": 0,
+        "nbr": null,
+        "pbt": 10,
+        "pbtdl": "00:10:00",
+        "pbr": null,
+        "pbe": false,
+        "pbp": true,
+        "pbc": true,
+        "pur_url": "https://www.vpnhood.com/free-vpn/go-premium",
+        "pur_url_f": 0
+      }
+    }
+  ],
+  "availableCultureInfos": [
+    {
+      "code": "ar",
+      "nativeName": "العربية"
+    },
+    {
+      "code": "de",
+      "nativeName": "Deutsch"
+    },
+    {
+      "code": "en",
+      "nativeName": "English"
+    },
+    {
+      "code": "es",
+      "nativeName": "español"
+    },
+    {
+      "code": "fa",
+      "nativeName": "فارسی"
+    },
+    {
+      "code": "fr",
+      "nativeName": "français"
+    },
+    {
+      "code": "hi",
+      "nativeName": "हिन्दी"
+    },
+    {
+      "code": "it",
+      "nativeName": "italiano"
+    },
+    {
+      "code": "pt-BR",
+      "nativeName": "português (Brasil)"
+    },
+    {
+      "code": "pt",
+      "nativeName": "português"
+    },
+    {
+      "code": "ru",
+      "nativeName": "русский"
+    },
+    {
+      "code": "tr",
+      "nativeName": "Türkçe"
+    },
+    {
+      "code": "zh",
+      "nativeName": "中文"
+    }
+  ]
+}
