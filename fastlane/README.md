@@ -63,7 +63,10 @@ and never hand them to a translator. The source of truth is [`store-i18n/`](../s
 Translate and compile:
 
 ```bash
-dotnet tool restore && dotnet vhtranslator      # in this repo; needs GEMINI_API_KEY
+dotnet tool restore && dotnet vhtranslator      # in this repo; needs GEMINI_API_KEY in the
+                                                # environment (CI feeds it from the org secret
+                                                # GOOGLE_GEMINI_TRNSLATE_APP_API_KEY; locally it is
+                                                # .user/google_gemini_translate_app_api_key.txt)
 cd ../VpnHood.Client.WebUI
 node e2e/store-metadata.mjs --root ../Vpnhood.App.Connect    # --check validates without writing
 ```
