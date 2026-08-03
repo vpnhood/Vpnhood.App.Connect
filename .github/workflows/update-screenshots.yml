@@ -18,9 +18,14 @@ name: Update Store Screenshots
 # shipped app actually uses, so the screenshots always match the shipped UI.
 #
 # No PAT anywhere, by design: the engine repo is public (a read-only checkout needs no credential)
-# and the push uses this workflow's own repo-scoped GITHUB_TOKEN. GEMINI_API_KEY is the only
-# secret, and only the translation step wants it — absent, translation is skipped with a warning
-# and everything else still works (the fork-without-secrets path).
+# and the push uses this workflow's own repo-scoped GITHUB_TOKEN. The Gemini translator key is the
+# only secret, and only the translation step wants it — absent, translation is skipped with a
+# warning and everything else still works (the fork-without-secrets path).
+#
+# The key comes from the ORG secret GOOGLE_GEMINI_TRNSLATE_APP_API_KEY (one key shared by the SPA
+# and both store listings). It is exposed to the step as GEMINI_API_KEY because that is the
+# variable vhtranslator itself reads — the secret name and the tool's variable are deliberately
+# allowed to differ rather than renaming either one.
 
 on:
   workflow_dispatch:
@@ -102,8 +107,9 @@ jobs:
     needs: [plan, generate]
     runs-on: ubuntu-latest
     env:
-      # Mapped to env so steps can test presence in `if:` (the `secrets` context isn't allowed there).
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      # Mapped to env so steps can test presence in `if:` (the `secrets` context isn't allowed there),
+      # and named for what vhtranslator reads rather than for the org secret it comes from.
+      GEMINI_API_KEY: ${{ secrets.GOOGLE_GEMINI_TRNSLATE_APP_API_KEY }}
     steps:
       - name: Checkout store assets (this repo)
         uses: actions/checkout@v5
@@ -158,7 +164,7 @@ jobs:
 
       - name: Warn if Gemini API key is missing
         if: env.GEMINI_API_KEY == ''
-        run: echo "::warning title=Store texts not translated::GEMINI_API_KEY secret is not set; store-i18n translations were not refreshed. Add the secret to enable translation."
+        run: echo "::warning title=Store texts not translated::GOOGLE_GEMINI_TRNSLATE_APP_API_KEY is not set; store-i18n translations were not refreshed. Add the secret to enable translation."
 
       - name: Compile store texts
         run: node .webui/e2e/store-metadata.mjs --root "$GITHUB_WORKSPACE"

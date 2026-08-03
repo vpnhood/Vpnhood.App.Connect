@@ -235,6 +235,8 @@ const ANDROID_SHOTS = [
   APPS_FILTER,
   { route: '/split-tunneling', label: 'Split Tunneling', hide: HIDE_LEAK_CHIP },
   { route: '/settings/kill-switch', label: 'Kill Switch' },
+  { route: '/settings/proxies', label: 'Proxies' },
+  // --- everything below is generated but NOT installed: Play's cap is 8 per device type. ---
   { route: '/dns', label: 'DNS' },                       // shows the Private DNS card too
   { route: '/settings/always-on', label: 'Always On' },
   { route: '/settings/quick-launch', label: 'Quick Launch' },
