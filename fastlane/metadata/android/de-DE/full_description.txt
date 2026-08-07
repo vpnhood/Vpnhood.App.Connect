@@ -1,36 +1,39 @@
-VpnHood! CONNECT ist eine schnelle, leistungsstarke und sichere Netzwerklösung, bei der Ihre digitale Privatsphäre an erster Stelle steht. Angetrieben von der Open-Source VpnHood ENGINE bietet sie eine zuverlässige Verbindung mit unbegrenzter Bandbreite und ohne Zeitbegrenzungen.
+VpnHood! CONNECT ist eine schnelle und sichere VPN-Lösung für Ihre Privatsphäre. Angetrieben von der Open-Source VpnHood ENGINE bietet sie eine stabile Verbindung mit unbegrenztem Datenvolumen ohne Zeitlimits.
 
 🛡️ Hauptfunktionen
-Vollständig kostenlos: Freier Zugang zu sicherer Netzwerkverbindung.
+Kostenlos: Sicheres Netzwerk frei nutzen. Hinweis: Unsere kostenlosen Server sind in China und Russland nicht verfügbar.
 
 Benutzerfreundlich: Verbindung mit nur einem Tippen.
 
 Hohe Leistung: Auf Geschwindigkeit optimiert mit unbegrenztem Datenvolumen.
 
-Open Source & Transparent: Basiert auf der VpnHood ENGINE (auf GitHub verfügbar) für einen vertrauenswürdigen und überprüfbaren Quellcode.
+Open Source & Transparent: Basiert auf der VpnHood Engine (auf GitHub) für einen verifizierbaren Code.
 
-Breite Kompatibilität: Unterstützt Android 7+, Android TV und Windows.
+Kompatibilität: Unterstützt Android 7+, Android TV und Windows.
 
-Dual-Stack-Unterstützung: Volle Kompatibilität mit IPv4 und IPv6.
+Dual-Stack: Volle Unterstützung für IPv4 und IPv6.
 
 ⚙️ Erweiterte Anpassung
-Split Tunneling auf App-Ebene: Wählen Sie spezifische Apps aus, die über den sicheren Tunnel geleitet oder davon ausgenommen werden sollen.
+Split Tunneling: Bestimmte Apps über den Tunnel leiten oder ausschließen, um die Leistung zu optimieren.
 
-Geografische Filterung: Schließen Sie lokalen Datenverkehr aus, um schnelle Zugriffe auf regionale Dienste und Banking-Apps zu behalten.
+Geografische Filterung: Lokalen Datenverkehr ausschließen, um schnellen Zugriff auf regionale Dienste und Banking-Apps zu behalten.
 
-LAN-Ausschluss: Behalten Sie den Zugriff auf lokale Netzwerkressourcen (wie Drucker oder lokale Server), während Sie online geschützt bleiben.
+LAN-Ausschluss: Zugriff auf lokale Netzwerkressourcen behalten und gleichzeitig geschützt surfen.
 
-Protokollsteuerung: Wechseln Sie je nach Netzwerkumgebung zwischen UDP- und TCP-Protokollen.
+Protokoll-Steuerung: Zwischen UDP- und TCP-Protokollen wechseln.
 
 💡 Warum VpnHood!?
-Datenschutzorientiertes Protokoll: VpnHood nutzt ein ausgeklügeltes, tarnsicheres Protokoll. Es ahmt Standard-HTTPS-Datenverkehr nach und schützt Ihre Verbindung vor Deep Packet Inspection.
+Datenschutz-Protokoll: VpnHood nutzt ein fortschrittliches, fingerabdruckresistentes Protokoll im HTTPS-Stil gegen Deep Packet Inspection.
 
-Innovativer Kern: Als Pionier in der .NET-basierten VPN-Entwicklung bietet VpnHood eine moderne und robuste Architektur.
+Innovativer Kern: Als Pionier der .NET-basierten VPN-Entwicklung bietet VpnHood eine robuste Architektur.
 
-Sicherheitsgeprüft: VpnHood wurde vom Open Tech Fund einem umfassenden Sicherheitsaudit unterzogen.
+Sicherheitsgeprüft: Umfassenden Sicherheitsaudits durch den Open Tech Fund unterzogen.
 
-Community-getrieben: Wir verbessern unsere Technologie kontinuierlich, um mit modernen Netzwerkstandards Schritt zu halten und ein freies Interneterlebnis zu bieten.
+Community-getrieben: Wir entwickeln unsere Technologie kontinuierlich für ein freies Internet weiter.
 
-📞 24/7-Support
-Unser engagiertes Team ist jederzeit für Sie da. Bei Fragen oder technischer Unterstützung kontaktieren Sie uns:
+🌍 Server-Verfügbarkeit
+Unsere kostenlosen Server sind in den meisten Ländern verfügbar. In China oder Russland sind sie derzeit nicht verfügbar.
+
+📞 24/7 Support
+Unser Team hilft Ihnen jederzeit gerne weiter:
 📧 E-Mail: support@vpnhood.com

@@ -1,7 +1,7 @@
 VpnHood! CONNECT is a Fast, high-speed, and secure networking solution designed to prioritize your digital privacy. Powered by the open-source VpnHood ENGINE, it provides a reliable connection with unlimited bandwidth and no time restrictions.
 
 🛡️ Key Features
-Completely Free: Open access to secure networking.
+Free to Use: Open access to secure networking. Please note that our free servers are not available in China or Russia.
 
 User-Friendly: Connect with a single tap.
 
@@ -30,6 +30,9 @@ Innovative Core: As a pioneer in .NET-based VPN development, VpnHood offers a mo
 Security Audited: For your peace of mind, VpnHood has undergone a comprehensive security audit by the Open Tech Fund.
 
 Community Driven: We are committed to continuous improvement, ensuring our technology evolves alongside modern networking standards to provide an unrestricted internet experience.
+
+🌍 Server Availability
+Our free servers are available in most countries. They are currently not available in China or Russia.
 
 📞 24/7 Support
 Our dedicated team is here to help you at any time. For questions or technical assistance, reach out to us:
