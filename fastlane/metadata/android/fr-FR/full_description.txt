@@ -1,36 +1,38 @@
-VpnHood! CONNECT est une solution réseau rapide et sécurisée conçue pour protéger votre vie privée numérique. Propulsé par le moteur open source VpnHood ENGINE, il offre une connexion fiable avec une bande passante illimitée et sans restriction de temps.
+VpnHood! CONNECT est une solution réseau rapide et sécurisée pour protéger votre vie privée. Propulsé par VpnHood ENGINE, il offre une connexion illimitée.
 
 🛡️ Fonctionnalités clés
-Totalement gratuit : Accès libre à un réseau sécurisé.
+Gratuit : Accès ouvert. Nos serveurs gratuits ne sont pas disponibles en Chine ni en Russie.
 
-Facile à utiliser : Connectez-vous en un seul geste.
+Simple : Connexion en un seul geste.
 
-Haute performance : Optimisé pour la vitesse avec données illimitées.
+Haute performance : Vitesse optimisée avec données illimitées.
 
-Open source et transparent : Basé sur le moteur VpnHood (disponible sur GitHub), garantissant un code fiable et vérifiable.
+Open source : Basé sur le moteur VpnHood (sur GitHub).
 
-Large compatibilité : Compatible avec Android 7+, Android TV et Windows.
+Compatibilité : Android 7+, Android TV et Windows.
 
-Support Dual-Stack : Compatibilité totale avec IPv4 et IPv6.
+Double pile : Compatible IPv4 et IPv6.
 
 ⚙️ Personnalisation avancée
-Split Tunneling par application : Choisissez les applications à acheminer via le tunnel sécurisé ou excluez-les pour optimiser les performances.
+Split Tunneling : Choisissez les applications à router ou à exclure.
 
-Filtrage géographique : Excluez le trafic local pour conserver un accès rapide aux services régionaux et applications bancaires nécessitant une IP locale.
+Filtrage géographique : Excluez le trafic local pour garder l'accès aux services régionaux.
 
-Exclusion du réseau local (LAN) : Conservez l'accès à vos appareils locaux (imprimantes, serveurs) tout en restant protégé en ligne.
+Exclusion LAN : Gardez l'accès aux ressources locales (imprimantes).
 
-Contrôle du protocole : Basculez entre UDP et TCP selon votre environnement réseau.
+Contrôle des protocoles : Basculez entre UDP et TCP.
 
-💡 Pourquoi choisir VpnHood! ?
-Protocole axé sur la confidentialité : VpnHood utilise un protocole sophistiqué résistant au marquage (fingerprinting). En imitant le trafic HTTPS standard, il garantit la confidentialité de votre connexion face à l'inspection profonde des paquets (DPI).
+💡 Pourquoi choisir VpnHood !?
+Protocole anti-empreinte : Imite le trafic HTTPS pour contrer l'inspection approfondie.
 
-Cœur innovant : Pionnier du développement VPN basé sur .NET, VpnHood offre une architecture moderne et robuste.
+Cœur novateur : Architecture moderne basée sur .NET.
 
-Audité pour la sécurité : Pour votre tranquillité d'esprit, VpnHood a fait l'objet d'un audit de sécurité complet par l'Open Tech Fund.
+Sécurité auditée : Audité par l'Open Tech Fund.
 
-Axé sur la communauté : Nous nous engageons à nous améliorer continuellement pour offrir une expérience internet sans restriction.
+Communauté : Amélioration continue.
+
+🌍 Disponibilité des serveurs
+Nos serveurs gratuits sont indisponibles en Chine et en Russie.
 
 📞 Support 24/7
-Notre équipe dédiée est là pour vous aider à tout moment. Pour toute question ou assistance technique, contactez-nous :
-📧 E-mail : support@vpnhood.com
+📧 Email : support@vpnhood.com

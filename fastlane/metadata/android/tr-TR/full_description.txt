@@ -1,36 +1,39 @@
-VpnHood! CONNECT, dijital gizliliğinize öncelik vermek için tasarlanmış hızlı ve güvenli bir ağ çözümüdür. Açık kaynaklı VpnHood ENGINE altyapısıyla, sınırsız bant genişliği ve zaman kısıtlaması olmadan güvenilir bir bağlantı sunar.
+VpnHood! CONNECT, dijital gizliliğinizi ön planda tutan hızlı, yüksek hızlı ve güvenli bir ağ çözümüdür. Açık kaynaklı VpnHood ENGINE tarafından desteklenir; sınırsız bant genişliği ve süre kısıtlaması olmaksızın güvenilir bağlantı sunar.
 
 🛡️ Temel Özellikler
-Tamamen Ücretsiz: Güvenli ağa açık ve serbest erişim.
+Ücretsiz Kullanım: Güvenli ağa açık erişim. Ücretsiz sunucularımızın Çin veya Rusya'da kullanılamadığını lütfen unutmayın.
 
 Kullanıcı Dostu: Tek dokunuşla bağlanın.
 
 Yüksek Performans: Sınırsız veri ile hız için optimize edilmiştir.
 
-Açık Kaynak ve Şeffaf: Güvenilir ve doğrulanabilir bir kod tabanı sağlayan VpnHood ENGINE (GitHub'da mevcut) üzerine inşa edilmiştir.
+Açık Kaynak ve Şeffaf: Güvenilir ve doğrulanabilir bir kod tabanı sağlayan VpnHood motoruyla (GitHub'da mevcut) geliştirilmiştir.
 
-Geniş Uyumluluk: Android 7+, Android TV ve Windows sistemlerini destekler.
+Geniş Uyumluluk: Android 7+, Android TV ve Windows'u destekler.
 
-Çift Yığın (Dual-Stack) Desteği: Hem IPv4 hem de IPv6 ile tam uyumluluk.
+Çift Yığın Desteği: Hem IPv4 hem de IPv6 ile tam uyumluluk.
 
 ⚙️ Gelişmiş Özelleştirme
-Uygulama Düzeyinde Split Tunneling: Performansı optimize etmek için belirli uygulamaları tünelden geçirin veya tünel dışı bırakın.
+Uygulama Düzeyinde Bölünmüş Tünelleme: Güvenli tünelden yönlendirilecek veya performansı artırmak için hariç tutulacak belirli uygulamaları seçin.
 
-Coğrafi Filtreleme: Yerel IP gerektiren bölgesel hizmetlere ve bankacılık uygulamalarına hızlı erişimi korumak için yerel ülke trafiğini tünel dışı bırakın.
+Coğrafi Filtreleme: Yerel IP gerektiren bölgesel hizmetlere ve bankacılık uygulamalarına yüksek hızda erişimi korumak için yerel ülke trafiğini hariç tutun.
 
-LAN İstisnası: Çevrim içi korunurken yerel ağ kaynaklarına (yazıcılar veya yerel sunucular gibi) erişimi sürdürün.
+LAN Hariç Tutma: Çevrimiçi korunmaya devam ederken yerel ağ kaynaklarına (yazıcılar veya yerel sunucular gibi) erişimi koruyun.
 
-Protokol Kontrolü: Ağ ortamınıza bağlı olarak UDP ve TCP protokolleri arasında geçiş yapın.
+Protokol Kontrolü: Belirli ağ ortamınıza göre UDP ve TCP protokolleri arasında geçiş yapın.
 
 💡 Neden VpnHood!?
-Gizlilik Odaklı Protokol: VpnHood, dijital parmak izine dayanıklı gelişmiş bir protokol kullanır. Standart HTTPS trafik kalıplarını taklit ederek bağlantınızın derin paket incelemelerine karşı gizli ve güvenli kalmasını sağlar.
+Gizlilik Öncelikli Protokol: VpnHood, parmak izine dayanıklı sofistike bir protokol kullanır. Standart HTTPS trafik kalıplarını taklit ederek bağlantınızın derin paket incelemesine karşı gizli ve güvenli kalmasını sağlar.
 
-Yenilikçi Altyapı: .NET tabanlı VPN geliştirmede öncü olan VpnHood, modern ve güçlü bir mimari sunar.
+Yenilikçi Çekirdek: .NET tabanlı VPN geliştirmede öncü olan VpnHood, modern ve güçlü bir mimari sunar.
 
 Güvenlik Denetiminden Geçti: İçinizin rahat etmesi için VpnHood, Open Tech Fund tarafından kapsamlı bir güvenlik denetiminden geçirilmiştir.
 
-Topluluk Odaklı: Özgür bir internet deneyimi sunmak amacıyla teknolojimizi modern ağ standartlarıyla birlikte sürekli geliştiriyoruz.
+Topluluk Odaklı: Kesintisiz bir internet deneyimi sunmak amacıyla teknolojimizin modern ağ standartlarıyla birlikte gelişmesini sağlayarak sürekli iyileştirmeye kendini adadık.
 
-📞 24/7 Destek
-Ekibimiz her zaman size yardımcı olmaya hazır. Sorularınız veya teknik destek için bize ulaşın:
+🌍 Sunucu Kullanılabilirliği
+Ücretsiz sunucularımız çoğu ülkede mevcuttur. Şu anda Çin veya Rusya'da kullanılamamaktadır.
+
+📞 7/24 Destek
+Özverili ekibimiz her zaman size yardım etmeye hazırdır. Soru veya teknik destek için bize ulaşın:
 📧 E-posta: support@vpnhood.com

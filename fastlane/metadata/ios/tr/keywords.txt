@@ -1,1 +1,1 @@
-vpn,vpnhood,proxy,gizlilik,güvenlik,tünel,açık kaynak,sınırsız,ücretsiz,sansür
+vpn,vpnhood,proxy,gizlilik,güvenli,tünel,açık kaynak,güvenlik duvarı

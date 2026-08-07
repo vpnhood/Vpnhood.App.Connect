@@ -1,1 +1,1 @@
-vpn,vpnhood,proxy,datenschutz,sicher,tunnel,opensource,unbegrenzt,kostenlos,entsperren,zensur
+vpn,vpnhood,proxy,datenschutz,sicher,tunnel,open source,firewall
