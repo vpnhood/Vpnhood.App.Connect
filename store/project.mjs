@@ -74,9 +74,43 @@ const CONNECTED = {
 /**
  * Connect's differentiator, and the reason its Servers page is a headline shot rather than the
  * Client's add-a-key screen: the bundled profile in fixture.json carries the real published server
- * list, free and premium locations together.
+ * list. Android shows it whole (free and premium together — free IS the story on Google Play);
+ * iOS substitutes a premium-only list via its platform patch, see IOS_LOCATION_INFOS.
  */
 const SERVERS = { route: '/servers', label: 'Servers (bundled locations)' };
+
+/**
+ * iOS ships PREMIUM-ONLY (owner decision 2026-08-09: the iOS access token serves no free tier, and
+ * the iOS listing text already says "does not include a free tier" — the screenshots must agree,
+ * App Store review compares them against the app). Derived from the shared fixture rather than
+ * duplicated, so the location list has one source of truth:
+ *   - keep only the pure "#premium" locations (a no-free token would never serve the free or
+ *     partial "~#premium" ones);
+ *   - rebuild the rows the app itself derives (ClientServerLocationInfo.cs — options are NEVER
+ *     hand-written, per the store README): the Auto/default row loses its free half
+ *     (hasFree=false, normal=null) and its unblockable flag (no kept location carries one), and
+ *     the two regions whose country wildcard disappeared with the free list (DE, US) are
+ *     un-nested — a country with a single location renders as a plain country row;
+ *   - the kept entries' own options are already correct for iOS: billing ON (premiumByPurchase
+ *     via isBillingSupported), no rewarded ads (both *ByRewardedAd null), premiumByTrial set — a
+ *     trial session is also what makes the connected Home shot honest for a non-premium viewer.
+ */
+const FIXTURE = JSON.parse(await fs.readFile(path.join(here, 'fixture.json'), 'utf8'));
+const IOS_LOCATION_INFOS = (() => {
+  const src = FIXTURE.clientProfileInfos[0].locationInfos;
+  const kept = src
+    .filter((l) => (l.tags ?? []).includes('#premium'))
+    .map((l) => ({ ...l, isNestedCountry: false }));
+  const auto = src.find((l) => l.isDefault);
+  return [
+    {
+      ...auto,
+      tags: ['#premium'],
+      options: { ...auto.options, hasFree: false, hasUnblockable: false, normal: null },
+    },
+    ...kept,
+  ];
+})();
 
 /**
  * The Apps Filter page calls GET /api/app/installed-apps, which on a real device returns the
@@ -254,11 +288,14 @@ export const PLATFORMS = {
     label: 'App Store',
     store: 'appStore',
     installDir: 'fastlane/screenshots/ios/<locale>',
-    // Connect.Ios registers no AdProvider and no AccountProvider (Connect.Ios/AppDelegate.cs:65-96),
-    // so the fixture's no-ads/no-billing baseline is already correct for iOS. Only osType and the
-    // edge-to-edge WKWebView inset behaviour have to be stated.
+    // iOS ships WITH StoreKit billing and premium-only servers (owner decisions 2026-08; the old
+    // note here claiming a no-billing iOS baseline predates them). Besides osType and the
+    // edge-to-edge WKWebView inset behaviour, the patch swaps in the premium-only location list —
+    // clientProfileInfos is an ARRAY, and deepMerge replaces arrays wholesale, so the whole
+    // profile is restated with only locationInfos changed.
     patch: {
       features: { osType: 'Ios', adjustForSystemBars: false },  // AppDelegate.cs:86
+      clientProfileInfos: [{ ...FIXTURE.clientProfileInfos[0], locationInfos: IOS_LOCATION_INFOS }],
     },
     devices: IOS_DEVICES,
     // iOS copy must never name another platform (App Store Guideline 2.3.10) — no Google Play /
