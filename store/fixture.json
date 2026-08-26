@@ -1,6 +1,6 @@
 {
   "features": {
-    "appId": "com.vpnhood.connect.windows",
+    "appId": "com.vpnhood.connect.windows.web",
     "appName": "VpnHood! CONNECT",
     "isExcludeAppsSupported": false,
     "isIncludeAppsSupported": false,
