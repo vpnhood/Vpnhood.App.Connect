@@ -16,3 +16,5 @@ These strings are an app-store LISTING (Google Play / App Store / Microsoft Stor
   - "ios.keywords": 100 characters maximum — a comma-separated keyword list with no space after commas, not a sentence
   - "ios.promotional_text": 170 characters maximum
   - "ios.description": 4000 characters maximum — translations run longer than English, so condense freely (merge or shorten bullets) and aim under 3,600
+
+The keys in release-notes.json are per-release changelog lines ("What's New" in the stores), extracted from the product CHANGELOG — one short line each. Translate the "Feature:" / "Improve:" / "Fix:" / "Update:" prefix naturally for the target language and keep it as a prefix. Keep every line CONCISE: some of these lines feed Google Play's release note, which is capped at 500 characters in total — prefer the shortest natural phrasing that keeps the meaning.

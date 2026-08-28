@@ -1,0 +1,23 @@
+{
+  "n_e6280572d8": "Feature: Support QUIC on all platforms",
+  "n_1832eb06c1": "Feature: Split DNS — DNS queries now follow your split tunneling rules, so bypassed apps and sites resolve outside the tunnel",
+  "n_bd42460eac": "Feature: Unrouted IP protection — choose to block or bypass destinations the server cannot route, so traffic never leaks silently",
+  "n_a88354ede7": "Feature: Split tunneling master switch — one tap keeps all traffic inside the VPN and blocks what the server cannot carry",
+  "n_d28209ee1c": "Feature: IPv6 option to block or bypass IPv6 when the server does not support it",
+  "n_9c5f3b9e01": "Feature: Built-in report viewer — view and share diagnostic reports right inside the app",
+  "n_938d0b9740": "Improve: Sign out, delete account and remove premium code now show progress while they work",
+  "n_579cfe079d": "Improve: Shorter first-run privacy summary, now translated into every supported language",
+  "n_334228261e": "Improve: Quick Launch tile reliability",
+  "n_e2dd69f534": "Improve: Split tunneling",
+  "n_a748595e46": "Improve: Initialization speed when using split tunneling by country",
+  "n_0e99d4abbf": "Improve: SOCKS & HTTP proxies stability",
+  "n_726bbdb5b4": "Improve: Memory usage & stability",
+  "n_6bfa308ff4": "Fix: Deleting your account on one device left it visible, and still signed in, on your other devices",
+  "n_9548de2be6": "Fix: Signing out could take away an access code that was still paid for",
+  "n_581f5f02f0": "Fix: Premium features stayed unlocked locally after a subscription had expired",
+  "n_c4deeaf54f": "Fix: Windows and Linux shipped without the default server, leaving the server list empty on first run",
+  "n_4174396f26": "Fix: A stray UDP packet could permanently stop unrelated UDP flows sharing the same server port",
+  "n_0682e5bced": "Fix: UDP flows sending without replies for over a minute could no longer receive responses",
+  "n_0b082c2950": "Update: Removed the legacy UDP proxy and the server's UseUdpProxy2 option; the shared UDP proxy is now always used and behaves as a port-restricted NAT",
+  "n_54981f93bc": "Update: Changing split-country, split-ip and split-domain filters no longer needs a reconnect"
+}

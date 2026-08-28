@@ -1,0 +1,3 @@
+* Nuova funzione: Supporto QUIC su tutte le piattaforme
+* Nuova funzione: Split DNS — le query DNS seguono le regole di Split Tunneling, risolvendosi fuori dal tunnel
+* Miglioramento: Utilizzo della memoria e stabilità

@@ -1,0 +1,23 @@
+{
+  "n_e6280572d8": "Nouveauté : Prise en charge de QUIC sur toutes les plateformes",
+  "n_1832eb06c1": "Nouveauté : DNS fractionné — Les requêtes DNS suivent vos règles de tunnel fractionné",
+  "n_bd42460eac": "Nouveauté : Protection IP non routée — Bloquez ou contournez les destinations inaccessibles",
+  "n_a88354ede7": "Nouveauté : Interrupteur principal de tunnel fractionné — Gardez tout le trafic dans le VPN",
+  "n_d28209ee1c": "Nouveauté : Option IPv6 pour bloquer ou contourner l'IPv6 si non pris en charge",
+  "n_9c5f3b9e01": "Nouveauté : Visionneuse de rapports — Affichez et partagez les diagnostics dans l'appli",
+  "n_938d0b9740": "Amélioration : Indicateurs de progression lors de la déconnexion et suppression de compte",
+  "n_579cfe079d": "Amélioration : Résumé de confidentialité abrégé et traduit dans toutes les langues",
+  "n_334228261e": "Amélioration : Fiabilité de la vignette Quick Launch",
+  "n_e2dd69f534": "Amélioration : Tunnel fractionné",
+  "n_a748595e46": "Amélioration : Vitesse d'initialisation avec le tunnel fractionné par pays",
+  "n_0e99d4abbf": "Amélioration : Stabilité des proxys SOCKS et HTTP",
+  "n_726bbdb5b4": "Amélioration : Utilisation de la mémoire et stabilité",
+  "n_6bfa308ff4": "Correctif : La suppression d'un compte laissait l'appareil connecté sur d'autres appareils",
+  "n_9548de2be6": "Correctif : La déconnexion pouvait supprimer un code d'accès payant",
+  "n_581f5f02f0": "Correctif : Les fonctions premium restaient actives après l'expiration de l'abonnement",
+  "n_c4deeaf54f": "Correctif : Liste de serveurs vide au premier lancement sur Windows et Linux",
+  "n_4174396f26": "Correctif : Un paquet UDP errant pouvait bloquer des flux UDP non liés",
+  "n_0682e5bced": "Correctif : Interruption des flux UDP sans réponse après plus d'une minute",
+  "n_0b082c2950": "Mise à jour : Suppression de l'ancien proxy UDP au profit du proxy partagé",
+  "n_54981f93bc": "Mise à jour : La modification des filtres par pays, IP et domaine divisés ne nécessite plus de reconnexion"
+}

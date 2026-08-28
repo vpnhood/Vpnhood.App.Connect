@@ -1,0 +1,110 @@
+name: Update Release Notes
+
+# Refreshes the localized store RELEASE NOTES ("What's New") from the monorepo CHANGELOG:
+#
+#   extract    the first H1 section ("# Latest") of vpnhood/VpnHood CHANGELOG.md
+#              -> store-i18n/en-US/release-notes.json (one key per line)
+#              -> store-i18n/release-notes.map.json   (order + per-line routing)
+#   translate  vhtranslator fills the sibling locales — incremental, only changed lines
+#   compile    store-release-notes.mjs -> fastlane/metadata/ios/<locale>/release_notes.txt
+#                                       + fastlane/metadata/android/<locale>/changelogs/default.txt
+#
+# CHANGELOG lines route themselves with trailing tags: #client/#connect pick the product,
+# #android #ios #windows #linux limit platforms (inclusive — none = all), and #store marks the
+# few lines for Google Play's short note (Play caps a changelog at 500 characters; iOS gets the
+# full note). See pub/RELEASE-STRATEGY.md in the main repo.
+#
+# Run it after editing the CHANGELOG's "# Latest" section, before the release: the release
+# workflow then uploads the Play changelog with the AAB, and the listing publish ships the iOS
+# notes (they are part of the iOS listing fingerprint). Manual-only, like update-screenshots.yml,
+# and deliberately light — no screenshot matrix, no browsers.
+#
+# Same no-PAT design as the other workflows: both extra checkouts are public read-only, and the
+# push uses this workflow's own repo-scoped GITHUB_TOKEN. The Gemini key is the only secret;
+# absent, the run warns and commits nothing (the fork-without-secrets path).
+
+on:
+  workflow_dispatch:
+    inputs:
+      webui-ref:
+        description: "vpnhood/VpnHood.Client.WebUI ref supplying the store tooling"
+        required: false
+        default: develop
+      code-ref:
+        description: "vpnhood/VpnHood ref whose CHANGELOG.md is the source"
+        required: false
+        default: develop
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      # Named for what vhtranslator reads, filled from the org secret — the same deliberate
+      # name split as update-screenshots.yml.
+      GEMINI_API_KEY: ${{ secrets.GOOGLE_GEMINI_TRNSLATE_APP_API_KEY }}
+    steps:
+      - name: Checkout store assets (this repo)
+        uses: actions/checkout@v5
+
+      - name: Checkout the store tooling
+        uses: actions/checkout@v5
+        with:
+          repository: vpnhood/VpnHood.Client.WebUI
+          ref: ${{ inputs.webui-ref }}
+          path: .webui
+
+      # Only CHANGELOG.md is needed from the monorepo — a sparse checkout keeps the job light.
+      - name: Checkout the CHANGELOG (vpnhood/VpnHood)
+        uses: actions/checkout@v5
+        with:
+          repository: vpnhood/VpnHood
+          ref: ${{ inputs.code-ref }}
+          path: .code
+          sparse-checkout: CHANGELOG.md
+          sparse-checkout-cone-mode: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+
+      # Node built-ins only — no npm ci needed (the same discipline as the workflow `plan` job's
+      # project import in update-screenshots.yml).
+      - name: Extract release notes from the CHANGELOG
+        run: node .webui/e2e/store-release-notes.mjs extract --changelog .code/CHANGELOG.md --root "$GITHUB_WORKSPACE" --project "$GITHUB_WORKSPACE/store/project.mjs"
+
+      - name: Set up .NET (vhtranslator)
+        if: env.GEMINI_API_KEY != ''
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Translate release notes
+        if: env.GEMINI_API_KEY != ''
+        run: dotnet tool restore && dotnet vhtranslator
+
+      # Without the key nothing was translated, so nothing may be compiled or committed — a
+      # half-updated store-i18n would fail the compiler's source/translation consistency check.
+      - name: Warn if Gemini API key is missing
+        if: env.GEMINI_API_KEY == ''
+        run: echo "::warning title=Release notes not updated::GOOGLE_GEMINI_TRNSLATE_APP_API_KEY is not set; the extracted notes were not translated and nothing was committed. Add the secret to enable translation."
+
+      - name: Compile release notes into the fastlane trees
+        if: env.GEMINI_API_KEY != ''
+        run: node .webui/e2e/store-release-notes.mjs compile --root "$GITHUB_WORKSPACE" --project "$GITHUB_WORKSPACE/store/project.mjs"
+
+      - name: Commit and push
+        if: env.GEMINI_API_KEY != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898270+github-actions[bot]@users.noreply.github.com"
+          git add -A -- ':!.webui' ':!.code'
+          if git diff --cached --quiet; then
+            echo "Release notes are already up to date."
+          else
+            git commit -m "Update store release notes (CHANGELOG ${{ inputs.code-ref }})"
+            git push
+          fi

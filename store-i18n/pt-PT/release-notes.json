@@ -1,0 +1,23 @@
+{
+  "n_e6280572d8": "Recurso: Suporte a QUIC em todas as plataformas",
+  "n_1832eb06c1": "Recurso: DNS dividido — consultas DNS seguem as regras de túnel dividido, resolvendo apps e sites ignorados fora do túnel",
+  "n_bd42460eac": "Recurso: Proteção de IP não encaminhado — bloqueie ou ignore destinos que o servidor não alcança, evitando fugas de tráfego",
+  "n_a88354ede7": "Recurso: Interruptor principal de túnel dividido — mantenha todo o tráfego na VPN e bloqueie o que o servidor não suporta",
+  "n_d28209ee1c": "Recurso: Opção IPv6 para bloquear ou ignorar IPv6 quando o servidor não o suporta",
+  "n_9c5f3b9e01": "Recurso: Visualizador de relatórios integrado — veja e partilhe relatórios de diagnóstico na app",
+  "n_938d0b9740": "Melhoria: Terminar sessão, apagar conta e remover código premium mostram agora o progresso",
+  "n_579cfe079d": "Melhoria: Resumo de privacidade inicial mais curto, traduzido para todos os idiomas suportados",
+  "n_334228261e": "Melhoria: Fiabilidade do mosaico de Início Rápido",
+  "n_e2dd69f534": "Melhoria: Túnel dividido",
+  "n_a748595e46": "Melhoria: Velocidade de inicialização ao usar túnel dividido por país",
+  "n_0e99d4abbf": "Melhoria: Estabilidade de proxies SOCKS e HTTP",
+  "n_726bbdb5b4": "Melhoria: Utilização de memória e estabilidade",
+  "n_6bfa308ff4": "Correção: Apagar a conta num dispositivo deixava-a visível e com sessão iniciada noutros",
+  "n_9548de2be6": "Correção: Terminar sessão podia remover um código de acesso ainda pago",
+  "n_581f5f02f0": "Correção: Funcionalidades premium ficavam desbloqueadas localmente após expirar a subscrição",
+  "n_c4deeaf54f": "Correção: Windows e Linux vinham sem servidor predefinido, deixando a lista vazia no arranque",
+  "n_4174396f26": "Correção: Um pacote UDP órfão podia parar fluxos UDP não relacionados na mesma porta",
+  "n_0682e5bced": "Correção: Fluxos UDP sem resposta por mais de um minuto deixavam de receber respostas",
+  "n_0b082c2950": "Atualização: Removido o proxy UDP legado e a opção UseUdpProxy2; o proxy UDP partilhado é agora sempre usado como NAT restrito a portas",
+  "n_54981f93bc": "Atualização: Alterar filtros de país, IP e domínio divididos já não exige reconexão"
+}

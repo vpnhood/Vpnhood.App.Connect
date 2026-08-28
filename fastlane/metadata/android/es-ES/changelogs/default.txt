@@ -1,0 +1,3 @@
+* Función: Compatible con QUIC en todas las plataformas
+* Función: DNS dividida: las consultas DNS siguen tus reglas de tunelización dividida, resolviendo apps y webs fuera del túnel
+* Mejora: Uso de memoria y estabilidad

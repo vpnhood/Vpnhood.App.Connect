@@ -1,0 +1,3 @@
+* Recurso: Suporte a QUIC em todas as plataformas
+* Recurso: DNS dividido — consultas DNS seguem as regras de túnel dividido, resolvendo apps e sites ignorados fora do túnel
+* Melhoria: Utilização de memória e estabilidade

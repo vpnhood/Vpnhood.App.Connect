@@ -1,0 +1,3 @@
+* Nouveauté : Prise en charge de QUIC sur toutes les plateformes
+* Nouveauté : DNS fractionné — Les requêtes DNS suivent vos règles de tunnel fractionné
+* Amélioration : Utilisation de la mémoire et stabilité

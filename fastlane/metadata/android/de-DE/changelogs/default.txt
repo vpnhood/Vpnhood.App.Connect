@@ -1,0 +1,3 @@
+* Neu: QUIC-Unterstützung auf allen Plattformen
+* Neu: Geteilte DNS — DNS-Abfragen folgen nun den Split-Tunneling-Regeln
+* Verbesserung: Speichernutzung und Stabilität

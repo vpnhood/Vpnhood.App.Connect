@@ -1,0 +1,3 @@
+* Recurso: Suporte ao QUIC em todas as plataformas
+* Recurso: Split DNS — consultas DNS agora seguem regras de tunelamento dividido
+* Melhoria: Uso de memória e estabilidade

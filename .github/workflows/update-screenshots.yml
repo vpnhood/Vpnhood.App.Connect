@@ -169,6 +169,12 @@ jobs:
       - name: Compile store texts
         run: node .webui/e2e/store-metadata.mjs --root "$GITHUB_WORKSPACE"
 
+      # Keeps the release-note fastlane files in step when the translation above also refreshed
+      # release-notes keys. The SOURCE is refreshed by update-release-notes.yml (from the monorepo
+      # CHANGELOG); a repo that never adopted it gets a warning and a skip, nothing more.
+      - name: Compile release notes
+        run: node .webui/e2e/store-release-notes.mjs compile --root "$GITHUB_WORKSPACE" --project "$GITHUB_WORKSPACE/store/project.mjs"
+
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"

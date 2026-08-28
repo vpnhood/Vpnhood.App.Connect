@@ -1,0 +1,23 @@
+{
+  "n_e6280572d8": "Recurso: Suporte ao QUIC em todas as plataformas",
+  "n_1832eb06c1": "Recurso: Split DNS — consultas DNS agora seguem regras de tunelamento dividido",
+  "n_bd42460eac": "Recurso: Proteção contra IP não roteado — bloqueie ou ignore destinos sem rota",
+  "n_a88354ede7": "Recurso: Chave geral de tunelamento dividido — mantenha o tráfego seguro com um toque",
+  "n_d28209ee1c": "Recurso: Opção IPv6 para bloquear ou ignorar IPv6 sem suporte no servidor",
+  "n_9c5f3b9e01": "Recurso: Visualizador de relatórios — veja e compartilhe diagnósticos no app",
+  "n_938d0b9740": "Melhoria: Sair, excluir conta e remover código premium agora mostram progresso",
+  "n_579cfe079d": "Melhoria: Resumo de privacidade inicial mais curto e totalmente traduzido",
+  "n_334228261e": "Melhoria: Confiabilidade do bloco de Início Rápido",
+  "n_e2dd69f534": "Melhoria: Tunelamento dividido",
+  "n_a748595e46": "Melhoria: Velocidade de inicialização ao usar tunelamento dividido por país",
+  "n_0e99d4abbf": "Melhoria: Estabilidade dos proxies SOCKS e HTTP",
+  "n_726bbdb5b4": "Melhoria: Uso de memória e estabilidade",
+  "n_6bfa308ff4": "Correção: Excluir a conta em um dispositivo a mantinha visível nos outros",
+  "n_9548de2be6": "Correção: Sair da conta podia remover um código de acesso pago",
+  "n_581f5f02f0": "Correção: Recursos premium continuavam desbloqueados após expirar a assinatura",
+  "n_c4deeaf54f": "Correção: Windows e Linux vinham sem servidor padrão no primeiro uso",
+  "n_4174396f26": "Correção: Pacote UDP órfão podia parar fluxos UDP não relacionados",
+  "n_0682e5bced": "Correção: Fluxos UDP sem resposta por mais de um minuto perdiam respostas",
+  "n_0b082c2950": "Atualização: Proxy UDP legado removido; o proxy compartilhado agora é padrão",
+  "n_54981f93bc": "Atualização: Alterar filtros de país, IP e domínio divididos não exige mais reconexão"
+}

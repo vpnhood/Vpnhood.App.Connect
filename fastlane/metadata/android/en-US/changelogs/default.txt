@@ -1,0 +1,3 @@
+* Feature: Support QUIC on all platforms
+* Feature: Split DNS — DNS queries now follow your split tunneling rules, so bypassed apps and sites resolve outside the tunnel
+* Improve: Memory usage & stability
