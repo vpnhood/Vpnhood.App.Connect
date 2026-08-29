@@ -252,6 +252,10 @@ const ANDROID_PATCH = {
     isExcludeAppsSupported: true,              // AndroidDevice.IsExcludeAppsSupported => true
     isIncludeAppsSupported: true,
     isAccountSupported: true,                  // AccountProvider set  (App.cs:50)
+    // The real config always carries authProviderIds (AppFeatures defaults it to []), and the
+    // NavigationDrawer indexes it whenever isAccountSupported — leave it out and every shot dies
+    // on a null read. Google build signs in with Google (GoogleAuthenticationProvider).
+    authProviderIds: ['google'],
     isBillingSupported: true,                  // ...with a BillingProvider (VpnHoodApp.cs:197)
     isAdSupported: true,                       // AdProviderItems non-empty (App.cs:51, VpnHoodApp.cs:212)
     isRewardedAdSupported: true,               // VpnHoodApp.cs:213
@@ -380,6 +384,7 @@ export const PLATFORMS = {
         isExcludeAppsSupported: true,
         isIncludeAppsSupported: true,
         isAccountSupported: true,
+        authProviderIds: ['google'],           // same Google build as the phone — see ANDROID_PATCH
         isBillingSupported: true,
         isAdSupported: true,
         isRewardedAdSupported: true,
@@ -432,5 +437,6 @@ export const ROUTES = {
   'GET /api/app/state': (fixture) => fixture.state,
   'GET /api/client-profiles': (fixture) => fixture.clientProfileInfos,
   'GET /api/app/installed-apps': (fixture) => fixture.installedApps ?? [],
+  'GET /api/account': () => null, // signed out — the honest state for a store screenshot
   'PUT /api/app/user-settings': () => null, // void
 };

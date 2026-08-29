@@ -8,6 +8,7 @@
     "isPremiumFlagSupported": true,
     "isAddAccessKeySupported": false,
     "isAccountSupported": false,
+    "authProviderIds": [],
     "isBillingSupported": false,
     "isTcpProxySupported": true,
     "isQuicSupported": true,
