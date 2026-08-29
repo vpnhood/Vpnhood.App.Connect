@@ -53,4 +53,4 @@ jobs:
       webui_ref: ${{ inputs.webui_ref }}
     secrets: inherit
 
-# Workflow not appearing after a fresh fork/import? See the main repo's .github/DEPLOYMENT.md.
+# Workflow not appearing after a fresh fork/import? See the main repo's docs/cicd/deployment.md.

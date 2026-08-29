@@ -213,6 +213,25 @@ const IOS_DEVICES = {
     userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 ' +
       '(KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1',
   },
+  // Mirrors the CLIENT's ipad-13 device in the engine's built-in project — Connect.Ios declares
+  // UIDeviceFamily 1+2 (iPad support is what enables the "iPad app on Mac" route), and App Store
+  // Connect refuses a version submission without 13" iPad screenshots while family 2 is present.
+  'ipad-13': {
+    label: 'iPad 13"',
+    prefix: 'ipad_',
+    frame: 'phone',
+    cssWidth: 1032, cssHeight: 1376, scale: 2, // -> 2064x2752, required while UIDeviceFamily has 2
+    safeTop: 24, safeBottom: 20,
+    screenW: 800,
+    // Proportionally thicker bezel and squarer corners than the phone, and no Dynamic Island — an
+    // iPad wearing an iPhone's cutout is the tell that a mockup was never checked.
+    bezel: 20, outerRadius: 58, screenRadius: 40,
+    island: null,
+    statusFont: 9, statusPad: 34,
+    indicatorWidth: 224,
+    userAgent: 'Mozilla/5.0 (iPad; CPU OS 18_5 like Mac OS X) AppleWebKit/605.1.15 ' +
+      '(KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1',
+  },
 };
 
 /**
