@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "items": {
+    "group.name": "Premium",
+    "vpnhood_1_month_subscription.name": "Premium 1 Month",
+    "vpnhood_1_month_subscription.description": "Access all premium servers",
+    "vpnhood_1_year_subscription.name": "Premium 1 Year",
+    "vpnhood_1_year_subscription.description": "Access all premium servers"
+  }
+}
