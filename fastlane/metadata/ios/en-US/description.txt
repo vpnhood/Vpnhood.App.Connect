@@ -41,7 +41,7 @@ Email: support@vpnhood.com
 
 Subscription
 
-VpnHood! CONNECT Premium is an auto-renewable subscription, offered as Premium 1 Month and Premium 1 Year. The price is shown in the app before you confirm. Payment is charged to your Apple Account at confirmation of purchase. The subscription renews automatically unless it is cancelled at least 24 hours before the end of the current period; you can manage or cancel it in your Apple Account settings at any time.
+VpnHood! CONNECT Premium is an auto-renewable subscription, offered as Premium 1 Month and Premium 1 Year. The price is shown in the app before you confirm. Payment is charged to your Apple Account at confirmation of purchase. The subscription renews automatically unless it is cancelled; you can manage or cancel it in your Apple Account settings at any time.
 
 Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
 Privacy Policy: https://www.vpnhood.com/vpnhood-connect-privacy-policy/

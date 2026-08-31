@@ -41,7 +41,7 @@ E-posta: support@vpnhood.com
 
 Abonelik
 
-VpnHood! CONNECT Premium, 1 Aylık ve 1 Yıllık olarak sunulan otomatik yenilenen bir aboneliktir. Fiyat onaylamadan önce gösterilir. Ödemeniz onay anında Apple Hesabınızdan tahsil edilir. Cari dönemin bitiminden en az 24 saat önce iptal edilmediği sürece otomatik yenilenir; Apple Hesabı ayarlarınızdan yönetebilir veya iptal edebilirsiniz.
+VpnHood! CONNECT Premium, 1 Aylık ve 1 Yıllık olarak sunulan otomatik yenilenen bir aboneliktir. Fiyat onaylamadan önce gösterilir. Ödemeniz onay anında Apple Hesabınızdan tahsil edilir. İptal edilmediği sürece otomatik yenilenir; Apple Hesabı ayarlarınızdan yönetebilir veya iptal edebilirsiniz.
 
 Kullanım Koşulları (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
 Gizlilik Politikası: https://www.vpnhood.com/vpnhood-connect-privacy-policy/

@@ -41,7 +41,7 @@ VpnHood! CONNECT 是一款高速、安全的网络工具，旨在保护您的数
 
 订阅说明
 
-VpnHood! CONNECT Premium 是一项自动续费订阅，提供 1 个月和 1 年高级版可选。价格将在确认前于应用内显示。确认购买后，费用将从您的 Apple 账户中扣除。订阅会自动续费，除非在当前周期结束前至少 24 小时取消；您可以随时在 Apple 账户设置中管理或取消订阅。
+VpnHood! CONNECT Premium 是一项自动续费订阅，提供 1 个月和 1 年高级版可选。价格将在确认前于应用内显示。确认购买后，费用将从您的 Apple 账户中扣除。订阅会自动续费，除非取消；您可以随时在 Apple 账户设置中管理或取消订阅。
 
 使用条款 (EULA)：https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
 隐私政策：https://www.vpnhood.com/vpnhood-connect-privacy-policy/
