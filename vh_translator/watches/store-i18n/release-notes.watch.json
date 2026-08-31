@@ -14,6 +14,7 @@
     "n_a748595e46": "Improve: Initialization speed when using split tunneling by country",
     "n_0e99d4abbf": "Improve: SOCKS & HTTP proxies stability",
     "n_726bbdb5b4": "Improve: Memory usage & stability",
+    "n_ab1ff88a0f": "Fix: Very slow download speed on iOS",
     "n_6bfa308ff4": "Fix: Deleting your account on one device left it visible, and still signed in, on your other devices",
     "n_9548de2be6": "Fix: Signing out could take away an access code that was still paid for",
     "n_581f5f02f0": "Fix: Premium features stayed unlocked locally after a subscription had expired",

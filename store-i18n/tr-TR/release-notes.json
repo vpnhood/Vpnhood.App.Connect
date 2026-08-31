@@ -12,6 +12,7 @@
   "n_a748595e46": "İyileştirme: Ülkeye göre bölünmüş tünelleme kullanırken başlatma hızı",
   "n_0e99d4abbf": "İyileştirme: SOCKS ve HTTP proxy kararlılığı",
   "n_726bbdb5b4": "İyileştirme: Bellek kullanımı ve kararlılık",
+  "n_ab1ff88a0f": "Düzeltme: iOS'ta çok düşük indirme hızı",
   "n_6bfa308ff4": "Düzeltme: Bir cihazda hesabı silmek, diğer cihazlarda görünür ve açık kalmasına neden oluyordu",
   "n_9548de2be6": "Düzeltme: Çıkış yapmak, ödemesi devam eden bir erişim kodunun silinmesine yol açabiliyordu",
   "n_581f5f02f0": "Düzeltme: Abonelik sona erdikten sonra premium özellikler yerel olarak açık kalıyordu",

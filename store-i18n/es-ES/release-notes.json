@@ -12,6 +12,7 @@
   "n_a748595e46": "Mejora: Velocidad de inicio al usar tunelización dividida por país",
   "n_0e99d4abbf": "Mejora: Estabilidad de los proxys SOCKS y HTTP",
   "n_726bbdb5b4": "Mejora: Uso de memoria y estabilidad",
+  "n_ab1ff88a0f": "Corrección: Velocidad de descarga muy lenta en iOS",
   "n_6bfa308ff4": "Corrección: Borrar la cuenta en un dispositivo la dejaba visible y con sesión iniciada en los demás",
   "n_9548de2be6": "Corrección: Cerrar sesión podía revocar un código de acceso aún pagado",
   "n_581f5f02f0": "Corrección: Las funciones prémium seguían desbloqueadas localmente tras caducar la suscripción",

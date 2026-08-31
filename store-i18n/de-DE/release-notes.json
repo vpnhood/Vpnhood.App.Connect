@@ -12,6 +12,7 @@
   "n_a748595e46": "Verbesserung: Initialisierungsgeschwindigkeit bei länderspezifischem Split Tunneling",
   "n_0e99d4abbf": "Verbesserung: Stabilität von SOCKS- und HTTP-Proxys",
   "n_726bbdb5b4": "Verbesserung: Speichernutzung und Stabilität",
+  "n_ab1ff88a0f": "Fix: Sehr geringe Download-Geschwindigkeit auf iOS",
   "n_6bfa308ff4": "Behoben: Kontolöschung ließ das Konto auf anderen Geräten angemeldet",
   "n_9548de2be6": "Behoben: Abmelden konnte einen noch bezahlten Zugangscode entfernen",
   "n_581f5f02f0": "Behoben: Premium-Funktionen blieben nach Ablauf des Abos lokal freigeschaltet",

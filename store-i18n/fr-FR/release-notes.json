@@ -12,6 +12,7 @@
   "n_a748595e46": "Amélioration : Vitesse d'initialisation avec le tunnel fractionné par pays",
   "n_0e99d4abbf": "Amélioration : Stabilité des proxys SOCKS et HTTP",
   "n_726bbdb5b4": "Amélioration : Utilisation de la mémoire et stabilité",
+  "n_ab1ff88a0f": "Correction : Vitesse de téléchargement très lente sur iOS",
   "n_6bfa308ff4": "Correctif : La suppression d'un compte laissait l'appareil connecté sur d'autres appareils",
   "n_9548de2be6": "Correctif : La déconnexion pouvait supprimer un code d'accès payant",
   "n_581f5f02f0": "Correctif : Les fonctions premium restaient actives après l'expiration de l'abonnement",

@@ -12,6 +12,7 @@
   "n_a748595e46": "Melhoria: Velocidade de inicialização ao usar túnel dividido por país",
   "n_0e99d4abbf": "Melhoria: Estabilidade de proxies SOCKS e HTTP",
   "n_726bbdb5b4": "Melhoria: Utilização de memória e estabilidade",
+  "n_ab1ff88a0f": "Correção: Velocidade de descarregamento muito lenta no iOS",
   "n_6bfa308ff4": "Correção: Apagar a conta num dispositivo deixava-a visível e com sessão iniciada noutros",
   "n_9548de2be6": "Correção: Terminar sessão podia remover um código de acesso ainda pago",
   "n_581f5f02f0": "Correção: Funcionalidades premium ficavam desbloqueadas localmente após expirar a subscrição",

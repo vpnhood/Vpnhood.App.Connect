@@ -12,6 +12,7 @@
   "n_a748595e46": "Melhoria: Velocidade de inicialização ao usar tunelamento dividido por país",
   "n_0e99d4abbf": "Melhoria: Estabilidade dos proxies SOCKS e HTTP",
   "n_726bbdb5b4": "Melhoria: Uso de memória e estabilidade",
+  "n_ab1ff88a0f": "Correção: Velocidade de download muito baixa no iOS",
   "n_6bfa308ff4": "Correção: Excluir a conta em um dispositivo a mantinha visível nos outros",
   "n_9548de2be6": "Correção: Sair da conta podia remover um código de acesso pago",
   "n_581f5f02f0": "Correção: Recursos premium continuavam desbloqueados após expirar a assinatura",

@@ -69,6 +69,13 @@
       "store": true
     },
     {
+      "key": "n_ab1ff88a0f",
+      "platforms": [
+        "ios"
+      ],
+      "store": true
+    },
+    {
       "key": "n_6bfa308ff4",
       "platforms": [],
       "store": false

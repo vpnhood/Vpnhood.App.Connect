@@ -12,6 +12,7 @@
   "n_a748595e46": "Miglioramento: Velocità di avvio con lo split tunneling per paese",
   "n_0e99d4abbf": "Miglioramento: Stabilità dei proxy SOCKS e HTTP",
   "n_726bbdb5b4": "Miglioramento: Utilizzo della memoria e stabilità",
+  "n_ab1ff88a0f": "Correggi: Velocità di download molto lenta su iOS",
   "n_6bfa308ff4": "Correzione: Eliminare l'account su un dispositivo lo lasciava visibile e attivo sugli altri",
   "n_9548de2be6": "Correzione: La disconnessione poteva rimuovere un codice di accesso ancora attivo",
   "n_581f5f02f0": "Correzione: Le funzioni premium restavano sbloccate in locale dopo la scadenza dell'abbonamento",
