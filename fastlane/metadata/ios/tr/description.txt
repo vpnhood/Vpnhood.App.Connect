@@ -1,40 +1,47 @@
-VpnHood! CONNECT, dijital gizliliğinizi ön planda tutan hızlı ve güvenli bir ağ çözümüdür. Açık kaynaklı VpnHood! ENGINE ile güçlendirilmiş olup, sınırsız bant genişliği ve süre sınırı olmadan güvenilir bağlantı sağlar.
+VpnHood! CONNECT, dijital gizliliğinizi korumak için tasarlanmış hızlı ve güvenli bir ağ çözümüdür. Açık kaynaklı VpnHood! ENGINE altyapısıyla sınırsız bant genişliği ve zaman kısıtlaması olmadan güvenilir bağlantı sunar.
 
-Lütfen dikkat: Bağlantı kurmak premium abonelik gerektirir. Bu uygulamada ücretsiz katman bulunmamaktadır.
+Lütfen dikkat: Bağlantı kurmak için premium abonelik gereklidir. Bu uygulamada ücretsiz sürüm bulunmaz.
 
 Temel Özellikler
 
-Premium Sunucular: Yönetilen sunucu ağımıza tek dokunuşla bağlanın.
+Premium Sunucular: Tek dokunuşla yönetilen sunucu ağımıza bağlanın.
 
-Kullanıcı Dostu: Ayar gerektirmeden tek dokunuşla bağlanın.
+Kullanıcı Dostu: Ek ayar gerektirmeden tek dokunuşla bağlanın.
 
 Yüksek Performans: Sınırsız veri ile hız için optimize edilmiştir.
 
-Açık Kaynak ve Şeffaf: Güvenilir ve doğrulanabilir kod tabanı sunan VpnHood! motoruyla (GitHub'da mevcut) geliştirilmiştir.
+Açık Kaynak ve Şeffaf: GitHub'da sunulan VpnHood! motoruyla güvenilir bir kod tabanı sunar.
 
-Çift Yığın Desteği: Hem IPv4 hem de IPv6 ile tam uyumluluk.
+Çift Yığın Desteği: IPv4 ve IPv6 ile tam uyumluluk.
 
 Gelişmiş Özelleştirme
 
-Uygulama Düzeyinde Bölünmüş Tünelleme: Güvenli tünelden yönlendirilecek veya performansı artırmak için hariç tutulacak uygulamaları seçin.
+Uygulama Düzeyinde Bölünmüş Tünelleme: Belirli uygulamaları tünelden geçirin veya performansı artırmak için hariç tutun.
 
-Coğrafi Filtreleme: Yerel IP gerektiren bölgesel hizmetlere ve bankacılık uygulamalarına yüksek hızda erişimi sürdürmek için yerel ülke trafiğini hariç tutun.
+Coğrafi Filtreleme: Yerel IP gerektiren yerel hizmetlere yüksek hızda erişmek için ülke trafiğini hariç tutun.
 
-LAN Hariç Tutma: Çevrimiçi korunurken yerel ağ kaynaklarına (yazıcılar veya yerel sunucular) erişimi koruyun.
+LAN Hariç Tutma: Çevrimiçi güvende kalırken yerel ağ kaynaklarına erişimi koruyun.
 
-Protokol Kontrolü: Ağ ortamınıza göre UDP ve TCP protokolleri arasında geçiş yapın.
+Protokol Kontrolü: Ağ ortamınıza göre UDP ve TCP arasında geçiş yapın.
 
 Neden VpnHood!?
 
-Gizlilik Öncelikli Protokol: VpnHood!, parmak izine dayanıklı gelişmiş bir protokol kullanır. Standart HTTPS trafiğini taklit ederek derin paket incelemesine karşı gizli ve güvenli kalmanızı sağlar.
+Gizlilik Odaklı Protokol: VpnHood!, standart HTTPS trafiğini taklit ederek derin paket incelemesine karşı güvenli kalır.
 
-Yenilikçi Çekirdek: .NET tabanlı VPN geliştirmede öncü olan VpnHood!, modern ve güçlü bir mimari sunar.
+Yenilikçi Çekirdek: .NET tabanlı VPN geliştirmede öncü olan VpnHood! modern bir mimari sunar.
 
-Güvenlik Denetiminden Geçti: VpnHood!, Open Tech Fund tarafından kapsamlı bir güvenlik denetimine tabi tutulmuştur.
+Güvenlik Denetiminden Geçti: Open Tech Fund tarafından kapsamlı güvenlik denetiminden geçmiştir.
 
-Topluluk Odaklı: Kesintisiz internet deneyimi sunmak için teknolojimizi sürekli geliştiriyoruz.
+Topluluk Odaklı: Kesintisiz bir internet deneyimi sunmak için sürekli gelişiyoruz.
 
 7/24 Destek
 
-Destek ekibimiz her zaman yardım etmeye hazırdır. Sorularınız için bize ulaşın:
+Destek ekibimiz her zaman yardıma hazırdır. Sorularınız için bize ulaşın:
 E-posta: support@vpnhood.com
+
+Abonelik
+
+VpnHood! CONNECT Premium, 1 Aylık ve 1 Yıllık olarak sunulan otomatik yenilenen bir aboneliktir. Fiyat onaylamadan önce gösterilir. Ödemeniz onay anında Apple Hesabınızdan tahsil edilir. Cari dönemin bitiminden en az 24 saat önce iptal edilmediği sürece otomatik yenilenir; Apple Hesabı ayarlarınızdan yönetebilir veya iptal edebilirsiniz.
+
+Kullanım Koşulları (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+Gizlilik Politikası: https://www.vpnhood.com/vpnhood-connect-privacy-policy/
