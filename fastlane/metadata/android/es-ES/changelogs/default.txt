@@ -1,3 +1,4 @@
-* Función: Compatible con QUIC en todas las plataformas
-* Función: DNS dividida: las consultas DNS siguen tus reglas de tunelización dividida, resolviendo apps y webs fuera del túnel
-* Mejora: Uso de memoria y estabilidad
+* Actualización: Starlink Tools: una vista previa anticipada de la pantalla
+* Corrección: Error excepcional tras cancelar el inicio de sesión de Google o por respuesta tardía de la VPN
+* Corrección: El sistema podía cerrar la app diez segundos tras rechazar la VPN en vez de detenerse con limpieza
+* Corrección: Cierre inesperado al informar Google Play de un resultado sin compra asociada

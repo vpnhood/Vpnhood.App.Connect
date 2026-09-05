@@ -1,3 +1,4 @@
-* Nuova funzione: Supporto QUIC su tutte le piattaforme
-* Nuova funzione: Split DNS — le query DNS seguono le regole di Split Tunneling, risolvendosi fuori dal tunnel
-* Miglioramento: Utilizzo della memoria e stabilità
+* Aggiornamento: Starlink Tools — un'anteprima della schermata
+* Correggi: Raro arresto anomalo dopo l'accesso a Google annullato o risposta lenta della VPN
+* Correggi: Chiusura forzata dell'app dopo il rifiuto dell'avvio VPN anziché un arresto pulito
+* Correggi: Arresto anomalo se Google Play segnalava un acquisto inesistente

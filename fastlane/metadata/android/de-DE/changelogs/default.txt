@@ -1,3 +1,4 @@
-* Neu: QUIC-Unterstützung auf allen Plattformen
-* Neu: Geteilte DNS — DNS-Abfragen folgen nun den Split-Tunneling-Regeln
-* Verbesserung: Speichernutzung und Stabilität
+* Update: Starlink Tools – eine frühe Vorschau
+* Fix: Seltener Absturz nach abgebrochenem Google-Login oder spätem VPN-Antworten
+* Fix: App wurde nach verweigertem VPN-Start oft hart beendet statt sauber gestoppt
+* Fix: Absturz, wenn Google Play ein Kaufergebnis ohne Kauf meldete

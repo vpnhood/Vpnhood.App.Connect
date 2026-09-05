@@ -1,3 +1,4 @@
-* Nouveauté : Prise en charge de QUIC sur toutes les plateformes
-* Nouveauté : DNS fractionné — Les requêtes DNS suivent vos règles de tunnel fractionné
-* Amélioration : Utilisation de la mémoire et stabilité
+* Mise à jour : Outils Starlink — un aperçu anticipé
+* Correctif : Plantage rare après une connexion Google annulée ou si le VPN répondait tard
+* Correctif : L'app pouvait fermer 10 s après un refus du VPN au lieu d'un arrêt propre
+* Correctif : Plantage si Google Play signalait un achat sans achat effectif

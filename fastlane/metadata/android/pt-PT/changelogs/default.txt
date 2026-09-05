@@ -1,3 +1,4 @@
-* Recurso: Suporte a QUIC em todas as plataformas
-* Recurso: DNS dividido — consultas DNS seguem as regras de túnel dividido, resolvendo apps e sites ignorados fora do túnel
-* Melhoria: Utilização de memória e estabilidade
+* Atualização: Ferramentas Starlink — uma pré-visualização do ecrã
+* Correção: Erro raro após login cancelado da Google ou resposta tardia do VPN
+* Correção: O sistema podia fechar a app após recusar iniciar o VPN
+* Correção: Erro quando o Google Play reportava compra sem dados

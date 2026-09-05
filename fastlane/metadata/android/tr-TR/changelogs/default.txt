@@ -1,3 +1,4 @@
-* Özellik: Tüm platformlarda QUIC desteği
-* Özellik: Bölünmüş DNS — DNS sorguları artık tünelleme kurallarınızı takip eder, böylece atlanan uygulamalar tünel dışında çözümlenir
-* İyileştirme: Bellek kullanımı ve kararlılık
+* Güncelleme: Starlink Araçları — ekranın erken bir önizlemesi
+* Düzeltme: İptal edilen Google girişi sonrası veya VPN geç yanıt verdiğinde yaşanan nadir çökme
+* Düzeltme: VPN servisi reddedildiğinde sistem düzgün durdurmak yerine uygulamayı on saniye sonra sonlandırabiliyordu
+* Düzeltme: Google Play satın alım olmadan sonuç bildirdiğinde oluşan çökme
