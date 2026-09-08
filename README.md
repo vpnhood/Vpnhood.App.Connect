@@ -5,7 +5,8 @@ shipped app reads at runtime. It contains **no source code** — that lives in
 [vpnhood/VpnHood](https://github.com/vpnhood/VpnHood).
 
 Looking for the app? [Releases](https://github.com/vpnhood/Vpnhood.App.Connect/releases) ·
-[Google Play](https://play.google.com/store/apps/details?id=com.vpnhood.connect.android)
+[Google Play](https://play.google.com/store/apps/details?id=com.vpnhood.connect.android) ·
+[App Store](https://apps.apple.com/app/id6788259880)
 
 ## What is in here
 
@@ -38,7 +39,10 @@ All three are thin wrappers: the real definitions live in the monorepo. A reusab
 its **caller's** context, so they read this repo's assets and push with this repo's own token — which
 is why no cross-repo credential exists anywhere in the chain.
 
-iOS binaries currently go to **TestFlight only**. The App Store *listing* is published normally.
+CONNECT is live on the App Store, but `connect_publish.yml` still uploads every .ipa to
+**TestFlight only** — `publish_app.yml` in the monorepo hardcodes the TestFlight lane for
+`app: connect`. A build reaches the App Store only when someone promotes it by hand in App
+Store Connect. The App Store *listing* is published normally by `publish_listing.yml`.
 
 ## Making a change
 
