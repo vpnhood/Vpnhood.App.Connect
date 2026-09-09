@@ -1,47 +1,47 @@
-O VpnHood! CONNECT é uma solução de rede rápida e segura concebida para priorizar a sua privacidade digital. Alimentado pelo VpnHood! ENGINE de código aberto, oferece uma ligação fiável com largura de banda ilimitada e sem limites de tempo.
+O VpnHood! CONNECT é uma solução de rede rápida e segura, desenhada para priorizar a sua privacidade digital. Impulsionado pelo VpnHood! ENGINE de código aberto, oferece uma ligação fiável com largura de banda ilimitada e sem limites de tempo.
 
-Nota: a ligação requer uma subscrição prémium. Esta aplicação não inclui um plano gratuito.
+Atenção: a ligação requer uma subscrição pré-paga. Esta aplicação não inclui um nível gratuito.
 
-Principais Recursos
+Principais Funcionalidades
 
-Servidores Prémium: Conecte-se à nossa rede de servidores geridos com apenas um toque.
+Servidores Premium: Ligue-se à nossa rede de servidores geridos com um único toque.
 
 Fácil de Usar: Um toque para ligar, sem necessidade de configuração.
 
 Alto Desempenho: Otimizado para velocidade com dados ilimitados.
 
-Código Aberto e Transparente: Criado com o motor VpnHood! (disponível no GitHub), garantindo um código de confiança.
+Código Aberto e Transparente: Criado com o motor VpnHood! (disponível no GitHub), garantindo um código fiável e verificável.
 
 Suporte Dual-Stack: Compatibilidade total com IPv4 e IPv6.
 
 Personalização Avançada
 
-Split Tunneling por Aplicação: Escolha aplicações específicas para passar pelo túnel seguro ou exclua-as para otimizar o desempenho.
+Split Tunneling de Destino: Encaminhe intervalos de IP ou domínios específicos através do túnel seguro, ou exclua-os, para otimizar o desempenho.
 
-Filtro Geográfico: Exclua o tráfego do país local para manter acesso rápido a serviços regionais e aplicações bancárias.
+Filtro Geográfico: Exclua o tráfego do país local para manter o acesso rápido a serviços regionais e aplicações bancárias que exigem um IP local.
 
-Exclusão de LAN: Mantenha o acesso a recursos locais (como impressoras) enquanto permanece protegido.
+Exclusão de LAN: Mantenha o acesso a recursos de rede local (como impressoras ou servidores locais) enquanto permanece protegido online.
 
-Controlo de Protocolo: Alterne entre os protocolos UDP e TCP conforme a sua rede.
+Controlo de Protocolo: Alterne entre os protocolos UDP e TCP consoante o seu ambiente de rede.
 
-Porque Escolher o VpnHood!?
+Porquê Escolher o VpnHood!?
 
-Protocolo com Foco na Privacidade: O VpnHood! utiliza um protocolo avançado e resistente a impressões digitais, imitando o tráfego HTTPS padrão.
+Protocolo Focado na Privacidade: O VpnHood! utiliza um protocolo avançado e resistente a impressões digitais. Ao imitar o tráfego HTTPS padrão, garante que a sua ligação permanece privada e segura contra inspeção profunda de pacotes.
 
-Núcleo Inovador: Pioneiro no desenvolvimento de VPN baseada em .NET.
+Núcleo Inovador: Como pioneiro no desenvolvimento de VPN baseadas em .NET, o VpnHood! oferece uma arquitetura moderna e robusta.
 
-Auditoria de Segurança: Auditado pela Open Tech Fund para sua total tranquilidade.
+Auditoria de Segurança: Para sua tranquilidade, o VpnHood! passou por uma auditoria de segurança abrangente realizada pelo Open Tech Fund.
 
-Orientado pela Comunidade: Evoluímos constantemente para garantir uma experiência de internet sem restrições.
+Movido pela Comunidade: Comprometemo-nos com a melhoria contínua, garantindo que a nossa tecnologia evolui com os padrões modernos para proporcionar uma experiência de internet sem restrições.
 
 Suporte 24/7
 
-A nossa equipa está sempre pronta a ajudar. Para assistência técnica, contacte-nos:
+A nossa equipa dedicada está aqui para ajudar a qualquer momento. Para dúvidas ou assistência técnica, contacte-nos:
 Email: support@vpnhood.com
 
 Subscrição
 
-O VpnHood! CONNECT Premium é uma subscrição renovável automaticamente (1 mês ou 1 ano). O preço é exibido na app antes de confirmar. O pagamento é cobrado na sua Conta Apple na confirmação da compra. Renova-se automaticamente, a menos que seja cancelado; pode gerir ou cancelar nas definições da Conta Apple.
+O VpnHood! CONNECT Premium é uma subscrição de renovação automática, disponível em planos de 1 Mês e 1 Ano. O preço é apresentado na aplicação antes da confirmação. O pagamento é cobrado à sua conta Apple ao confirmar a compra. A subscrição renova-se automaticamente, a menos que seja cancelada; pode geri-la ou cancelá-la nas definições da sua conta Apple a qualquer momento.
 
 Termos de Utilização (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
 Política de Privacidade: https://www.vpnhood.com/vpnhood-connect-privacy-policy/

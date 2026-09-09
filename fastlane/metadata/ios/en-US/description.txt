@@ -16,7 +16,7 @@ Dual-Stack Support: Full compatibility with both IPv4 and IPv6.
 
 Advanced Customization
 
-App-Level Split Tunneling: Select specific apps to route through the secure tunnel or exclude them to optimize performance.
+Destination Split Tunneling: Route specific IP ranges or domains through the secure tunnel, or exclude them, to optimize performance.
 
 Geographic Filtering: Exclude local country traffic to maintain high-speed access to regional services and banking apps that require a local IP.
 

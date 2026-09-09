@@ -1,47 +1,47 @@
-VpnHood! CONNECT es una solución de red rápida y segura para proteger tu privacidad digital. Impulsado por VpnHood! ENGINE, ofrece conexiones confiables con ancho de banda ilimitado.
+VpnHood! CONNECT es una solución de red rápida y segura diseñada para proteger tu privacidad digital. Impulsada por el VpnHood! ENGINE de código abierto, ofrece una conexión fiable con ancho de banda ilimitado y sin límites de tiempo.
 
-Nota: La conexión requiere una suscripción premium. Esta app no incluye versión gratuita.
+Atención: la conexión requiere una suscripción prémium. Esta aplicación no incluye versión gratuita.
 
-Características Clave
+Características principales
 
-Servidores Premium: Conéctate a nuestra red con un solo toque.
+Servidores prémium: Conéctate a nuestra red gestionada con un solo toque.
 
-Fácil de Usar: Conexión con un toque y sin configuraciones.
+Fácil de usar: Conexión inmediata con un toque y sin configuraciones.
 
-Alto Rendimiento: Optimizado para velocidad con datos ilimitados.
+Alto rendimiento: Optimizado para ofrecer velocidad con datos ilimitados.
 
-Código Abierto: Basado en VpnHood! engine (en GitHub), con código verificable.
+Código abierto y transparente: Basado en el motor VpnHood! (disponible en GitHub), garantizando un código verificable.
 
 Soporte Dual-Stack: Compatible con IPv4 e IPv6.
 
-Personalización Avanzada
+Personalización avanzada
 
-Split Tunneling por App: Elige qué apps usarán el túnel seguro.
+División de túneles: Enruta o excluye rangos de IP y dominios específicos para optimizar el rendimiento.
 
-Filtro Geográfico: Excluye tráfico local para acceder rápido a servicios regionales y bancos.
+Filtro geográfico: Excluye el tráfico local para acceder sin problemas a servicios regionales y apps bancarias.
 
-Exclusión LAN: Mantén acceso a recursos locales (impresoras) protegido.
+Exclusión de red local: Mantén el acceso a recursos locales (impresoras) mientras navegas protegido.
 
-Control de Protocolo: Alterna entre UDP y TCP según tu red.
+Control de protocolos: Cambia entre UDP y TCP según tu entorno de red.
 
-¿Por qué VpnHood!?
+¿Por qué elegir VpnHood!?
 
-Protocolo Privado: VpnHood! imita tráfico HTTPS para evitar inspecciones profundas.
+Protocolo centrado en la privacidad: VpnHood! utiliza un protocolo avanzado resistente a huellas digitales que imita el tráfico HTTPS para evitar la inspección profunda de paquetes.
 
-Núcleo Innovador: Arquitectura moderna basada en .NET.
+Núcleo innovador: Pionero en desarrollo VPN con .NET, ofrece una arquitectura moderna y robusta.
 
-Auditoría de Seguridad: Auditado por Open Tech Fund.
+Auditoría de seguridad: Ha superado una auditoría integral por parte del Open Tech Fund.
 
-Impulsado por la Comunidad: Evoluciona constantemente hacia un internet libre.
+Impulsado por la comunidad: Evolucionamos junto con los estándares modernos para ofrecer internet sin restricciones.
 
 Soporte 24/7
 
-Estamos para ayudarte. Contáctanos:
+Estamos aquí para ayudarte. Si tienes dudas o necesitas asistencia técnica:
 Correo: support@vpnhood.com
 
 Suscripción
 
-VpnHood! CONNECT Premium es una suscripción de renovación automática (1 mes o 1 año). El precio se muestra antes de confirmar. El pago se carga a tu cuenta de Apple al confirmar. Se renueva automáticamente salvo que se cancele en los ajustes de tu cuenta.
+VpnHood! CONNECT Premium es una suscripción de renovación automática (1 mes o 1 año). El precio se muestra en la app antes de confirmar. El pago se carga a tu cuenta de Apple al confirmar la compra. Se renueva automáticamente salvo que se cancele desde los ajustes de tu cuenta de Apple.
 
-Términos de Uso (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
-Política de Privacidad: https://www.vpnhood.com/vpnhood-connect-privacy-policy/
+Términos de uso (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+Política de privacidad: https://www.vpnhood.com/vpnhood-connect-privacy-policy/

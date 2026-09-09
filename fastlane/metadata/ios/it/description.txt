@@ -1,45 +1,47 @@
-VpnHood! CONNECT è una soluzione di rete veloce e sicura per la tua privacy digitale. Basato su VpnHood! ENGINE open-source, offre una connessione affidabile con banda illimitata e senza limiti di tempo.
+VpnHood! CONNECT è una soluzione di rete veloce e sicura per la tua privacy digitale. Basato sul motore open-source VpnHood! ENGINE, offre connessioni affidabili con banda illimitata e senza limiti di tempo.
 
-Nota: la connessione richiede un abbonamento premium. L'app non include una versione gratuita.
+Nota: la connessione richiede un abbonamento premium. Questa app non include piani gratuiti.
 
-Funzioni principali
+Funzioni Principali
 
 Server Premium: Connettiti alla nostra rete con un solo tocco.
 
-Semplice: Connessione immediata senza configurazione.
+Semplice: Un solo tocco per connettersi, nessuna configurazione richiesta.
 
-Alte prestazioni: Ottimizzato per la velocità con dati illimitati.
+Alte Prestazioni: Ottimizzato per la velocità con dati illimitati.
 
 Open Source: Sviluppato sul motore VpnHood! (su GitHub) per la massima trasparenza.
 
 Supporto Dual-Stack: Piena compatibilità con IPv4 e IPv6.
 
-Personalizzazione avanzata
+Personalizzazione Avanzata
 
-Split Tunneling: Scegli quali app instradare attraverso il tunnel sicuro.
+Split Tunneling: Instrada o escludi intervalli IP o domini specifici per ottimizzare le prestazioni.
 
-Filtro geografico: Escludi il traffico locale per mantenere l'accesso ad app bancarie e servizi regionali.
+Filtro Geografico: Esclude il traffico locale per mantenere l'accesso veloce a servizi e app bancarie.
 
 Esclusione LAN: Mantieni l'accesso alle risorse locali protetto online.
 
-Controllo protocollo: Passa da UDP a TCP in base alla tua rete.
+Controllo Protocollo: Scegli tra UDP e TCP in base alla tua rete.
 
-Perché scegliere VpnHood!?
+Perché Scegliere VpnHood!?
 
-Protocollo incentrato sulla privacy: VpnHood! usa un protocollo anti-impronta che simula il traffico HTTPS per proteggerti da ispezioni profonde.
+Protocollo Privacy-First: VpnHood! usa un protocollo avanzato resistente alle impronte digitali che imita il traffico HTTPS per proteggerti dai controlli profondi.
 
-Core innovativo: Un'architettura moderna basata su .NET.
+Core Innovativo: Un'architettura moderna basata su .NET.
 
-Verificato: Sottoposto a un audit di sicurezza completo dall'Open Tech Fund.
+Audit di Sicurezza: Verificato da Open Tech Fund.
+
+Basato sulla Community: Ci impegniamo a evolvere la tecnologia per un internet senza restrizioni.
 
 Supporto 24/7
 
-Contattaci per assistenza:
+Siamo a tua disposizione. Contattaci:
 Email: support@vpnhood.com
 
 Abbonamento
 
-VpnHood! CONNECT Premium è un abbonamento con rinnovo automatico (1 mese o 1 anno). Il prezzo è mostrato nell'app. Il pagamento è addebitato sul tuo account Apple alla conferma. Si rinnova automaticamente salvo disdetta; gestiscilo nelle impostazioni del tuo account Apple.
+VpnHood! CONNECT Premium è un abbonamento a rinnovo automatico (1 mese o 1 anno). Il prezzo è mostrato in-app prima della conferma. Il pagamento viene addebitato sull'account Apple. Si rinnova automaticamente salvo disattivazione nelle impostazioni Apple.
 
-Termini di uso (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+Termini d'uso (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
 Informativa sulla privacy: https://www.vpnhood.com/vpnhood-connect-privacy-policy/

@@ -1,45 +1,47 @@
-VpnHood! CONNECT ist eine schnelle und sichere VPN-Lösung für optimalen Datenschutz. Angetrieben von der Open-Source VpnHood! ENGINE bietet sie unbegrenztes Datenvolumen ohne Zeitlimit.
+VpnHood! CONNECT ist eine schnelle und sichere VPN-Lösung für mehr Privatsphäre. Angetrieben von der Open-Source-VpnHood! ENGINE bietet sie unbegrenztes Datenvolumen ohne Zeitlimit.
 
-Hinweis: Für die Verbindung ist ein Premium-Abo erforderlich. Diese App enthält keine kostenlose Version.
+Hinweis: Für die Verbindung ist ein Premium-Abo erforderlich. Die App bietet keine kostenlose Version.
 
 Hauptfunktionen
 
-Premium-Server: Mit nur einem Tippen verbinden.
+Premium-Server: Mit einem Tipp verbinden.
 
-Benutzerfreundlich: Keine Einrichtung erforderlich.
+Benutzerfreundlich: Keine Einrichtung nötig.
 
-Hohe Leistung: Auf Geschwindigkeit optimiert.
+Hohe Leistung: Optimiert für maximale Geschwindigkeit.
 
-Open Source: Auf Basis der VpnHood! Engine auf GitHub.
+Open Source: Basiert auf der VpnHood! Engine (auf GitHub verfügbar).
 
-Dual-Stack: Volle Kompatibilität mit IPv4 und IPv6.
+Dual-Stack-Unterstützung: Kompatibel mit IPv4 und IPv6.
 
 Erweiterte Anpassung
 
-Split Tunneling: Apps einzeln ein- oder ausschließen.
+Split Tunneling: Gezieltes Leiten von IP-Bereichen oder Domains.
 
-Geografisches Filtern: Lokalen Datenverkehr ausnehmen.
+Geografische Filterung: Lokalen Datenverkehr ausschließen.
 
-LAN-Ausschluss: Zugriff auf lokale Netzwerkressourcen.
+LAN-Ausschluss: Zugriff auf lokale Netzwerkressourcen beibehalten.
 
 Protokollsteuerung: Zwischen UDP und TCP wechseln.
 
 Warum VpnHood!?
 
-Datenschutz-Protokoll: Getarnt als HTTPS-Traffic.
+Datenschutz-Protokoll: Schützt vor Deep Packet Inspection durch HTTPS-Nachahmung.
 
-Innovativer Kern: Moderne .NET-Architektur.
+Innovativer Kern: Moderne .NET-basierte Architektur.
 
-Sicherheitsgeprüft: Vom Open Tech Fund geprüft.
+Sicherheitsgeprüft: Umfassender Audit durch den Open Tech Fund.
 
-24/7 Support
+Community-getrieben: Ständige Weiterentwicklung.
 
-Kontaktieren Sie uns bei Fragen:
+24/7-Support
+
+Bei Fragen erreichen Sie uns unter:
 E-Mail: support@vpnhood.com
 
 Abo
 
-VpnHood! CONNECT Premium ist ein automatisches Abo (1 Monat oder 1 Jahr). Die Bezahlung erfolgt über Ihren Apple-Account. Verlängert sich automatisch, sofern es nicht gekündigt wird.
+VpnHood! CONNECT Premium ist ein sich automatisch verlängerndes Abonnement (1 Monat oder 1 Jahr). Der Preis wird vor Kauf angezeigt. Die Abrechnung erfolgt über Ihren Apple-Account. Das Abo verlängert sich automatisch, sofern es nicht gekündigt wird.
 
 Nutzungsbedingungen (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
 Datenschutzrichtlinie: https://www.vpnhood.com/vpnhood-connect-privacy-policy/
