@@ -391,7 +391,6 @@
         "removeDuplicateIps": true
       }
     },
-    "allowRemoteAccess": false,
     "customData": null,
     "dnsServers": []
   },
