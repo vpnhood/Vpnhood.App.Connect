@@ -112,7 +112,7 @@ jobs:
         run: >
           .vh/src/Apps/Tools/StoreScreenshots/bin/Release/net10.0/VpnHoodStoreScreenshots generate
           --config "$GITHUB_WORKSPACE/store/screenshots.json"
-          --assets "$GITHUB_WORKSPACE/.vh/src/AppUi/Assets/Classic/ui.zip"
+          --assets "$GITHUB_WORKSPACE/.vh/src/AppUi/VpnHood.AppUi.Assets.Classic/ui.zip"
           --out "$GITHUB_WORKSPACE/test-results/store-screenshots"
           --locale ${{ matrix.locale }}
           ${{ inputs.platforms && format('--platform {0}', inputs.platforms) || '' }}
