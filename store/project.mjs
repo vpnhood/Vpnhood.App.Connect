@@ -1,7 +1,7 @@
 /**
  * Store-screenshot configuration for VpnHood! CONNECT.
  *
- * The screenshot engine lives in vpnhood/VpnHood.Client.WebUI; its built-in e2e/store/project.mjs
+ * The screenshot engine lives in vpnhood/VpnHood.AppUi.Spa; its built-in e2e/store/project.mjs
  * describes the CLIENT. This file is the CONNECT equivalent, passed to the engine through the
  * composite action's `project` input (see .github/workflows/update-screenshots.yml). The engine
  * itself is never edited — only this file and the fixture.json beside it.
@@ -59,15 +59,19 @@ export const LOCALES = JSON.parse(await fs.readFile(localesFile, 'utf8')).locale
 });
 
 /**
- * ConnectionInfo.vue renders `(speed * 10 / 1000000).toFixed(2)`, so 1 Mbps == 100_000 here. Only
- * ever use throughput the product actually sustains — it is a performance claim on a store page.
+ * The UI renders `speed * 10 / 1000000` Mbps, so 1 Mbps == 100_000 here. Only ever use throughput
+ * the product actually sustains — it is a performance claim on a store page.
+ *
+ * Rounded, because the field is a whole number of bytes: `82.4 * 100_000` is 8240000.000000001 in
+ * JavaScript, which the app's typed API refuses to read as an integer (the SPA renderer never
+ * minded, the Avalonia one fails the shot).
  */
-const MBPS = 100_000;
+const mbps = (n) => Math.round(n * 100_000);
 
 const CONNECTED = {
   state: {
     connectionState: 'Connected',
-    sessionStatus: { speed: { received: 108.7 * MBPS, sent: 82.4 * MBPS } },
+    sessionStatus: { speed: { received: mbps(108.7), sent: mbps(82.4) } },
   },
 };
 
@@ -195,8 +199,13 @@ const APPS_FILTER = {
 // The "IP Leak Risk" chip is an accurate in-app caution about a setting the user opts into (split
 // tunneling exposes your IP to whatever you route around the tunnel — true of every VPN). Out of
 // context on a store page it reads as a claim about the product. Hidden for the capture only; the
-// app still shows it to anyone who turns the setting on.
-const HIDE_LEAK_CHIP = ['.v-chip.text-warning'];
+// app still shows it to anyone who turns the setting on. Each renderer names the chip its own way
+// (store-screenshots.mjs, "Two renderers"), and the engine refuses a shot that names only one.
+const SPLIT_TUNNELING = {
+  route: '/split-tunneling', label: 'Split Tunneling',
+  hide: ['.v-chip.text-warning'],            // the SPA: a CSS selector
+  hideAvalonia: ['EnabledItem/WarningChip'], // the Avalonia UI: x:Names from the page down
+};
 
 const IOS_DEVICES = {
   'iphone-6.9': {
@@ -290,7 +299,7 @@ const ANDROID_SHOTS = [
   { route: '/protocols/cloak-mode', label: 'Cloak Mode' },
   { route: '/protocols', label: 'Protocols' },
   APPS_FILTER,
-  { route: '/split-tunneling', label: 'Split Tunneling', hide: HIDE_LEAK_CHIP },
+  SPLIT_TUNNELING,
   { route: '/settings/kill-switch', label: 'Kill Switch' },
   { route: '/settings/proxies', label: 'Proxies' },
   // --- everything below is generated but NOT installed: Play's cap is 8 per device type. ---
@@ -337,7 +346,7 @@ export const PLATFORMS = {
       SERVERS,
       { route: '/protocols/cloak-mode', label: 'Cloak Mode' },
       { route: '/protocols', label: 'Protocols' },
-      { route: '/split-tunneling', label: 'Split Tunneling', hide: HIDE_LEAK_CHIP },
+      SPLIT_TUNNELING,
       { route: '/dns', label: 'DNS' },
       { route: '/settings/proxies', label: 'Proxies' },
     ],
@@ -414,7 +423,7 @@ export const PLATFORMS = {
       SERVERS,
       { route: '/protocols/cloak-mode', label: 'Cloak Mode' },
       { route: '/protocols', label: 'Protocols' },
-      { route: '/split-tunneling', label: 'Split Tunneling', hide: HIDE_LEAK_CHIP },
+      SPLIT_TUNNELING,
       { route: '/dns', label: 'DNS' },
       { route: '/settings/proxies', label: 'Proxies' },
     ],

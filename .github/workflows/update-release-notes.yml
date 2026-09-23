@@ -27,7 +27,7 @@ on:
   workflow_dispatch:
     inputs:
       webui-ref:
-        description: "vpnhood/VpnHood.Client.WebUI ref supplying the store tooling"
+        description: "vpnhood/VpnHood.AppUi.Spa ref supplying the store tooling"
         required: false
         default: develop
       code-ref:
@@ -52,7 +52,7 @@ jobs:
       - name: Checkout the store tooling
         uses: actions/checkout@v5
         with:
-          repository: vpnhood/VpnHood.Client.WebUI
+          repository: vpnhood/VpnHood.AppUi.Spa
           ref: ${{ inputs.webui-ref }}
           path: .webui
 
@@ -74,7 +74,7 @@ jobs:
       # Node built-ins only — no npm ci needed (the same discipline as the workflow `plan` job's
       # project import in update-screenshots.yml).
       - name: Extract release notes from the CHANGELOG
-        run: node .webui/e2e/store-release-notes.mjs extract --changelog .code/CHANGELOG.md --root "$GITHUB_WORKSPACE" --project "$GITHUB_WORKSPACE/store/project.mjs"
+        run: node .webui/src/VpnHood.AppUi.Presentation.Classic.Spa/e2e/store-release-notes.mjs extract --changelog .code/CHANGELOG.md --root "$GITHUB_WORKSPACE" --project "$GITHUB_WORKSPACE/store/project.mjs"
 
       - name: Set up .NET (vhtranslator)
         if: env.GEMINI_API_KEY != ''
@@ -94,7 +94,7 @@ jobs:
 
       - name: Compile release notes into the fastlane trees
         if: env.GEMINI_API_KEY != ''
-        run: node .webui/e2e/store-release-notes.mjs compile --root "$GITHUB_WORKSPACE" --project "$GITHUB_WORKSPACE/store/project.mjs"
+        run: node .webui/src/VpnHood.AppUi.Presentation.Classic.Spa/e2e/store-release-notes.mjs compile --root "$GITHUB_WORKSPACE" --project "$GITHUB_WORKSPACE/store/project.mjs"
 
       - name: Commit and push
         if: env.GEMINI_API_KEY != ''

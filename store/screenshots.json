@@ -1,0 +1,225 @@
+{
+  // Store screenshots for VpnHood! CONNECT: the languages, the stores, the devices and the screens.
+  //
+  // THIS is the file to edit - the tool that reads it (VpnHood/src/Apps/Tools/StoreScreenshots) is
+  // never edited to change what a listing shows. Beside it, fixture.json is the app's own answers,
+  // recorded from a Windows Release client with every identifying value replaced.
+  //
+  // What makes CONNECT different from the CLIENT, and where each difference comes from:
+  //   - Connect ships a bundled access key (the AccessKeys option in every Connect App.cs), so the
+  //     Servers screen shows a real location list. The Client ships none and shows add-a-key guidance.
+  //   - IsAddAccessKeySupported = false (Connect.Win.Web/App.cs), and therefore
+  //     IsPremiumFlagSupported = true (VpnHoodApp.cs): the premium/free split is Connect's story.
+  //   - UiTheme = "violet" with the Connect logo and consent (every Connect head's AppConfigs.cs).
+  //     That lives in fixture.json, not here.
+  //
+  // Array order IS the store's order - a file is numbered by where its shot sits in the list - so
+  // reordering a set means moving items, never renumbering them.
+
+  "installRoot": "..",
+
+  // Every language the listing ships, the same list as store-i18n/locales.json. `tag` is the
+  // store's code, which is also the folder a set installs into; `culture` is the app's own
+  // language. `stores` spells a tag differently for one store, and null there means that store has
+  // no such language, so the set is not installed for it.
+  "locales": [
+    { "tag": "en-US", "culture": "en" },
+    { "tag": "ar", "culture": "ar", "stores": { "appStore": "ar-SA" } },
+    { "tag": "de-DE", "culture": "de" },
+    { "tag": "es-ES", "culture": "es" },
+    { "tag": "fa", "culture": "fa", "stores": { "appStore": null } },
+    { "tag": "fr-FR", "culture": "fr" },
+    { "tag": "hi-IN", "culture": "hi", "stores": { "appStore": "hi" } },
+    { "tag": "it-IT", "culture": "it", "stores": { "appStore": "it" } },
+    { "tag": "pt-BR", "culture": "pt-BR" },
+    { "tag": "pt-PT", "culture": "pt" },
+    { "tag": "ru-RU", "culture": "ru", "stores": { "appStore": "ru" } },
+    { "tag": "tr-TR", "culture": "tr", "stores": { "appStore": "tr" } },
+    { "tag": "zh-CN", "culture": "zh", "stores": { "appStore": "zh-Hans" } }
+  ],
+
+  // What the Split Apps screen lists. A real device answers with what is installed, icons and all;
+  // a listing cannot show those - another company's icon is its artwork and its trademark - so the
+  // tool draws a tile per app in the colour it is known by, with its initial.
+  "installedApps": [
+    { "appId": "com.android.vending", "appName": "Play Store", "background": ["#ffffff"], "foreground": ["#00c4ff", "#00e59d"] },
+    { "appId": "com.whatsapp", "appName": "WhatsApp", "background": ["#25D366"], "foreground": ["#ffffff"] },
+    { "appId": "com.android.calculator", "appName": "Calculator", "background": ["#43A047"], "foreground": ["#ffffff"] },
+    { "appId": "com.android.calendar", "appName": "Calendar", "background": ["#1E88E5"], "foreground": ["#ffffff"] },
+    { "appId": "com.android.camera", "appName": "Camera", "background": ["#E53935"], "foreground": ["#ffffff"] },
+    { "appId": "com.android.chrome", "appName": "Chrome", "background": ["#4285F4"], "foreground": ["#ffffff"] },
+    { "appId": "com.android.deskclock", "appName": "Clock", "background": ["#5C6BC0"], "foreground": ["#ffffff"] },
+    { "appId": "com.facebook.katana", "appName": "Facebook", "background": ["#1877F2"], "foreground": ["#ffffff"] },
+    { "appId": "com.google.android.gm", "appName": "Gmail", "background": ["#ffffff"], "foreground": ["#EA4335"] },
+    { "appId": "com.instagram.android", "appName": "Instagram", "background": ["#F58529", "#DD2A7B", "#8134AF"], "foreground": ["#ffffff"] },
+    { "appId": "com.google.android.apps.maps", "appName": "Maps", "background": ["#ffffff"], "foreground": ["#34A853"] },
+    { "appId": "com.spotify.music", "appName": "Spotify", "background": ["#1DB954"], "foreground": ["#ffffff"] },
+    { "appId": "com.google.android.youtube", "appName": "YouTube", "background": ["#FF0000"], "foreground": ["#ffffff"] }
+  ],
+
+  "platforms": {
+
+    // iOS ships PREMIUM-ONLY (owner decision 2026-08-09: the iOS access token serves no free tier,
+    // and the iOS listing text already says so - App Review compares the text with the pictures).
+    // fixture.ios.json carries that location list, derived from fixture.json by the app's own rules
+    // (ClientServerLocationInfo.cs): the pure "#premium" locations kept, the Auto row's free half
+    // dropped, the countries whose wildcard went with the free list un-nested. Derive it again when
+    // the fixture changes; never edit it by hand.
+    // iOS copy must never name another platform (App Store guideline 2.3.10).
+    "ios": {
+      "label": "App Store",
+      "store": "appStore",
+      "installDir": "fastlane/screenshots/ios/<locale>",
+      "patchFile": "fixture.ios.json",
+      "devices": {
+        "iphone-6.9": {
+          "label": "iPhone 6.9",
+          "prefix": "",
+          "frame": "phone",
+          "cssWidth": 430, "cssHeight": 932, "scale": 3,
+          "safeTop": 59, "safeBottom": 34,
+          "screenW": 344,
+          "bezel": 9, "outerRadius": 54, "screenRadius": 46,
+          "island": { "width": 86, "height": 25 },
+          "statusFont": 11.5, "statusPad": 26,
+          "indicatorWidth": 105
+        },
+        // Connect.Ios declares UIDeviceFamily 1+2, and App Store Connect refuses a submission
+        // without 13-inch iPad pictures while family 2 is there.
+        "ipad-13": {
+          "label": "iPad 13",
+          "prefix": "ipad_",
+          "frame": "phone",
+          "cssWidth": 1032, "cssHeight": 1376, "scale": 2,
+          "safeTop": 24, "safeBottom": 20,
+          "screenW": 800,
+          "bezel": 20, "outerRadius": 58, "screenRadius": 40,
+          "statusFont": 9, "statusPad": 34,
+          "indicatorWidth": 224
+        }
+      },
+      "shots": [
+        { "route": "/", "label": "Home (connected)", "patch": { "state": { "connectionState": "Connected", "sessionStatus": { "speed": { "received": 10870000, "sent": 8240000 } } } } },
+        { "route": "/servers", "label": "Servers (bundled locations)" },
+        { "route": "/protocols/cloak-mode", "label": "Cloak Mode" },
+        { "route": "/protocols", "label": "Protocols" },
+        { "route": "/split-tunneling", "label": "Split Tunneling", "hide": ["EnabledItem/WarningChip"] },
+        { "route": "/dns", "label": "DNS" },
+        { "route": "/settings/proxies", "label": "Proxies" }
+      ]
+    },
+
+    // AndroidDevice + AndroidDeviceUiProvider on a phone. Connect's Google build additionally
+    // registers an AccountProvider with a BillingProvider and ad providers
+    // (Connect.Android.Google/App.cs), which the Windows baseline in fixture.json does not have.
+    // The ad flags do NOT retro-fit the per-location options already recorded in the fixture, so
+    // the locations show their no-rewarded-ad affordances: an understatement of what the Google
+    // build offers, never an overstatement.
+    // Google Play takes at most eight screenshots per device type; the set draws every screen worth
+    // having and the install ships the leading eight.
+    "android-phone": {
+      "label": "Google Play",
+      "store": "googlePlay",
+      "installDir": "fastlane/metadata/android/<locale>/images/phoneScreenshots",
+      "installMax": 8,
+      "patch": {
+        "features": {
+          "osType": "Android",
+          "isExcludeAppsSupported": true,
+          "isIncludeAppsSupported": true,
+          "isAccountSupported": true,
+          "authProviderIds": ["google"],
+          "isBillingSupported": true,
+          "isAdSupported": true,
+          "isRewardedAdSupported": true,
+          "isUserReviewSupported": true,
+          "adjustForSystemBars": false
+        },
+        "intentFeatures": {
+          "isQuickLaunchSupported": true,
+          "isRequestQuickLaunchSupported": true,
+          "isRequestNotificationSupported": true,
+          "isPrivateDnsSettingsSupported": true,
+          "isKillSwitchSettingsSupported": true,
+          "isAlwaysOnSettingsSupported": true,
+          "isSettingsSupported": true,
+          "isAppSettingsSupported": true,
+          "isAppNotificationSettingsSupported": true
+        },
+        "state": { "isNotificationEnabled": true }
+      },
+      "devices": {
+        "android-phone": {
+          "label": "Android",
+          "prefix": "",
+          "frame": "phone",
+          "statusStyle": "android",
+          "cssWidth": 360, "cssHeight": 740, "scale": 4,
+          "safeTop": 28, "safeBottom": 20,
+          "screenW": 288,
+          "bezel": 4, "outerRadius": 40, "screenRadius": 36,
+          "punchHole": { "size": 12 },
+          "statusFont": 11, "statusPad": 22,
+          "indicatorWidth": 96
+        }
+      },
+      "shots": [
+        { "route": "/", "label": "Home (connected)", "patch": { "state": { "connectionState": "Connected", "sessionStatus": { "speed": { "received": 10870000, "sent": 8240000 } } } } },
+        { "route": "/servers", "label": "Servers (bundled locations)" },
+        { "route": "/protocols/cloak-mode", "label": "Cloak Mode" },
+        { "route": "/protocols", "label": "Protocols" },
+        { "route": "/split-tunneling/split-apps", "label": "Apps Filter", "patch": { "userSettings": { "splitTunneling": { "appMode": "Exclude", "apps": ["com.android.vending", "com.whatsapp"] } } } },
+        { "route": "/split-tunneling", "label": "Split Tunneling", "hide": ["EnabledItem/WarningChip"] },
+        { "route": "/settings/kill-switch", "label": "Kill Switch" },
+        { "route": "/settings/proxies", "label": "Proxies" },
+        // everything below is drawn but not installed: the store's cap is eight per device type
+        { "route": "/dns", "label": "DNS" },
+        { "route": "/settings/always-on", "label": "Always On" },
+        { "route": "/settings/quick-launch", "label": "Quick Launch" }
+      ]
+    },
+
+    // AndroidDevice with AndroidUtils.IsTv() true: the app split stays supported, but every
+    // AndroidDeviceUiProvider intent is gated on !IsTv, so the intents keep the fixture's all-false
+    // baseline and the UI switches to its television layout. No Apps Filter (the list is finger-
+    // driven) and no Kill Switch, Always On or Quick Launch (each one is gated !IsTv).
+    // Bare on purpose: a television screenshot IS the whole panel, and a bezel would only letterbox it.
+    "android-tv": {
+      "label": "Google Play TV",
+      "store": "googlePlay",
+      "installDir": "fastlane/metadata/android/<locale>/images/tvScreenshots",
+      "installMax": 8,
+      "patch": {
+        "features": {
+          "osType": "Android",
+          "isTv": true,
+          "isExcludeAppsSupported": true,
+          "isIncludeAppsSupported": true,
+          "isAccountSupported": true,
+          "authProviderIds": ["google"],
+          "isBillingSupported": true,
+          "isAdSupported": true,
+          "isRewardedAdSupported": true,
+          "adjustForSystemBars": false
+        }
+      },
+      "devices": {
+        "android-tv": {
+          "label": "Android TV",
+          "prefix": "",
+          "frame": "none",
+          "cssWidth": 1280, "cssHeight": 720, "scale": 1.5
+        }
+      },
+      "shots": [
+        { "route": "/", "label": "Home (connected)", "patch": { "state": { "connectionState": "Connected", "sessionStatus": { "speed": { "received": 10870000, "sent": 8240000 } } } } },
+        { "route": "/servers", "label": "Servers (bundled locations)" },
+        { "route": "/protocols/cloak-mode", "label": "Cloak Mode" },
+        { "route": "/protocols", "label": "Protocols" },
+        { "route": "/split-tunneling", "label": "Split Tunneling", "hide": ["EnabledItem/WarningChip"] },
+        { "route": "/dns", "label": "DNS" },
+        { "route": "/settings/proxies", "label": "Proxies" }
+      ]
+    }
+  }
+}

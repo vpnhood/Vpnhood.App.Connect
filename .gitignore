@@ -3,3 +3,7 @@
 .DS_Store
 
 /asc/
+
+# Working files of a screenshot run: the raw captures, the mocked state each one was drawn from,
+# and the finished sets before they are installed into fastlane/ and store/.
+/test-results/

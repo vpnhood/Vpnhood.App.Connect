@@ -32,7 +32,7 @@ machine — the runners hold the signing keys, the toolchains and the store cred
 | Workflow | Does | Trigger |
 | --- | --- | --- |
 | `connect_publish.yml` | Builds Linux/Windows/Android/iOS, uploads to Google Play and TestFlight, creates the GitHub release here | Usually `pub/Connect/PublishByGithub.ps1` in the monorepo, which bumps the version first |
-| `update-screenshots.yml` | Regenerates every screenshot and recompiles the texts, one locale per runner, and commits the result here | Manual. Pass the WebUI ref the shipped app actually uses |
+| `update-screenshots.yml` | Regenerates every screenshot and recompiles the texts, one locale per runner, and commits the result here | Manual. Pass the VpnHood ref the shipped app was built from (the Avalonia UI it draws) and the WebUI ref of the engine |
 | `publish_listing.yml` | Pushes texts and screenshots to Google Play and the App Store | Manual. Skips any store whose content is byte-identical to the last publish |
 
 All three are thin wrappers: the real definitions live in the monorepo. A reusable workflow runs in
@@ -70,5 +70,5 @@ overwritten by the next run.
 
 The full maintainer's map of the screenshot and listing pipeline — how the tools fit together, the
 invariants, and how to verify a change — lives in
-[`e2e/store/README.md`](https://github.com/vpnhood/VpnHood.Client.WebUI/blob/main/e2e/store/README.md)
+[`e2e/store/README.md`](https://github.com/vpnhood/VpnHood.AppUi.Spa/blob/main/src/VpnHood.AppUi.Presentation.Classic.Spa/e2e/store/README.md)
 in the WebUI repo, which owns the tooling.

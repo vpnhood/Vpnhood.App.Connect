@@ -35,7 +35,7 @@ on:
         required: false
         default: false
       webui_ref:
-        description: "vpnhood/VpnHood.Client.WebUI ref supplying the store tooling."
+        description: "vpnhood/VpnHood.AppUi.Spa ref supplying the store tooling."
         type: string
         required: false
         default: develop

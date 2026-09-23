@@ -1,37 +1,50 @@
 name: Update Store Screenshots
 
-# Regenerates every store screenshot set with the VpnHood.Client.WebUI engine and commits the
-# result to THIS repo, one locale per runner so ten languages take the wall time of one:
+# Regenerates every store screenshot set and commits the result to THIS repo, one language per
+# runner so thirteen of them take the wall time of one.
 #
-#   plan      reads the locale list from THIS repo's store/project.mjs (no hardcoded copy to drift)
-#   generate  matrix: each job builds the SPA and shoots ONE locale, uploading its final/ PNGs
-#   assemble  merges the artifacts, installs every locale into the store trees, refreshes the
-#             store-i18n translations, compiles the texts, and pushes the single commit
+# The screens are drawn by the Avalonia UI the shipped app runs, through the screenshot tool
+# beside it (vpnhood/VpnHood, src/Apps/Tools/StoreScreenshots) - no browser, no app, no VPN. What
+# each picture shows is store/screenshots.json and store/fixture.json in THIS repo; that tool's
+# README is the maintainer's map.
 #
-# CONNECT vs CLIENT: the engine's built-in e2e/store/project.mjs describes the CLIENT. Connect
-# passes its OWN config through the action's `project` input — store/project.mjs here, with
-# store/fixture.json beside it. Everything Connect-specific (the bundled server list, the premium
-# story, the ad-supported Android build, the VpnHoodConnect UI theme) lives in those two files;
-# the engine stays untouched.
+#   plan      reads the language list from store-i18n/locales.json, the list the texts use
+#   generate  matrix: one language per job - builds the UI's asset store and the tool, draws every
+#             screen of every store, uploads the finished set
+#   assemble  gathers the languages, installs them into the store trees, refreshes the store-i18n
+#             translations, compiles the texts, and pushes the single commit
 #
-# Manual-only, like the metadata publishers: run it after a release, passing the WebUI ref the
-# shipped app actually uses, so the screenshots always match the shipped UI.
+# Manual-only, like the metadata publishers: run it after a release, passing the VpnHood ref the
+# shipped client was built from, so the pictures always match the shipped UI.
 #
-# No PAT anywhere, by design: the engine repo is public (a read-only checkout needs no credential)
-# and the push uses this workflow's own repo-scoped GITHUB_TOKEN. The Gemini translator key is the
-# only secret, and only the translation step wants it — absent, translation is skipped with a
-# warning and everything else still works (the fork-without-secrets path).
+# CONNECT vs CLIENT: everything Connect-specific - the bundled server list, the premium story,
+# the ad-supported Android build, the violet theme - lives in this repo's store/screenshots.json,
+# store/fixture.json and store/fixture.ios.json. The tool is never edited for it.
 #
-# The key comes from the ORG secret GOOGLE_GEMINI_TRNSLATE_APP_API_KEY (one key shared by the SPA
-# and both store listings). It is exposed to the step as GEMINI_API_KEY because that is the
-# variable vhtranslator itself reads — the secret name and the tool's variable are deliberately
-# allowed to differ rather than renaming either one.
+# The look itself - images, fonts, the words - is a submodule of that repo
+# (vpnhood/VpnHood.AppUi.Assets.Classic), so one checkout brings everything the pictures need. The
+# VpnHood.AppUi.Spa checkout in the assemble job is there for one remaining reason: it still owns
+# the store TEXT tools. It goes away as those move.
+#
+# No PAT anywhere, by design: both source repos are public (a read-only checkout needs no
+# credential) and the push uses this workflow's own repo-scoped GITHUB_TOKEN. The Gemini
+# translator key is the only secret, and only the translation step wants it - absent, translation
+# is skipped with a warning and everything else still works (the fork-without-secrets path).
+#
+# The key comes from the ORG secret GOOGLE_GEMINI_TRNSLATE_APP_API_KEY (one key shared by both
+# store listings). It is exposed to the step as GEMINI_API_KEY because that is the variable
+# vhtranslator itself reads - the secret name and the tool's variable are deliberately allowed to
+# differ rather than renaming either one.
 
 on:
   workflow_dispatch:
     inputs:
+      vh-ref:
+        description: "vpnhood/VpnHood ref to draw with — the Avalonia UI the shipped app was built from"
+        required: false
+        default: develop
       webui-ref:
-        description: "VpnHood.Client.WebUI ref to generate with — the SPA version the shipped app uses"
+        description: "VpnHood.AppUi.Spa ref of the screenshot engine (its SPA build also feeds the UI's asset store)"
         required: false
         default: develop
       platforms:
@@ -50,9 +63,11 @@ jobs:
     steps:
       - name: Checkout store assets (this repo)
         uses: actions/checkout@v5
-      - name: Read the locale list from this repo's project config
+      # The same list the store TEXTS are translated into, so a picture set and a text set can
+      # never drift apart. store/screenshots.json maps each tag to the app's own language.
+      - name: Read the language list
         id: locales
-        run: echo "locales=$(node -e "import('./store/project.mjs').then(p => process.stdout.write(JSON.stringify(p.LOCALES.map(l => l.tag))))")" >> "$GITHUB_OUTPUT"
+        run: echo "locales=$(node -e "process.stdout.write(JSON.stringify(require('./store-i18n/locales.json').locales.map(l => l.tag)))")" >> "$GITHUB_OUTPUT"
 
   generate:
     needs: plan
@@ -64,42 +79,49 @@ jobs:
       - name: Checkout store assets (this repo)
         uses: actions/checkout@v5
 
-      # `uses:` cannot take an expression, so the engine version is chosen by checking the WebUI
-      # repo out at the requested ref and running its composite action from that local path.
-      - name: Checkout the screenshot engine
+      # The UI that draws the screens, the tool that drives it, and - as a submodule of that repo -
+      # the store of images, fonts and words it draws with. One checkout, no build of anything else.
+      - name: Checkout the app's UI, its screenshot tool and the look
         uses: actions/checkout@v5
         with:
-          repository: vpnhood/VpnHood.Client.WebUI
-          ref: ${{ inputs.webui-ref }}
-          path: .webui
+          repository: vpnhood/VpnHood
+          ref: ${{ inputs.vh-ref }}
+          path: .vh
+          submodules: true
 
-      # The engine's npm packages and the Chromium build dominate a cold run — cache both.
-      - name: Cache npm and Playwright browsers
+      - name: Cache NuGet
         uses: actions/cache@v5
         with:
-          path: |
-            ~/.npm
-            ~/.cache/ms-playwright
-          key: webui-${{ runner.os }}-${{ hashFiles('.webui/package-lock.json') }}
+          path: ~/.nuget/packages
+          key: shots-${{ runner.os }}-${{ hashFiles('.vh/**/*.csproj') }}
 
       # Arabic, Devanagari and CJK glyphs come from system fonts the runner image does not carry;
-      # without them Chromium draws tofu boxes, which no fail-loud guard can detect.
+      # without them the UI draws tofu boxes, which no fail-loud guard can catch.
       - name: Install Noto fonts (Arabic / Indic / CJK)
         run: sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends fonts-noto-core fonts-noto-ui-core fonts-noto-cjk
 
-      - name: Generate screenshots (${{ matrix.locale }})
-        uses: ./.webui
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v5
         with:
-          install: "false"
-          platforms: ${{ inputs.platforms }}
-          project: ${{ github.workspace }}/store/project.mjs
-          extra-args: --locale ${{ matrix.locale }}
+          global-json-file: .vh/global.json
+
+      - name: Build the screenshot tool
+        run: dotnet build -c Release .vh/src/Apps/Tools/StoreScreenshots/VpnHood.App.StoreScreenshots.csproj
+
+      - name: Draw the screenshots (${{ matrix.locale }})
+        run: >
+          .vh/src/Apps/Tools/StoreScreenshots/bin/Release/net10.0/VpnHoodStoreScreenshots generate
+          --config "$GITHUB_WORKSPACE/store/screenshots.json"
+          --assets "$GITHUB_WORKSPACE/.vh/src/AppUi/Assets/Classic/ui.zip"
+          --out "$GITHUB_WORKSPACE/test-results/store-screenshots"
+          --locale ${{ matrix.locale }}
+          ${{ inputs.platforms && format('--platform {0}', inputs.platforms) || '' }}
 
       - name: Upload finals
         uses: actions/upload-artifact@v7
         with:
           name: finals-${{ matrix.locale }}
-          path: .webui/test-results/store-screenshots/final
+          path: test-results/store-screenshots/final
           retention-days: 1
           if-no-files-found: error
 
@@ -114,10 +136,18 @@ jobs:
       - name: Checkout store assets (this repo)
         uses: actions/checkout@v5
 
-      - name: Checkout the screenshot engine
+      - name: Checkout the screenshot tool
         uses: actions/checkout@v5
         with:
-          repository: vpnhood/VpnHood.Client.WebUI
+          repository: vpnhood/VpnHood
+          ref: ${{ inputs.vh-ref }}
+          path: .vh
+
+      # Still the home of the store TEXT tools this job runs.
+      - name: Checkout the text tools
+        uses: actions/checkout@v5
+        with:
+          repository: vpnhood/VpnHood.AppUi.Spa
           ref: ${{ inputs.webui-ref }}
           path: .webui
 
@@ -125,7 +155,7 @@ jobs:
         uses: actions/cache@v5
         with:
           path: ~/.npm
-          key: webui-${{ runner.os }}-${{ hashFiles('.webui/package-lock.json') }}
+          key: webui-${{ runner.os }}-${{ hashFiles('.webui/src/VpnHood.AppUi.Presentation.Classic.Spa/package-lock.json') }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v5
@@ -134,7 +164,7 @@ jobs:
 
       # The engine script needs its packages, but an install-only run launches no browser.
       - name: Install engine dependencies
-        working-directory: .webui
+        working-directory: .webui/src/VpnHood.AppUi.Presentation.Classic.Spa
         run: npm ci
 
       - name: Download every locale's finals
@@ -142,12 +172,23 @@ jobs:
         with:
           pattern: finals-*
           merge-multiple: true
-          path: .webui/test-results/store-screenshots/final
+          path: test-results/store-screenshots/final
 
-      # Fails loudly if any locale's finals are incomplete — a store directory is never partial.
-      - name: Install screenshots into the store trees
-        working-directory: .webui
-        run: node e2e/store-screenshots.mjs --frame-only --capture-only --install --install-root "$GITHUB_WORKSPACE" --project "$GITHUB_WORKSPACE/store/project.mjs"
+      # Fails loudly if any language's set is incomplete - a store folder is never partial.
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: .vh/global.json
+
+      - name: Build the screenshot tool
+        run: dotnet build -c Release .vh/src/Apps/Tools/StoreScreenshots/VpnHood.App.StoreScreenshots.csproj
+
+      - name: Install the sets into the store trees
+        run: >
+          .vh/src/Apps/Tools/StoreScreenshots/bin/Release/net10.0/VpnHoodStoreScreenshots generate
+          --config "$GITHUB_WORKSPACE/store/screenshots.json"
+          --out "$GITHUB_WORKSPACE/test-results/store-screenshots"
+          --capture-only --frame-only --install --install-root "$GITHUB_WORKSPACE"
 
       # Store TEXTS: refresh translations for whatever changed in store-i18n (vhtranslator is
       # incremental through the committed vh_translator/watches files), then compile every locale
@@ -167,13 +208,13 @@ jobs:
         run: echo "::warning title=Store texts not translated::GOOGLE_GEMINI_TRNSLATE_APP_API_KEY is not set; store-i18n translations were not refreshed. Add the secret to enable translation."
 
       - name: Compile store texts
-        run: node .webui/e2e/store-metadata.mjs --root "$GITHUB_WORKSPACE"
+        run: node .webui/src/VpnHood.AppUi.Presentation.Classic.Spa/e2e/store-metadata.mjs --root "$GITHUB_WORKSPACE"
 
       # Keeps the release-note fastlane files in step when the translation above also refreshed
       # release-notes keys. The SOURCE is refreshed by update-release-notes.yml (from the monorepo
       # CHANGELOG); a repo that never adopted it gets a warning and a skip, nothing more.
       - name: Compile release notes
-        run: node .webui/e2e/store-release-notes.mjs compile --root "$GITHUB_WORKSPACE" --project "$GITHUB_WORKSPACE/store/project.mjs"
+        run: node .webui/src/VpnHood.AppUi.Presentation.Classic.Spa/e2e/store-release-notes.mjs compile --root "$GITHUB_WORKSPACE" --project "$GITHUB_WORKSPACE/store/project.mjs"
 
       - name: Commit and push
         run: |
@@ -181,7 +222,7 @@ jobs:
           git config user.email "41898270+github-actions[bot]@users.noreply.github.com"
           # .webui must stay on disk — the runner's post-steps still read checkout metadata after
           # this step. It is excluded from the commit instead.
-          git add -A -- ':!.webui'
+          git add -A -- ':!.webui' ':!.vh' ':!test-results'
           if git diff --cached --quiet; then
             echo "Screenshots and texts are already up to date."
           else
