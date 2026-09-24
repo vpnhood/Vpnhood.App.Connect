@@ -9,13 +9,13 @@
  * What makes Connect different from the Client, and where each difference comes from:
  *   - Connect ships a BUNDLED access key (the `AccessKeys` option in every Connect App.cs), so the
  *     Servers page shows a real location list. The Client ships none and shows add-a-key guidance.
- *   - IsAddAccessKeySupported = false (Connect.Win.Web/App.cs:22) and therefore
+ *   - IsAddAccessKeySupported = false (Connect.Windows.Web/App.cs:22) and therefore
  *     IsPremiumFlagSupported = true (VpnHoodApp.cs:189) — the premium/free split is Connect's story.
  *   - features.uiName = "VpnHoodConnect" drives the SPA's whole visual identity: vuetify theme and
  *     logo (src/main.ts:26, src/components/NavigationDrawer.vue:114) plus isConnectApp() behaviour
  *     (src/services/VpnHoodApp.ts:339). It lives in fixture.json, not here.
  *
- * The fixture is the WINDOWS capability baseline (no ads, no billing — matching Connect.Win.Web and
+ * The fixture is the WINDOWS capability baseline (no ads, no billing — matching Connect.Windows.Web and
  * Connect.Ios, neither of which registers an AdProvider or AccountProvider). Each platform below
  * overlays only what its own device class genuinely enables; values are traced to the app, never
  * invented.

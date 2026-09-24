@@ -8,7 +8,7 @@
   // What makes CONNECT different from the CLIENT, and where each difference comes from:
   //   - Connect ships a bundled access key (the AccessKeys option in every Connect App.cs), so the
   //     Servers screen shows a real location list. The Client ships none and shows add-a-key guidance.
-  //   - IsAddAccessKeySupported = false (Connect.Win.Web/App.cs), and therefore
+  //   - IsAddAccessKeySupported = false (Connect.Windows.Web/App.cs), and therefore
   //     IsPremiumFlagSupported = true (VpnHoodApp.cs): the premium/free split is Connect's story.
   //   - UiTheme = "violet" with the Connect logo and consent (every Connect head's AppConfigs.cs).
   //     That lives in fixture.json, not here.
