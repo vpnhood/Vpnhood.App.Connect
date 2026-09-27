@@ -7,7 +7,7 @@
     "uiName": "VpnHoodConnect",
     "companyName": "VpnHood",
     "uiTheme": "violet",
-    "logoAssetPath": "images/VpnHoodConnect-logo.png",
+    "logoAssetPath": "images/logo-connect.png",
     "privacyConsentAssetName": "privacy-consent-connect",
     "privacyPolicyUrl": "https://www.vpnhood.com/vpnhood-connect-privacy-policy",
     "termsOfUseUrl": "https://www.vpnhood.com/legal/vpnhood-connect-terms-of-use",
@@ -243,9 +243,9 @@
     },
     "connectRequestTime": "2026-07-31T02:37:23.0216873-07:00",
     "lastError": null,
-    "clientProfile": {
-      "clientProfileId": "00000000-0000-4000-8000-000000000301",
-      "clientProfileName": "VpnHood Global Servers",
+    "vpnProfile": {
+      "vpnProfileId": "00000000-0000-4000-8000-000000000301",
+      "vpnProfileName": "VpnHood Global Servers",
       "supportId": "1000",
       "customData": null,
       "isPremiumLocationSelected": false,
@@ -353,7 +353,7 @@
       "dnsMode": "IncludeAll",
       "unsupportedIpV6Mode": "Block"
     },
-    "clientProfileId": "00000000-0000-4000-8000-000000000301"
+    "vpnProfileId": "00000000-0000-4000-8000-000000000301"
   },
   "userSettings": {
     "isLicenseAccepted": true,
@@ -361,7 +361,7 @@
     "isQuickLaunchPrompted": false,
     "cultureCode": null,
     "countryCode": null,
-    "clientProfileId": "00000000-0000-4000-8000-000000000301",
+    "vpnProfileId": "00000000-0000-4000-8000-000000000301",
     "maxPacketChannelCount": 4,
     "splitTunneling": {
       "enabled": true,
@@ -400,10 +400,10 @@
     "customData": null,
     "dnsServers": []
   },
-  "clientProfileInfos": [
+  "vpnProfileInfos": [
     {
-      "clientProfileId": "00000000-0000-4000-8000-000000000301",
-      "clientProfileName": "VpnHood Global Servers",
+      "vpnProfileId": "00000000-0000-4000-8000-000000000301",
+      "vpnProfileName": "VpnHood Global Servers",
       "supportId": "1000",
       "customData": null,
       "isPremiumLocationSelected": false,

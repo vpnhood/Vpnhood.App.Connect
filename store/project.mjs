@@ -101,7 +101,7 @@ const SERVERS = { route: '/servers', label: 'Servers (bundled locations)' };
  */
 const FIXTURE = JSON.parse(await fs.readFile(path.join(here, 'fixture.json'), 'utf8'));
 const IOS_LOCATION_INFOS = (() => {
-  const src = FIXTURE.clientProfileInfos[0].locationInfos;
+  const src = FIXTURE.vpnProfileInfos[0].locationInfos;
   const kept = src
     .filter((l) => (l.tags ?? []).includes('#premium'))
     .map((l) => ({ ...l, isNestedCountry: false }));
@@ -332,11 +332,11 @@ export const PLATFORMS = {
     // iOS ships WITH StoreKit billing and premium-only servers (owner decisions 2026-08; the old
     // note here claiming a no-billing iOS baseline predates them). Besides osType and the
     // edge-to-edge WKWebView inset behaviour, the patch swaps in the premium-only location list —
-    // clientProfileInfos is an ARRAY, and deepMerge replaces arrays wholesale, so the whole
+    // vpnProfileInfos is an ARRAY, and deepMerge replaces arrays wholesale, so the whole
     // profile is restated with only locationInfos changed.
     patch: {
       features: { osType: 'Ios', adjustForSystemBars: false },  // AppDelegate.cs:86
-      clientProfileInfos: [{ ...FIXTURE.clientProfileInfos[0], locationInfos: IOS_LOCATION_INFOS }],
+      vpnProfileInfos: [{ ...FIXTURE.vpnProfileInfos[0], locationInfos: IOS_LOCATION_INFOS }],
     },
     devices: IOS_DEVICES,
     // iOS copy must never name another platform (App Store Guideline 2.3.10) — no Google Play /
@@ -444,7 +444,7 @@ export const ROUTES = {
   'PATCH /api/app/configure': (fixture) => fixture,
   'GET /api/app/config': (fixture) => fixture,
   'GET /api/app/state': (fixture) => fixture.state,
-  'GET /api/client-profiles': (fixture) => fixture.clientProfileInfos,
+  'GET /api/vpn-profiles': (fixture) => fixture.vpnProfileInfos,
   'GET /api/app/installed-apps': (fixture) => fixture.installedApps ?? [],
   'GET /api/account': () => null, // signed out — the honest state for a store screenshot
   'PUT /api/app/user-settings': () => null, // void

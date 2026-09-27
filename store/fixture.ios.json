@@ -3,10 +3,10 @@
     "osType": "Ios",
     "adjustForSystemBars": false
   },
-  "clientProfileInfos": [
+  "vpnProfileInfos": [
     {
-      "clientProfileId": "00000000-0000-4000-8000-000000000301",
-      "clientProfileName": "VpnHood Global Servers",
+      "vpnProfileId": "00000000-0000-4000-8000-000000000301",
+      "vpnProfileName": "VpnHood Global Servers",
       "supportId": "1000",
       "customData": null,
       "isPremiumLocationSelected": false,
