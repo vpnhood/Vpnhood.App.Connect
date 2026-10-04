@@ -66,7 +66,7 @@ Translate and compile:
 dotnet tool restore && dotnet vhtranslator      # in this repo; needs GEMINI_API_KEY in the
                                                 # environment (CI feeds it from the org secret
                                                 # GOOGLE_GEMINI_TRNSLATE_APP_API_KEY; locally it is
-                                                # .user/google_gemini_translate_app_api_key.txt)
+                                                # .user/vendors/google/google_gemini_translate_app_api_key.txt)
 cd ../VpnHood.AppUi.Spa/src/VpnHood.AppUi.Presentation.Classic.Spa
 node e2e/store-metadata.mjs --root ../../../Vpnhood.App.Connect    # --check validates without writing
 ```
