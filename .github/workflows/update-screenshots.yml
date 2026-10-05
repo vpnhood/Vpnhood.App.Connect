@@ -62,7 +62,7 @@ jobs:
       locales: ${{ steps.locales.outputs.locales }}
     steps:
       - name: Checkout store assets (this repo)
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
       # The same list the store TEXTS are translated into, so a picture set and a text set can
       # never drift apart. store/screenshots.json maps each tag to the app's own language.
       - name: Read the language list
@@ -77,12 +77,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout store assets (this repo)
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       # The UI that draws the screens, the tool that drives it, and - as a submodule of that repo -
       # the store of images, fonts and words it draws with. One checkout, no build of anything else.
       - name: Checkout the app's UI, its screenshot tool and the look
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           repository: vpnhood/VpnHood
           ref: ${{ inputs.vh-ref }}
@@ -90,7 +90,7 @@ jobs:
           submodules: true
 
       - name: Cache NuGet
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ~/.nuget/packages
           key: shots-${{ runner.os }}-${{ hashFiles('.vh/**/*.csproj') }}
@@ -101,7 +101,7 @@ jobs:
         run: sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends fonts-noto-core fonts-noto-ui-core fonts-noto-cjk
 
       - name: Set up .NET
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           global-json-file: .vh/global.json
 
@@ -134,10 +134,10 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GOOGLE_GEMINI_TRNSLATE_APP_API_KEY }}
     steps:
       - name: Checkout store assets (this repo)
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Checkout the screenshot tool
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           repository: vpnhood/VpnHood
           ref: ${{ inputs.vh-ref }}
@@ -145,20 +145,20 @@ jobs:
 
       # Still the home of the store TEXT tools this job runs.
       - name: Checkout the text tools
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           repository: vpnhood/VpnHood.AppUi.Spa
           ref: ${{ inputs.webui-ref }}
           path: .webui
 
       - name: Cache npm
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ~/.npm
           key: webui-${{ runner.os }}-${{ hashFiles('.webui/src/VpnHood.AppUi.Presentation.Classic.Spa/package-lock.json') }}
 
       - name: Set up Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: "24"
 
@@ -176,7 +176,7 @@ jobs:
 
       # Fails loudly if any language's set is incomplete - a store folder is never partial.
       - name: Set up .NET
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           global-json-file: .vh/global.json
 
@@ -195,7 +195,7 @@ jobs:
       # into the fastlane trees.
       - name: Set up .NET (vhtranslator)
         if: env.GEMINI_API_KEY != ''
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: 10.0.x
 

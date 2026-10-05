@@ -47,10 +47,10 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GOOGLE_GEMINI_TRNSLATE_APP_API_KEY }}
     steps:
       - name: Checkout store assets (this repo)
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Checkout the store tooling
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           repository: vpnhood/VpnHood.AppUi.Spa
           ref: ${{ inputs.webui-ref }}
@@ -58,7 +58,7 @@ jobs:
 
       # Only CHANGELOG.md is needed from the monorepo — a sparse checkout keeps the job light.
       - name: Checkout the CHANGELOG (vpnhood/VpnHood)
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           repository: vpnhood/VpnHood
           ref: ${{ inputs.code-ref }}
@@ -67,7 +67,7 @@ jobs:
           sparse-checkout-cone-mode: false
 
       - name: Set up Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: "24"
 
@@ -78,7 +78,7 @@ jobs:
 
       - name: Set up .NET (vhtranslator)
         if: env.GEMINI_API_KEY != ''
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: 10.0.x
 
