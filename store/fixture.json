@@ -50,7 +50,6 @@
     "autoRemoveExpiredPremium": false,
     "isAdSupported": false,
     "isRewardedAdSupported": false,
-    "webUiPort": 4700,
     "premiumFeatures": [
       "CustomDns",
       "AlwaysOn",
