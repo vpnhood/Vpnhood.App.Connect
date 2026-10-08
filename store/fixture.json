@@ -9,8 +9,11 @@
     "uiTheme": "violet",
     "logoAssetPath": "images/logo-connect.png",
     "privacyConsentAssetName": "privacy-consent-connect",
-    "privacyPolicyUrl": "https://www.vpnhood.com/vpnhood-connect-privacy-policy",
-    "termsOfUseUrl": "https://www.vpnhood.com/legal/vpnhood-connect-terms-of-use",
+    "links": {
+      "privacyPolicy": "https://www.vpnhood.com/vpnhood-connect-privacy-policy",
+      "termsOfUse": "https://www.vpnhood.com/legal/vpnhood-connect-terms-of-use"
+    },
+    "showPoweredBy": true,
     "isPremiumFlagSupported": true,
     "isAddAccessKeySupported": false,
     "isAccountSupported": false,
