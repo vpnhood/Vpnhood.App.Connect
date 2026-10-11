@@ -12,7 +12,7 @@ name: Publish Connect (All Platforms)
 #   secrets.ACCESS_KEY_AD / ACCESS_KEY_PREMIUM  (embedded default server key: ad = the ad-supported
 #     Google build; premium = every ad-free distribution — iOS, web APK, Windows, Linux)
 #   secrets.IOS_PROVISION_APP_BASE64 / _EXT_BASE64  (iOS App Store profiles)
-# Org secrets inherited: ADVANCED_INSTALLER_LICENSE, AZURE_SIGNING_*, APPLE_DISTRIBUTION_CERT_*,
+# Org secrets inherited: AZURE_SIGNING_*, APPLE_DISTRIBUTION_CERT_*,
 #   APPSTORE_CONNECT_* . iOS uploads go to TestFlight only (Connect isn't App Store-review compliant yet).
 # NOTE: Google Play publishing additionally needs GOOGLE_PLAY_API_KEY — only when publish_play is on.
 
