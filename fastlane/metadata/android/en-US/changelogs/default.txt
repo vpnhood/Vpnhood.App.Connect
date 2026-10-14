@@ -1,4 +1,3 @@
-* Update: Starlink Tools — an early preview of the screen
 * Fix: Rare crash after a cancelled Google sign-in or when the VPN service answered late
 * Fix: The system could kill the app ten seconds after a refused VPN service start instead of the service stopping cleanly
 * Fix: Crash when Google Play reported a purchase result without a purchase
