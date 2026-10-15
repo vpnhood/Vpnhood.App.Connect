@@ -133,7 +133,8 @@
           "isAdSupported": true,
           "isRewardedAdSupported": true,
           "isUserReviewSupported": true,
-          "adjustForSystemBars": false
+          "adjustForSystemBars": false,
+          "alwaysOnSupport": "Device"
         },
         "intentFeatures": {
           "isQuickLaunchSupported": true,
@@ -141,7 +142,6 @@
           "isRequestNotificationSupported": true,
           "isPrivateDnsSettingsSupported": true,
           "isKillSwitchSettingsSupported": true,
-          "isAlwaysOnSettingsSupported": true,
           "isSettingsSupported": true,
           "isAppSettingsSupported": true,
           "isAppNotificationSettingsSupported": true
