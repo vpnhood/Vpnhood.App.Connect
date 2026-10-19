@@ -44,4 +44,4 @@ Abo
 VpnHood! CONNECT Premium ist ein sich automatisch verlängerndes Abonnement (1 Monat oder 1 Jahr). Der Preis wird vor Kauf angezeigt. Die Abrechnung erfolgt über Ihren Apple-Account. Das Abo verlängert sich automatisch, sofern es nicht gekündigt wird.
 
 Nutzungsbedingungen (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
-Datenschutzrichtlinie: https://www.vpnhood.com/vpnhood-connect-privacy-policy/
+Datenschutzrichtlinie: https://www.vpnhood.com/legal/vpnhood-connect/privacy-policy/

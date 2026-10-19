@@ -44,4 +44,4 @@ VpnHood! CONNECT هو حل شبكات سريع وآمن لحماية خصوصي�
 VpnHood! CONNECT Premium هو اشتراك يتجدد تلقائياً، ويُقدم كاشتراك لمدة شهر أو سنة. يُعرض السعر داخل التطبيق قبل التأكيد. يتم خصم الدفع من حساب Apple الخاص بك عند تأكيد الشراء. يتجدد الاشتراك تلقائياً ما لم يتم إلغاؤه؛ يمكنك إدارة أو إلغاء اشتراكك من إعدادات حساب Apple الخاص بك في أي وقت.
 
 شروط الاستخدام (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
-سياسة الخصوصية: https://www.vpnhood.com/vpnhood-connect-privacy-policy/
+سياسة الخصوصية: https://www.vpnhood.com/legal/vpnhood-connect/privacy-policy/

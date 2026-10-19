@@ -44,4 +44,4 @@ Subscrição
 O VpnHood! CONNECT Premium é uma subscrição de renovação automática, disponível em planos de 1 Mês e 1 Ano. O preço é apresentado na aplicação antes da confirmação. O pagamento é cobrado à sua conta Apple ao confirmar a compra. A subscrição renova-se automaticamente, a menos que seja cancelada; pode geri-la ou cancelá-la nas definições da sua conta Apple a qualquer momento.
 
 Termos de Utilização (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
-Política de Privacidade: https://www.vpnhood.com/vpnhood-connect-privacy-policy/
+Política de Privacidade: https://www.vpnhood.com/legal/vpnhood-connect/privacy-policy/

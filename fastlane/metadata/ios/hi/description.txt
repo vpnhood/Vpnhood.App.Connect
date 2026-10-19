@@ -44,4 +44,4 @@ VpnHood! क्यों चुनें?
 VpnHood! CONNECT प्रीमियम एक स्वतः-नवीकरणीय सब्सक्रिप्शन है, जो 1 महीने और 1 वर्ष के प्रीमियम के रूप में उपलब्ध है। पुष्टि होने पर आपके Apple खाते से भुगतान लिया जाता है। सब्सक्रिप्शन का स्वतः नवीनीकरण होता है जब तक कि इसे रद्द न किया जाए; आप इसे अपने Apple खाता सेटिंग में प्रबंधित कर सकते हैं।
 
 उपयोग की शर्तें (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
-गोपनीयता नीति: https://www.vpnhood.com/vpnhood-connect-privacy-policy/
+गोपनीयता नीति: https://www.vpnhood.com/legal/vpnhood-connect/privacy-policy/

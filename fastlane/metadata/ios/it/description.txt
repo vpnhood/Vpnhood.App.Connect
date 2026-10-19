@@ -44,4 +44,4 @@ Abbonamento
 VpnHood! CONNECT Premium è un abbonamento a rinnovo automatico (1 mese o 1 anno). Il prezzo è mostrato in-app prima della conferma. Il pagamento viene addebitato sull'account Apple. Si rinnova automaticamente salvo disattivazione nelle impostazioni Apple.
 
 Termini d'uso (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
-Informativa sulla privacy: https://www.vpnhood.com/vpnhood-connect-privacy-policy/
+Informativa sulla privacy: https://www.vpnhood.com/legal/vpnhood-connect/privacy-policy/

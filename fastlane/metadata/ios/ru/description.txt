@@ -42,4 +42,4 @@ Email: support@vpnhood.com
 VpnHood! CONNECT Premium — это автопродлеваемая подписка (на 1 месяц или 1 год). Цена отображается в приложении перед подтверждением. Оплата списывается с аккаунта Apple. Подписка продлевается автоматически, если ее не отменить в настройках Apple Account.
 
 Условия использования (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
-Privacy Policy: https://www.vpnhood.com/vpnhood-connect-privacy-policy/
+Privacy Policy: https://www.vpnhood.com/legal/vpnhood-connect/privacy-policy/
