@@ -110,7 +110,7 @@ jobs:
 
       - name: Draw the screenshots (${{ matrix.locale }})
         run: >
-          .vh/src/Apps/Tools/StoreScreenshots/bin/Release/net10.0/VpnHoodStoreScreenshots generate
+          .vh/src/Apps/Tools/StoreScreenshots/bin/Release/net11.0/VpnHoodStoreScreenshots generate
           --config "$GITHUB_WORKSPACE/store/screenshots.json"
           --assets "$GITHUB_WORKSPACE/.vh/src/AppUi/VpnHood.AppUi.Assets.Classic/buildTransitive/ui.zip"
           --out "$GITHUB_WORKSPACE/test-results/store-screenshots"
@@ -185,7 +185,7 @@ jobs:
 
       - name: Install the sets into the store trees
         run: >
-          .vh/src/Apps/Tools/StoreScreenshots/bin/Release/net10.0/VpnHoodStoreScreenshots generate
+          .vh/src/Apps/Tools/StoreScreenshots/bin/Release/net11.0/VpnHoodStoreScreenshots generate
           --config "$GITHUB_WORKSPACE/store/screenshots.json"
           --out "$GITHUB_WORKSPACE/test-results/store-screenshots"
           --capture-only --frame-only --install --install-root "$GITHUB_WORKSPACE"
