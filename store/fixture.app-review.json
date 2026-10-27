@@ -1,0 +1,31 @@
+{
+  "features": {
+    "isAccountSupported": true,
+    "isBillingSupported": true,
+    "authProviderIds": [ "apple" ]
+  },
+  "purchaseOptions": {
+    "isStoreAvailable": true,
+    "storeError": null,
+    "subscriptionPlans": [
+      {
+        "basePrice": 4.99,
+        "currentPrice": 4.99,
+        "period": "P1M",
+        "planToken": "vpnhood_1_month_subscription",
+        "currencySymbol": "$",
+        "currencyCode": "USD"
+      },
+      {
+        "basePrice": 39.99,
+        "currentPrice": 39.99,
+        "period": "P1Y",
+        "planToken": "vpnhood_1_year_subscription",
+        "currencySymbol": "$",
+        "currencyCode": "USD"
+      }
+    ],
+    "purchaseUrl": null,
+    "canGoPremiumByCode": false
+  }
+}

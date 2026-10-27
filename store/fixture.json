@@ -182,7 +182,7 @@
       "isPremiumSession": true,
       "suppressedTo": "None",
       "serverVersion": "8.0.833",
-      "clientPublicIpAddress": null,
+      "clientPublicIpAddress": "203.0.113.10",
       "createdTime": "2026-07-31T09:37:23.3308173Z",
       "channelProtocols": [
         "Tcp",
