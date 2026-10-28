@@ -7,6 +7,7 @@ These strings are an app-store LISTING (Google Play / App Store / Microsoft Stor
 - Platform and company names (GitHub, Google Play, App Store, Windows, Android, iOS, .NET) never change.
 - Keep URLs and email addresses exactly as written.
 - Translate feature names the way the app's own UI would, and use them consistently: Cloak Mode, Split Tunneling, Kill Switch, Private DNS, Custom DNS, Always-On, Quick Launch.
+  Cloak Mode is named: ar وضع التخفي · de-DE Tarnmodus · es-ES Modo Camuflaje · fa حالت مخفی · fr-FR Mode furtif · hi-IN क्लोक मोड · it-IT Modalità camuffamento · pt-BR Modo invisível · pt-PT Modo invisível · ru-RU Режим маскировки · tr-TR Kamufle Modu · zh-CN 伪装模式.
 - Keep the paragraph structure, blank lines, and the ▶ ★ • ✔ list markers exactly as in the source.
 - Never add an emoji or pictograph the source value does not contain. App Store Connect REJECTS emoji in "ios.*" copy at upload, so one invented emoji fails the whole release; emoji already present in a source value (the "android.*" description uses some) are kept exactly as written.
 - Stores enforce HARD character limits per key; a longer translation fails the release, so shorten rather than exceed. Count the characters of every limited value before returning it and aim at least 10% BELOW its limit — a shorter phrase always beats a rejected release. Invisible characters (LRM/RLM direction marks) count toward the limit too — use them only when strictly required for correct display:
