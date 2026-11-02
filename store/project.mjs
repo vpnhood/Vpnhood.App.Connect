@@ -428,6 +428,41 @@ export const PLATFORMS = {
       { route: '/settings/proxies', label: 'Proxies' },
     ],
   },
+
+  // The Microsoft Store edition (Connect.Windows.Microsoft). No patch: the fixture is the Windows
+  // baseline, signed out, and the Store edition has no app split either.
+  windows: {
+    label: 'Microsoft Store',
+    store: 'microsoftStore',
+    // No fastlane lane exists for the Microsoft Store — upload via Partner Center or the msstore CLI.
+    installDir: 'store/microsoft/<locale>/screenshots',
+    patch: {},
+    devices: {
+      'windows-desktop': {
+        label: 'Windows',
+        prefix: '',
+        frame: 'desktop',
+        // The real window is a fixed 400x700 that cannot be resized (ClassicAvaloniaApp.WindowFit),
+        // far under the Store's 1366x768 floor — so the capture is composited into a desktop scene.
+        cssWidth: 400, cssHeight: 700, scale: 3,
+        safeTop: 0, safeBottom: 0,
+        isMobile: false, hasTouch: false,
+        canvas: { width: 1920, height: 1080, windowWidth: 520, titleBar: 40 },
+        windowTitle: 'VpnHood! CONNECT',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' +
+          '(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0',
+      },
+    },
+    shots: [
+      { route: '/', label: 'Home (connected)', patch: CONNECTED },
+      SERVERS,
+      { route: '/protocols/cloak-mode', label: 'Cloak Mode' },
+      { route: '/protocols', label: 'Protocols' },
+      SPLIT_TUNNELING,
+      { route: '/dns', label: 'DNS' },
+      { route: '/settings/proxies', label: 'Proxies' },
+    ],
+  },
 };
 
 /**
