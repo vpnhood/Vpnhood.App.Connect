@@ -62,10 +62,15 @@ on:
         required: false
         default: false
       publish_appstore:
-        description: "Upload the built .ipa to TestFlight (only applies when build_ios is on)"
+        description: "Upload the built .ipa to TestFlight/App Store (only applies when build_ios is on)"
         type: boolean
         required: false
         default: true
+      publish_appletv:
+        description: "Upload the Apple TV's .ipa beside the iPhone's (only applies when publish_appstore is on)"
+        type: boolean
+        required: false
+        default: false
       rollout:
         description: "Google Play audience ratio (%) for a PRODUCTION release (1-100; 100 = full). Ignored on prerelease/alpha."
         required: false
@@ -84,6 +89,7 @@ jobs:
       only_aab: ${{ inputs.only_aab }}
       build_ios: ${{ inputs.build_ios }}
       publish_appstore: ${{ inputs.publish_appstore }}
+      publish_appletv: ${{ inputs.publish_appletv }}
       rollout: ${{ inputs.rollout }}
     secrets: inherit
 
