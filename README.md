@@ -39,10 +39,9 @@ All three are thin wrappers: the real definitions live in the monorepo. A reusab
 its **caller's** context, so they read this repo's assets and push with this repo's own token — which
 is why no cross-repo credential exists anywhere in the chain.
 
-CONNECT is live on the App Store, but `connect_publish.yml` still uploads every .ipa to
-**TestFlight only** — `publish_app.yml` in the monorepo hardcodes the TestFlight lane for
-`app: connect`. A build reaches the App Store only when someone promotes it by hand in App
-Store Connect. The App Store *listing* is published normally by `publish_listing.yml`.
+A prerelease's .ipa goes to TestFlight and a stable release's to the App Store, as CLIENT's do;
+the version goes to review by hand in App Store Connect. The App Store *listing* is published by
+`publish_listing.yml`.
 
 ## Making a change
 
