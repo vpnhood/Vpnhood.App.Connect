@@ -1,3 +1,3 @@
-* Fix: Rare crash after a cancelled Google sign-in or when the VPN service answered late
-* Fix: The system could kill the app ten seconds after a refused VPN service start instead of the service stopping cleanly
-* Fix: Crash when Google Play reported a purchase result without a purchase
+* Improve: The Android app starts two to four times faster, most of all on budget phones
+* Feature: In the EEA, the UK and Switzerland, the app asks in Google's own form before its ads use your data, and Settings > Privacy > Ad privacy choices changes your answer
+* Fix: Where Google Play works only through the VPN, the app's update now comes once you connect

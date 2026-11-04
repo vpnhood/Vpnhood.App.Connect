@@ -1,3 +1,3 @@
-* Fix: Seltener Absturz nach abgebrochenem Google-Login oder spätem VPN-Antworten
-* Fix: App wurde nach verweigertem VPN-Start oft hart beendet statt sauber gestoppt
-* Fix: Absturz, wenn Google Play ein Kaufergebnis ohne Kauf meldete
+* Verbesserung: Die Android-App startet zwei- bis viermal schneller, vor allem auf Einsteigerhandys
+* Funktion: Im EWR, in UK und der Schweiz fragt die App vor der datenbasierten Werbung über ein Google-Formular nach; die Auswahl lässt sich unter Einstellungen > Datenschutz > Werbeeinstellungen ändern
+* Behebung: Wenn Google Play nur über das VPN erreichbar ist, wird das App-Update nun direkt nach dem Verbindungsaufbau geladen.

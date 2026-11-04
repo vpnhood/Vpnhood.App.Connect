@@ -1,3 +1,3 @@
-* Correção: Falha rara após login do Google cancelado ou resposta lenta do serviço VPN
-* Correção: O sistema podia fechar o app dez segundos após recusar iniciar a VPN
-* Correção: Falha ao relatar resultado de compra sem compra no Google Play
+* Melhoria: O app para Android inicia de duas a quatro vezes mais rápido, especialmente em celulares básicos
+* Recurso: No EEA, Reino Unido e Suíça, o app exibe o formulário do Google antes que anúncios usem seus dados, e Configurações > Privacidade > Escolhas de privacidade de anúncios altera sua resposta
+* Correção: Quando o Google Play funciona apenas através da VPN, a atualização do app agora é recebida assim que você se conecta

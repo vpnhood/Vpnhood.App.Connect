@@ -1,3 +1,3 @@
-* Correção: Erro raro após login cancelado da Google ou resposta tardia do VPN
-* Correção: O sistema podia fechar a app após recusar iniciar o VPN
-* Correção: Erro quando o Google Play reportava compra sem dados
+* Melhoria: A aplicação Android arranca duas a quatro vezes mais rápido, especialmente em telemóveis económicos
+* Nova funcionalidade: NaEEE, Reino Unido e Suíça, a aplicação solicita consentimento antes de utilizar os seus dados para anúncios
+* Correção: Quando o Google Play funciona apenas através da VPN, a atualização da aplicação chega assim que estabelecer ligação.
