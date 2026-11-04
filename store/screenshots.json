@@ -193,6 +193,8 @@
         "descriptor": {
           "osType": "Android",
           "isTv": true,
+          "isRemoteAccessSupported": true,
+          "version": "9.1.868.0",
           "isExcludeAppsSupported": true,
           "isIncludeAppsSupported": true,
           "isAccountSupported": true,
@@ -208,17 +210,43 @@
           "label": "Android TV",
           "prefix": "",
           "frame": "none",
-          "cssWidth": 1280, "cssHeight": 720, "scale": 1.5
+          "cssWidth": 960, "cssHeight": 540, "scale": 2
+        }
+      },
+      "shots": [
+        { "route": "/", "label": "Home (connected)", "patch": { "state": { "connectionState": "Connected", "sessionStatus": { "speed": { "received": 10870000, "sent": 8240000 } } } } },
+        { "route": "/servers", "label": "Servers" },
+        { "route": "/protocols", "label": "Protocols" },
+        { "route": "/protocols/cloak-mode", "label": "Cloak Mode" },
+        { "route": "/split-tunneling/split-countries", "label": "Split Countries" },
+        { "route": "/statistics", "label": "Statistics" }
+      ]
+    },
+
+    // The Apple TV app: the iPhone's head on a television, in the UI's television layout, with iOS's
+    // locations. 960x540 at 2x is how it lays out on every Apple TV (tvOS's 1920x1080 points). Only
+    // what a TV shows: its settings are on the paired phone. Bare, as android-tv.
+    "apple-tv": {
+      "label": "App Store Apple TV",
+      "store": "appStore",
+      "installDir": "fastlane/screenshots/appletv/<locale>",
+      "patchFile": "fixture.ios.json",
+      "patch": { "descriptor": { "isTv": true, "isRemoteAccessSupported": true, "version": "9.1.868.0" } },
+      "devices": {
+        "apple-tv": {
+          "label": "Apple TV",
+          "prefix": "",
+          "frame": "none",
+          "cssWidth": 960, "cssHeight": 540, "scale": 2
         }
       },
       "shots": [
         { "route": "/", "label": "Home (connected)", "patch": { "state": { "connectionState": "Connected", "sessionStatus": { "speed": { "received": 10870000, "sent": 8240000 } } } } },
         { "route": "/servers", "label": "Servers (bundled locations)" },
-        { "route": "/protocols/cloak-mode", "label": "Cloak Mode" },
         { "route": "/protocols", "label": "Protocols" },
-        { "route": "/split-tunneling", "label": "Split Tunneling", "hide": ["EnabledItem/WarningChip"] },
-        { "route": "/dns", "label": "DNS" },
-        { "route": "/settings/proxies", "label": "Proxies" }
+        { "route": "/protocols/cloak-mode", "label": "Cloak Mode" },
+        { "route": "/split-tunneling/split-countries", "label": "Split Countries" },
+        { "route": "/statistics", "label": "Statistics" }
       ]
     }
   }
