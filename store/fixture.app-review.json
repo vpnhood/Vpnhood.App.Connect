@@ -1,5 +1,5 @@
 {
-  "features": {
+  "descriptor": {
     "isAccountSupported": true,
     "isBillingSupported": true,
     "authProviderIds": [ "apple" ]

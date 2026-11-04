@@ -1,5 +1,5 @@
 {
-  "features": {
+  "descriptor": {
     "appId": "com.vpnhood.connect.windows.web",
     "appName": "VpnHood! CONNECT",
     "packageTitle": "VpnHoodConnect",
