@@ -1,0 +1,14 @@
+* Aktualisierung: UDP nutzt ein neues Protokoll; auf Servern, die noch nicht aktualisiert wurden, verbindet sich die App ohne UDP
+* Verbesserung: Die App zeichnet ihre Bildschirme selbst statt als Webseite, und Texte sind kontrastreicher und leichter lesbar
+* Aktualisierung: Der App-Name auf iOS wird nun wie auf anderen Plattformen als VpnHood! CONNECT geschrieben
+* Aktualisierung: Bei Tarifen mit Geschwindigkeitsbegrenzung starten die ersten Megabytes nach einer Pause mit voller Geschwindigkeit für schnelles Laden; erst bei dauerhafter Last greift das Limit
+* Verbesserung: Käufe auf der Website öffnen den Bezahlvorgang in der Sprache der App
+* Behebung: Lokales Netzwerk trennen funktioniert nun wie vorgesehen: Bei Aktivierung sind lokale Geräte wie Drucker direkt erreichbar; bei Deaktivierung läuft deren Datenverkehr über das VPN. Zuvor verhielt es sich umgekehrt.
+* Behebung: Ein im Hintergrund gestartetes VPN (z. B. via Always-On oder Schnelleinstellungen) verwendet nun stets Ihre aktuellen Einstellungen und den gewählten Server, niemals entfernte Server.
+* Behebung: „Nach Updates suchen“ liefert nun immer eine verlässliche Rückmeldung und zeigt den Hinweis auch nach Auswahl von „Später“ erneut an.
+* Behebung: Wurde die App im verbundenen Zustand aktualisiert, öffnet sie jetzt auf „Getrennt“ statt mit „VPN-Dienst ist auf ein Problem gestoßen“
+* Behebung: Ihre Einstellungen und Server kommen jetzt in das Backup Ihres Telefons und auf einem neuen Telefon zurück, während Ihre Anmeldung, die Protokolle der App und ihre entpackten Dateien auf dem Telefon bleiben, zu dem sie gehören
+* Behebung: „Passwort vergessen“ im Anmeldeformular leitet nun direkt zur Passwort-Zurücksetzungsseite statt zur Startseite weiter.
+* Behebung: Nach dem Löschen eines Kontos werden angemeldete Geräte nun korrekt abgemeldet, anstatt automatisch ein neues Konto zu erstellen.
+* Behebung: Große Uploads bei langsamer Verbindung blockieren den übrigen Datenverkehr wie das Surfen nicht mehr
+* Behebung: Online-Spiele wie Counter-Strike 2 und Dota 2 funktionieren wieder über das VPN, da Pakete über 1280 Byte nicht mehr verworfen werden. Ein eigener VpnHoodServer benötigt ebenfalls dieses Update

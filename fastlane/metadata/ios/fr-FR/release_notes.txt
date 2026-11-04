@@ -1,0 +1,14 @@
+* Mise à jour : UDP intègre un nouveau protocole ; sur un serveur non mis à jour, l'application se connecte sans UDP
+* Amélioration : L'application dessine elle-même ses écrans au lieu de les afficher comme une page Web, et le texte est plus lisible, avec plus de contraste
+* Mise à jour : Le nom de l'application sur iOS s'écrit désormais comme sur les autres plateformes : VpnHood! CONNECT
+* Mise à jour : Sur un forfait avec limitation de vitesse, les premiers mégaoctets après une pause bénéficient de la vitesse maximale pour charger rapidement les pages, seule une utilisation intensive continue étant soumise à la limite
+* Amélioration : L'achat sur le site Web ouvre le processus de paiement dans la langue de l'application
+* Correction : Le réseau local divisé fonctionne désormais correctement. Activé, les appareils locaux comme une imprimante ou une TV sont atteints directement ; désactivé, leur trafic passe par le VPN.
+* Correction : Un VPN démarré sans ouvrir l'application respecte désormais vos derniers réglages et le serveur choisi.
+* Correction : « Rechercher des mises à jour » répond toujours correctement et affiche la notification même après avoir choisi Plus tard.
+* Correction : Si l'application était mise à jour pendant la connexion, elle s'ouvre désormais sur Déconnecté au lieu d'afficher « Le service VPN a rencontré un problème »
+* Correction : Vos paramètres et serveurs vont désormais dans la sauvegarde du téléphone et reviennent sur un nouveau téléphone, tandis que votre connexion, les journaux de l'application et ses fichiers décompressés restent sur le téléphone auquel ils appartiennent
+* Correction : Le lien « Mot de passe oublié » ouvre désormais directement la page de réinitialisation du site web.
+* Correction : Après la suppression d'un compte, les appareils connectés se déconnectent correctement au lieu d'en créer un nouveau.
+* Correctif : Un gros envoi sur connexion lente ne bloque plus le reste du trafic, comme la navigation
+* Correctif : Les jeux en ligne envoyant de grands paquets, comme Counter-Strike 2 et Dota 2, fonctionnent désormais parfaitement via le VPN

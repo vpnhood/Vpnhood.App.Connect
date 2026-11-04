@@ -319,10 +319,10 @@ export const INSTALL_ROOT = '../Vpnhood.App.Connect';
  * Release-notes config for store-release-notes.mjs: `product` picks which #client/#connect-tagged
  * CHANGELOG lines this app keeps. `ios: false` suppresses — and deletes — the
  * fastlane/metadata/ios/<locale>/release_notes.txt files, because Apple allows no "What's New" on
- * an app's FIRST App Store version and rejects a v1 submission that carries one. Flip it to true
- * once CONNECT 1.0 is live on the App Store.
+ * an app's FIRST App Store version and rejects a v1 submission that carries one. CONNECT is live
+ * on the App Store, and an update needs its "What's New".
  */
-export const RELEASE_NOTES = { product: 'connect', ios: false };
+export const RELEASE_NOTES = { product: 'connect', ios: true };
 
 export const PLATFORMS = {
   ios: {

@@ -1,0 +1,14 @@
+* Aggiornamento: UDP ha un nuovo protocollo; su un server non ancora aggiornato, l'app si connette senza UDP
+* Miglioramento: l'app disegna da sé le sue schermate invece di mostrarle come una pagina web, e il testo è più leggibile, con più contrasto
+* Aggiornamento: il nome dell'app su iOS è ora scritto come sulle altre piattaforme, VpnHood! CONNECT
+* Aggiornamento: con un piano a limite di velocità, i primi megabyte dopo una pausa viaggiano alla massima velocità per caricare rapidamente le pagine; il limite si applica solo in caso di utilizzo continuo e intenso
+* Miglioramento: l'acquisto sul sito web apre la cassa nella lingua dell'app
+* Correzione: Divisione Rete Locale ora funziona correttamente; se attiva, i dispositivi locali come stampanti o TV sono raggiungibili direttamente, altrimenti il traffico passa per la VPN.
+* Correzione: Le connessioni VPN avviate senza aprire l'app seguono correttamente le ultime impostazioni e il server scelto.
+* Correzione: "Verifica aggiornamenti" fornisce sempre una risposta sullo stato della versione e mostra l'avviso anche dopo aver scelto "Più tardi".
+* Correzione: se l'app veniva aggiornata mentre era connessa, ora si apre su Disconnesso invece di dire «Il servizio VPN ha riscontrato un problema»
+* Correzione: impostazioni e server ora finiscono nel backup del telefono e tornano su un telefono nuovo, mentre l'accesso, i log dell'app e i suoi file decompressi restano sul telefono a cui appartengono
+* Correzione: Il pulsante "Password dimenticata" ora apre direttamente la pagina di recupero password anziché la home page.
+* Correzione: Dopo l'eliminazione dell'account, i dispositivi associati effettuano correttamente la disconnessione senza crearne uno nuovo.
+* Correzione: Un grande upload su una connessione lenta non blocca più il resto del traffico del dispositivo, come la navigazione
+* Correzione: I giochi online che inviano pacchetti di grandi dimensioni, come Counter-Strike 2 e Dota 2 su Steam, ora funzionano tramite la VPN; in precedenza i pacchetti oltre i 1280 byte venivano scartati

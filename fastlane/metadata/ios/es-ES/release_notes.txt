@@ -1,0 +1,14 @@
+* Actualización: UDP cuenta con un nuevo protocolo; en servidores aún no actualizados, la app se conecta sin UDP
+* Mejora: La app dibuja sus propias pantallas en lugar de mostrarlas como una página web, y el texto es más fácil de leer, con más contraste
+* Actualización: El nombre de la app en iOS se escribe igual que en las demás plataformas: VpnHood! CONNECT
+* Actualización: En planes con límite de velocidad, los primeros megabytes tras una pausa van a velocidad máxima para cargar páginas rápido, aplicando el límite solo en uso continuo e intensivo
+* Mejora: Comprar en la web abre el proceso de pago en el idioma de la app
+* Corrección: Dividir red local funciona como se indica: activado, los dispositivos locales como impresoras o TV se alcanzan directamente; desactivado, su tráfico permanece en la VPN. Hacía lo contrario con la división de túneles desactivada o en un servidor con direcciones locales.
+* Corrección: Una VPN iniciada sin abrir la app (siempre activa, panel rápido, ajustes del sistema o reinicio) sigue tus últimos ajustes, incluido "Compartir datos de uso anónimos", y el servidor elegido, nunca uno eliminado.
+* Corrección: "Buscar actualizaciones" siempre responde (tienes la última versión o no se pudo comprobar) y muestra el aviso de actualización incluso tras elegir Más tarde.
+* Corrección: Si la app se actualizaba estando conectada, ahora se abre en Desconectado en lugar de decir «El servicio VPN encontró un problema»
+* Corrección: Tus ajustes y servidores ahora se incluyen en la copia de seguridad del teléfono y vuelven en un teléfono nuevo, mientras que tu inicio de sesión, los registros de la app y sus archivos descomprimidos se quedan en el teléfono al que pertenecen
+* Corrección: "¿Olvidaste tu contraseña?" en el formulario de acceso abre la página de restablecimiento de la web y ya no la página principal.
+* Corrección: Tras eliminar tu cuenta, cualquier dispositivo con sesión iniciada se cierra automáticamente en lugar de volver a iniciar sesión y crear una cuenta nueva.
+* Corrección: Una subida grande con conexión lenta ya no bloquea el tráfico del dispositivo, como la navegación
+* Corrección: Los juegos online como Counter-Strike 2 y Dota 2 en Steam ya funcionan perfectamente a través de la VPN

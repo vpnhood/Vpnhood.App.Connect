@@ -1,0 +1,14 @@
+* Atualização: O UDP tem um novo protocolo; em servidores desatualizados, o app se conecta sem UDP
+* Melhoria: O app desenha as próprias telas em vez de exibi-las como página web, e o texto está mais fácil de ler, com mais contraste
+* Atualização: O nome do app no iOS agora é escrito como nas outras plataformas: VpnHood! CONNECT
+* Atualização: Em planos com limite de velocidade, os primeiros megabytes após uma pausa vão em velocidade total para carregar páginas rápido, aplicando o limite apenas no uso intenso contínuo
+* Melhoria: Comprar no site abre o checkout no idioma do app
+* Correção: A Rede Local Dividida agora funciona como esperado: ativada, dispositivos locais como impressoras ou TVs são acessados diretamente; desativada, o tráfego fica na VPN. Ela fazia o oposto quando o Túnel Dividido estava desativado ou em servidores com endereços locais
+* Correção: Uma VPN iniciada sem abrir o app (always-on, bloco de configurações rápidas, ajustes de VPN do sistema ou reinicialização) agora segue suas configurações mais recentes, incluindo o compartilhamento de dados e o servidor escolhido, nunca um servidor removido
+* Correção: "Verificar atualizações" agora sempre responde (informando que você tem a versão mais recente ou que não foi possível verificar) e exibe o aviso de atualização mesmo após escolher Mais tarde
+* Correção: Quando o app era atualizado durante a conexão, agora ele abre em Desconectado em vez de dizer "O serviço VPN encontrou um problema"
+* Correção: Suas configurações e servidores agora vão para o backup do celular e voltam em um celular novo, enquanto seu login, os logs do app e seus arquivos descompactados ficam no celular a que pertencem
+* Correção: O botão "Esqueceu a senha" na tela de login agora abre corretamente a página de redefinição de senha no site da conta, em vez da página inicial
+* Correção: Após excluir sua conta, os dispositivos conectados são desconectados automaticamente, em vez de fazer login silenciosamente e criar uma nova conta
+* Correção: Um upload grande em conexão lenta não bloqueia mais o restante do tráfego do dispositivo, como a navegação
+* Correção: Jogos online que enviam pacotes grandes, como Counter-Strike 2 e Dota 2 na Steam, funcionam pela VPN; qualquer pacote acima de 1280 bytes era descartado. Um VpnHoodServer próprio também precisa desta versão

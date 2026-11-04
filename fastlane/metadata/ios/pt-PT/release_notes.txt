@@ -1,0 +1,14 @@
+* Atualização: O UDP tem um novo protocolo; num servidor ainda não atualizado, a aplicação liga-se sem UDP
+* Melhoria: A aplicação desenha os seus próprios ecrãs em vez de os mostrar como página web, e o texto é mais fácil de ler, com mais contraste
+* Atualização: O nome da aplicação no iOS passa a ser grafado como nas restantes plataformas: VpnHood! CONNECT
+* Atualização: Num plano com limite de velocidade, os primeiros megabytes após uma pausa beneficiam de velocidade máxima
+* Melhoria: As compras efetuadas no site abrem o pagamento no idioma da aplicação
+* Correção: A divisão de rede local funciona conforme indicado: ativada, dispositivos locais como impressoras ou TVs são acedidos diretamente; desativada, o tráfego permanece na VPN.
+* Correção: Uma VPN iniciada sem abrir a aplicação segue as suas definições mais recentes, incluindo o servidor e a localização escolhidos, nunca um servidor removido.
+* Correção: "Verificar atualizações" responde sempre e mostra o aviso de atualização mesmo após escolher Mais tarde.
+* Correção: Quando a aplicação era atualizada durante a ligação, abre agora em Desconectado em vez de dizer "O serviço VPN encontrou um problema"
+* Correção: As suas definições e servidores vão agora para a cópia de segurança do telemóvel e regressam num telemóvel novo, enquanto a sua sessão, os registos da aplicação e os seus ficheiros descompactados ficam no telemóvel a que pertencem
+* Correção: "Esqueceu-se da palavra-passe" no formulário de início de sessão abre agora a página correta de recuperação.
+* Correção: Após eliminar a conta, os dispositivos com sessão iniciada terminam a sessão em vez de criarem uma nova conta.
+* Correção: Um carregamento pesado numa ligação lenta deixa de bloquear o restante tráfego do dispositivo, como a navegação
+* Correção: Jogos online que enviam pacotes grandes, como Counter-Strike 2 e Dota 2 no Steam, funcionam através da VPN (anteriormente, pacotes superiores a 1280 bytes eram descartados). Um VpnHoodServer próprio também requer esta versão

@@ -1,0 +1,14 @@
+* Güncelleme: UDP yeni bir protokole sahip; güncellenmemiş sunucularda uygulama UDP olmadan bağlanır
+* Geliştirme: Uygulama ekranlarını web sayfası olarak göstermek yerine kendisi çiziyor ve metinler daha yüksek kontrastla daha kolay okunuyor
+* Güncelleme: iOS'taki uygulama adı diğer platformlardaki gibi VpnHood! CONNECT olarak yazılır
+* Güncelleme: Hız sınırlı planlarda, duraklamadan sonraki ilk megabaytlar tam hızda indirilir, böylece sayfalar hızlı açılır
+* Geliştirme: Web sitesinden yapılan satın alımlar, ödeme sayfasını uygulamanın dilinde açar
+* Düzeltme: Yerel Ağ Bölme artık doğru çalışıyor: açıkken yazıcı veya TV gibi yerel cihazlara doğrudan erişilir, kapalıyken trafiğiniz VPN'de kalır.
+* Düzeltme: Uygulama açılmadan başlatılan VPN, en son ayarlarınızı ve seçtiğiniz sunucuyu takip eder.
+* Düzeltme: "Güncellemeleri kontrol et" artık her zaman yanıt verir ve "Sonra" seçilse bile bildirimi gösterir.
+* Düzeltme: Uygulama bağlıyken güncellendiğinde artık "VPN hizmeti bir sorunla karşılaştı" demek yerine Bağlantı Kesildi durumunda açılıyor
+* Düzeltme: Ayarlarınız ve sunucularınız artık telefonunuzun yedeğine giriyor ve yeni telefonda geri geliyor; oturumunuz, uygulamanın günlükleri ve açılmış dosyaları ise ait oldukları telefonda kalıyor
+* Düzeltme: Giriş ekranındaki "Şifremi unuttum" bağlantısı artık doğrudan şifre sıfırlama sayfasını açıyor.
+* Düzeltme: Hesabınızı sildikten sonra oturum açık kalan cihazların hesabı otomatik olarak kapatması sağlandı.
+* Düzeltme: Yavaş bağlantıda yapılan büyük yüklemeler gezinme gibi diğer trafiği engellemiyor
+* Düzeltme: Counter-Strike 2 ve Dota 2 gibi büyük paket gönderen çevrimiçi oyunların VPN üzerinden çalışması sağlandı
