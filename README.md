@@ -14,7 +14,7 @@ Looking for the app? [Releases](https://github.com/vpnhood/Vpnhood.App.Connect/r
 | --- | --- | --- |
 | `fastlane/` | Compiled store trees — texts and screenshots for Google Play and the App Store | Generated. Never hand-edit |
 | `store-i18n/` | The source texts, one folder per locale | **`en-US/store.json` by hand**; the other 12 by vhtranslator |
-| `store/project.mjs` | Which locales, devices and pages get shot, and where they install | By hand |
+| `store/screenshots.json` | Which locales, devices and pages get shot, and where they install | By hand |
 | `store/fixture.json` | The mocked app state screenshots render against — never real keys or accounts | By hand |
 | `vh_translator/` | Translator config, prompt, and watch files that make translation incremental | By hand |
 | `remote-settings.json` | Live config the **shipped app** fetches: in-app promotion and ad flag | By hand |
@@ -32,7 +32,7 @@ machine — the runners hold the signing keys, the toolchains and the store cred
 | Workflow | Does | Trigger |
 | --- | --- | --- |
 | `connect_publish.yml` | Builds Linux/Windows/Android/iOS, uploads to Google Play and TestFlight, creates the GitHub release here | Usually `pub/Connect/PublishByGithub.ps1` in the monorepo, which bumps the version first |
-| `update-screenshots.yml` | Regenerates every screenshot and recompiles the texts, one locale per runner, and commits the result here | Manual. Pass the VpnHood ref the shipped app was built from (the Avalonia UI it draws) and the WebUI ref of the engine |
+| `update-screenshots.yml` | Regenerates every screenshot and recompiles the texts, one locale per runner, and commits the result here | Manual. Pass the VpnHood ref the shipped app was built from (the Avalonia UI it draws) |
 | `publish_listing.yml` | Pushes texts and screenshots to Google Play and the App Store | Manual. Skips any store whose content is byte-identical to the last publish |
 
 All three are thin wrappers: the real definitions live in the monorepo. A reusable workflow runs in
@@ -47,7 +47,7 @@ the version goes to review by hand in App Store Connect. The App Store *listing*
 
 - **Store text** — edit `store-i18n/en-US/store.json`, run `update-screenshots.yml` (translates and
   compiles), then `publish_listing.yml`.
-- **Screenshot pages, order or devices** — edit `store/project.mjs`, then the same two workflows.
+- **Screenshot pages, order or devices** — edit `store/screenshots.json`, then the same two workflows.
   Array order is store order.
 - **Promotion banner** — add the image under `promotions/`, point `remote-settings.json` at it. Live
   immediately, no release.
@@ -69,5 +69,5 @@ overwritten by the next run.
 
 The full maintainer's map of the screenshot and listing pipeline — how the tools fit together, the
 invariants, and how to verify a change — lives in
-[`e2e/store/README.md`](https://github.com/vpnhood/VpnHood.AppUi.Spa/blob/main/src/VpnHood.AppUi.Presentation.Classic.Spa/e2e/store/README.md)
-in the WebUI repo, which owns the tooling.
+[`src/Apps/Tools/StoreListing/README.md`](https://github.com/vpnhood/VpnHood/blob/develop/src/Apps/Tools/StoreListing/README.md)
+in the main repo, which owns the tooling.

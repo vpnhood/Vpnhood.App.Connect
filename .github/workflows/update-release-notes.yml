@@ -19,19 +19,15 @@ name: Update Release Notes
 # notes (they are part of the iOS listing fingerprint). Manual-only, like update-screenshots.yml,
 # and deliberately light — no screenshot matrix, no browsers.
 #
-# Same no-PAT design as the other workflows: both extra checkouts are public read-only, and the
+# Same no-PAT design as the other workflows: the extra checkout is public read-only, and the
 # push uses this workflow's own repo-scoped GITHUB_TOKEN. The Gemini key is the only secret;
 # absent, the run warns and commits nothing (the fork-without-secrets path).
 
 on:
   workflow_dispatch:
     inputs:
-      webui-ref:
-        description: "vpnhood/VpnHood.AppUi.Spa ref supplying the store tooling"
-        required: false
-        default: develop
       code-ref:
-        description: "vpnhood/VpnHood ref whose CHANGELOG.md is the source"
+        description: "vpnhood/VpnHood ref whose CHANGELOG.md is the source and whose store tools run"
         required: false
         default: develop
 
@@ -49,21 +45,17 @@ jobs:
       - name: Checkout store assets (this repo)
         uses: actions/checkout@v7
 
-      - name: Checkout the store tooling
-        uses: actions/checkout@v7
-        with:
-          repository: vpnhood/VpnHood.AppUi.Spa
-          ref: ${{ inputs.webui-ref }}
-          path: .webui
-
-      # Only CHANGELOG.md is needed from the monorepo — a sparse checkout keeps the job light.
-      - name: Checkout the CHANGELOG (vpnhood/VpnHood)
+      # Only CHANGELOG.md and the store tools are needed from the monorepo — a sparse checkout keeps
+      # the job light.
+      - name: Checkout the CHANGELOG and the store tools (vpnhood/VpnHood)
         uses: actions/checkout@v7
         with:
           repository: vpnhood/VpnHood
           ref: ${{ inputs.code-ref }}
           path: .code
-          sparse-checkout: CHANGELOG.md
+          sparse-checkout: |
+            CHANGELOG.md
+            src/Apps/Tools/StoreListing
           sparse-checkout-cone-mode: false
 
       - name: Set up Node.js
@@ -71,10 +63,9 @@ jobs:
         with:
           node-version: "24"
 
-      # Node built-ins only — no npm ci needed (the same discipline as the workflow `plan` job's
-      # project import in update-screenshots.yml).
+      # Node built-ins only — no npm ci needed.
       - name: Extract release notes from the CHANGELOG
-        run: node .webui/src/VpnHood.AppUi.Presentation.Classic.Spa/e2e/store-release-notes.mjs extract --changelog .code/CHANGELOG.md --root "$GITHUB_WORKSPACE" --project "$GITHUB_WORKSPACE/store/project.mjs"
+        run: node .code/src/Apps/Tools/StoreListing/store-release-notes.mjs extract --changelog .code/CHANGELOG.md --root "$GITHUB_WORKSPACE" --product connect
 
       - name: Set up .NET (vhtranslator)
         if: env.GEMINI_API_KEY != ''
@@ -94,14 +85,14 @@ jobs:
 
       - name: Compile release notes into the fastlane trees
         if: env.GEMINI_API_KEY != ''
-        run: node .webui/src/VpnHood.AppUi.Presentation.Classic.Spa/e2e/store-release-notes.mjs compile --root "$GITHUB_WORKSPACE" --project "$GITHUB_WORKSPACE/store/project.mjs"
+        run: node .code/src/Apps/Tools/StoreListing/store-release-notes.mjs compile --root "$GITHUB_WORKSPACE" --product connect
 
       - name: Commit and push
         if: env.GEMINI_API_KEY != ''
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898270+github-actions[bot]@users.noreply.github.com"
-          git add -A -- ':!.webui' ':!.code'
+          git add -A -- ':!.code'
           if git diff --cached --quiet; then
             echo "Release notes are already up to date."
           else

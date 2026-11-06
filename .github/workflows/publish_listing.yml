@@ -34,8 +34,8 @@ on:
         type: boolean
         required: false
         default: false
-      webui_ref:
-        description: "vpnhood/VpnHood.AppUi.Spa ref supplying the store tooling."
+      tools_ref:
+        description: "vpnhood/VpnHood ref supplying the store tooling."
         type: string
         required: false
         default: develop
@@ -50,7 +50,7 @@ jobs:
       force: ${{ inputs.force }}
       skip_metadata: ${{ inputs.skip_metadata }}
       skip_screenshots: ${{ inputs.skip_screenshots }}
-      webui_ref: ${{ inputs.webui_ref }}
+      tools_ref: ${{ inputs.tools_ref }}
     secrets: inherit
 
 # Workflow not appearing after a fresh fork/import? See the main repo's docs/cicd/deployment.md.

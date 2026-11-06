@@ -23,11 +23,10 @@ name: Update Store Screenshots
 #
 # The look itself - images, fonts, the words - is a submodule of that repo
 # (vpnhood/VpnHood.AppUi.Assets.Classic), so one checkout brings everything the pictures need. The
-# VpnHood.AppUi.Spa checkout in the assemble job is there for one remaining reason: it still owns
-# the store TEXT tools. It goes away as those move.
+# store TEXT tools are in that repo too (src/Apps/Tools/StoreListing).
 #
-# No PAT anywhere, by design: both source repos are public (a read-only checkout needs no
-# credential) and the push uses this workflow's own repo-scoped GITHUB_TOKEN. The Gemini
+# No PAT anywhere, by design: that repo is public (a read-only checkout needs no credential) and
+# the push uses this workflow's own repo-scoped GITHUB_TOKEN. The Gemini
 # translator key is the only secret, and only the translation step wants it - absent, translation
 # is skipped with a warning and everything else still works (the fork-without-secrets path).
 #
@@ -41,10 +40,6 @@ on:
     inputs:
       vh-ref:
         description: "vpnhood/VpnHood ref to draw with — the Avalonia UI the shipped app was built from"
-        required: false
-        default: develop
-      webui-ref:
-        description: "VpnHood.AppUi.Spa ref of the screenshot engine (its SPA build also feeds the UI's asset store)"
         required: false
         default: develop
       platforms:
@@ -136,36 +131,17 @@ jobs:
       - name: Checkout store assets (this repo)
         uses: actions/checkout@v7
 
-      - name: Checkout the screenshot tool
+      - name: Checkout the screenshot and text tools
         uses: actions/checkout@v7
         with:
           repository: vpnhood/VpnHood
           ref: ${{ inputs.vh-ref }}
           path: .vh
 
-      # Still the home of the store TEXT tools this job runs.
-      - name: Checkout the text tools
-        uses: actions/checkout@v7
-        with:
-          repository: vpnhood/VpnHood.AppUi.Spa
-          ref: ${{ inputs.webui-ref }}
-          path: .webui
-
-      - name: Cache npm
-        uses: actions/cache@v6
-        with:
-          path: ~/.npm
-          key: webui-${{ runner.os }}-${{ hashFiles('.webui/src/VpnHood.AppUi.Presentation.Classic.Spa/package-lock.json') }}
-
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version: "24"
-
-      # The engine script needs its packages, but an install-only run launches no browser.
-      - name: Install engine dependencies
-        working-directory: .webui/src/VpnHood.AppUi.Presentation.Classic.Spa
-        run: npm ci
 
       - name: Download every locale's finals
         uses: actions/download-artifact@v8
@@ -208,24 +184,24 @@ jobs:
         run: echo "::warning title=Store texts not translated::GOOGLE_GEMINI_TRNSLATE_APP_API_KEY is not set; store-i18n translations were not refreshed. Add the secret to enable translation."
 
       - name: Compile store texts
-        run: node .webui/src/VpnHood.AppUi.Presentation.Classic.Spa/e2e/store-metadata.mjs --root "$GITHUB_WORKSPACE"
+        run: node .vh/src/Apps/Tools/StoreListing/store-metadata.mjs --root "$GITHUB_WORKSPACE"
 
       # Keeps the release-note fastlane files in step when the translation above also refreshed
       # release-notes keys. The SOURCE is refreshed by update-release-notes.yml (from the monorepo
       # CHANGELOG); a repo that never adopted it gets a warning and a skip, nothing more.
       - name: Compile release notes
-        run: node .webui/src/VpnHood.AppUi.Presentation.Classic.Spa/e2e/store-release-notes.mjs compile --root "$GITHUB_WORKSPACE" --project "$GITHUB_WORKSPACE/store/project.mjs"
+        run: node .vh/src/Apps/Tools/StoreListing/store-release-notes.mjs compile --root "$GITHUB_WORKSPACE" --product connect
 
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898270+github-actions[bot]@users.noreply.github.com"
-          # .webui must stay on disk — the runner's post-steps still read checkout metadata after
+          # .vh must stay on disk — the runner's post-steps still read checkout metadata after
           # this step. It is excluded from the commit instead.
-          git add -A -- ':!.webui' ':!.vh' ':!test-results'
+          git add -A -- ':!.vh' ':!test-results'
           if git diff --cached --quiet; then
             echo "Screenshots and texts are already up to date."
           else
-            git commit -m "Update store screenshots and texts (WebUI ${{ inputs.webui-ref }})"
+            git commit -m "Update store screenshots and texts (VpnHood ${{ inputs.vh-ref }})"
             git push
           fi
