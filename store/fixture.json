@@ -20,7 +20,7 @@
     "isAccountSupported": false,
     "authProviderIds": [],
     "isBillingSupported": false,
-    "isTcpProxySupported": true,
+    "isTcpForwardingSupported": true,
     "isQuicSupported": true,
     "isSplitDomainSupported": true,
     "isUserReviewSupported": false,
@@ -189,7 +189,7 @@
         "Udp",
         "Quic"
       ],
-      "isTcpProxySupported": true,
+      "isTcpForwardingSupported": true,
       "isTcpPacketSupported": true,
       "isQuicPacketSupported": true,
       "isUdpPacketSupported": true
@@ -231,8 +231,8 @@
       "sessionMaxTraffic": 0,
       "sessionExpirationTime": null,
       "activeClientCount": 1,
-      "isTcpProxy": true,
-      "canChangeTcpProxy": true,
+      "isTcpForwarding": true,
+      "canChangeTcpForwarding": true,
       "isDropQuic": false,
       "channelProtocol": "Tcp"
     },
@@ -346,7 +346,7 @@
     "channelProtocol": "Tcp",
     "isProxyEndPointActive": false,
     "promotionExists": false,
-    "tcpProxyUsageReason": "None",
+    "tcpForwardingLockReason": "None",
     "splitTunnelingState": {
       "isEnabled": true,
       "isSplittingTraffic": false,
@@ -367,7 +367,7 @@
   },
   "userSettings": {
     "isLicenseAccepted": true,
-    "isTcpProxyPrompted": true,
+    "isTcpForwardingPrompted": true,
     "isQuickLaunchPrompted": false,
     "cultureCode": null,
     "countryCode": null,
@@ -389,7 +389,7 @@
     },
     "channelProtocol": "Tcp",
     "dropUdp": false,
-    "useTcpProxy": true,
+    "useTcpForwarding": true,
     "dropQuic": false,
     "allowAnonymousTracker": true,
     "debugData1": null,
