@@ -5,6 +5,7 @@ These strings are an app-store LISTING (Google Play / App Store / Microsoft Stor
 
 - The brand name "VpnHood" — alone, as "VpnHood!", or in product names like "VpnHood! CONNECT", "VpnHood! CLIENT", "VpnHood! STORE", "VpnHood! ENGINE" — never changes: never translate or transliterate it; always keep it in Latin script.
 - Platform and company names (GitHub, Google Play, App Store, Windows, Android, iOS, .NET) never change.
+  Persian (fa) writes the famous ones in Persian letters, as the site and the app do: Windows ویندوز · Linux لینوکس · Android اندروید · iPhone آیفون · iPad آیپد · Google گوگل · Google Play گوگل پلی · App Store اپ استور · Apple اپل, with Persian digits in a version. iOS, GitHub, .NET and exact product names such as Android System WebView stay Latin.
 - Keep URLs and email addresses exactly as written.
 - Translate feature names the way the app's own UI would, and use them consistently: Cloak Mode, Split Tunneling, Kill Switch, Private DNS, Custom DNS, Always-On, Quick Launch.
   Cloak Mode is named: ar وضع التخفي · de-DE Tarnmodus · es-ES Modo Camuflaje · fa حالت مخفی · fr-FR Mode furtif · hi-IN क्लोक मोड · it-IT Modalità camuffamento · pt-BR Modo invisível · pt-PT Modo invisível · ru-RU Режим маскировки · tr-TR Kamufle Modu · zh-CN 伪装模式.
