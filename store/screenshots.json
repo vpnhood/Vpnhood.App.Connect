@@ -71,6 +71,12 @@
       "store": "appStore",
       "installDir": "fastlane/screenshots/ios/<locale>",
       "patchFile": "fixture.ios.json",
+      // No kill switch or automatic update of its own: IosDevice.KillSwitch is null, and
+      // AppStoreAppUpdaterProvider.IsAutomaticUpdateSupported is false (the App Store updates it). No always-on of its
+      // own either: IosDevice.IsAlwaysOnSupported is false and IosDeviceUiProvider has no page for it. The log's Share
+      // button is there: IosDeviceUiProvider.IsShareSupported is true.
+      // And no always-on state: AppAlwaysOnService.State is null where AlwaysOnSupport is not App.
+      "patch": { "descriptor": { "isKillSwitchSupported": false, "isAutomaticUpdateSupported": false, "alwaysOnSupport": "None" }, "intentFeatures": { "isShareSupported": true }, "state": { "alwaysOnState": null } },
       "devices": {
         "iphone-6.9": {
           "label": "iPhone 6.9",
@@ -135,8 +141,12 @@
           "isAdSupported": true,
           "isRewardedAdSupported": true,
           "isUserReviewSupported": true,
-          "adjustForSystemBars": false,
-          "alwaysOnSupport": "Device"
+          "alwaysOnSupport": "Device",
+          // No kill switch or automatic update of its own: AndroidDevice.KillSwitch is null (the
+          // system's "Block connections without VPN"), and GooglePlayAppUpdaterProvider.IsAutomaticUpdateSupported
+          // is false (Google Play updates it).
+          "isKillSwitchSupported": false,
+          "isAutomaticUpdateSupported": false
         },
         "intentFeatures": {
           "isQuickLaunchSupported": true,
@@ -146,9 +156,12 @@
           "isKillSwitchSettingsSupported": true,
           "isSettingsSupported": true,
           "isAppSettingsSupported": true,
-          "isAppNotificationSettingsSupported": true
+          "isAppNotificationSettingsSupported": true,
+          // AndroidDeviceUiProvider.IsShareSupported => !IsTv: the log's Share button opens the share sheet
+          "isShareSupported": true
         },
-        "state": { "isNotificationEnabled": true }
+        // AppAlwaysOnService.State is null where AlwaysOnSupport is not App
+        "state": { "isNotificationEnabled": true, "alwaysOnState": null }
       },
       "devices": {
         "android-phone": {
@@ -204,8 +217,16 @@
           "isBillingSupported": true,
           "isAdSupported": true,
           "isRewardedAdSupported": true,
-          "adjustForSystemBars": false
-        }
+          // No kill switch or automatic update of its own: AndroidDevice.KillSwitch is null (the
+          // system's "Block connections without VPN"), and GooglePlayAppUpdaterProvider.IsAutomaticUpdateSupported
+          // is false (Google Play updates it).
+          "isKillSwitchSupported": false,
+          "isAutomaticUpdateSupported": false,
+          // no always-on: AndroidDevice has none of its own, and IsAlwaysOnSettingsSupported is gated !IsTv
+          "alwaysOnSupport": "None"
+        },
+        // AppAlwaysOnService.State is null where AlwaysOnSupport is not App
+        "state": { "alwaysOnState": null }
       },
       "devices": {
         "android-tv": {
@@ -233,7 +254,8 @@
       "store": "appStore",
       "installDir": "fastlane/screenshots/appletv/<locale>",
       "patchFile": "fixture.ios.json",
-      "patch": { "descriptor": { "isTv": true, "isRemoteAccessSupported": true, "version": "9.1.868.0" } },
+      // No kill switch, automatic update or always-on of its own, and the log can be shared, as ios.
+      "patch": { "descriptor": { "isTv": true, "isRemoteAccessSupported": true, "version": "9.1.868.0", "isKillSwitchSupported": false, "isAutomaticUpdateSupported": false, "alwaysOnSupport": "None" }, "intentFeatures": { "isShareSupported": true }, "state": { "alwaysOnState": null } },
       "devices": {
         "apple-tv": {
           "label": "Apple TV",

@@ -5,7 +5,6 @@
     "packageTitle": "VpnHoodConnect",
     "isExcludeAppsSupported": false,
     "isIncludeAppsSupported": false,
-    "uiName": "VpnHoodConnect",
     "companyName": "VpnHood",
     "uiTheme": "violet",
     "logoAssetPath": "images/logo-connect.png",
@@ -15,19 +14,15 @@
       "termsOfUse": "https://www.vpnhood.com/legal/vpnhood-connect/terms-of-use/"
     },
     "showPoweredBy": true,
-    "isPremiumFlagSupported": true,
     "isAddAccessKeySupported": false,
     "isAccountSupported": false,
     "authProviderIds": [],
     "isBillingSupported": false,
-    "isTcpForwardingSupported": true,
     "isQuicSupported": true,
-    "isSplitDomainSupported": true,
     "isUserReviewSupported": false,
     "isAnonymousTrackerSupported": true,
     "isTv": false,
     "osType": "Windows",
-    "gaMeasurementId": null,
     "clientId": "00000000-0000-4000-8000-000000000001",
     "isDebugMode": false,
     "debugCommands": [
@@ -45,19 +40,9 @@
       "/os-tcp-stack"
     ],
     "isProxySupported": true,
-    "adjustForSystemBars": true,
     "allowEndPointStrategy": false,
-    "autoRemoveExpiredPremium": false,
     "isAdSupported": false,
     "isRewardedAdSupported": false,
-    "premiumFeatures": [
-      "CustomDns",
-      "AlwaysOn",
-      "QuickLaunch",
-      "SplitIpViaApp",
-      "SplitIpViaDevice",
-      "SplitDomain"
-    ],
     "channelProtocols": [
       "Tcp",
       "Udp",
@@ -68,7 +53,11 @@
     "premium": {},
     "isLicenseAgreementRequired": false,
     "isRemoteAccessSupported": false,
-    "isSplitCountrySupported": true
+    "isSplitCountrySupported": true,
+    "isKillSwitchSupported": true,
+    "killSwitchOffScriptPath": null,
+    "isAutomaticUpdateSupported": true,
+    "alwaysOnSupport": "App"
   },
   "intentFeatures": {
     "isUserReviewSupported": false,
@@ -80,7 +69,8 @@
     "isSettingsSupported": false,
     "isAppSettingsSupported": false,
     "isAppNotificationSettingsSupported": false,
-    "isWebBrowserSupported": true
+    "isWebBrowserSupported": true,
+    "isShareSupported": false
   },
   "state": {
     "configTime": "2026-07-31T02:37:24.3124913-07:00",
@@ -170,10 +160,8 @@
       "isIpV6SupportedByServer": true,
       "serverLocationInfo": {
         "hasMultipleRegions": false,
-        "translatedCountryName": "United States",
         "countryCode": "US",
         "regionName": "Oregon",
-        "tags": [],
         "serverLocation": "US/Oregon",
         "countryName": "United States",
         "isAuto": false,
@@ -239,10 +227,8 @@
     "proxyConnectorStatus": null,
     "serverLocationInfo": {
       "hasMultipleRegions": false,
-      "translatedCountryName": "United States",
       "countryCode": "US",
       "regionName": "Oregon",
-      "tags": [],
       "serverLocation": "US/Oregon",
       "countryName": "United States",
       "isAuto": false,
@@ -258,13 +244,11 @@
       "isPremiumLocationSelected": false,
       "isPremium": false,
       "hasAccessCode": false,
-      "isAccessCodeFromAccount": false,
       "canGoPremium": true,
       "canTryPremium": true,
       "selectedLocationInfo": {
         "isNestedCountry": false,
         "isDefault": true,
-        "translatedCountryName": "Auto Select",
         "options": {
           "normal": 0,
           "normalByRewardedAd": null,
@@ -313,18 +297,16 @@
         "deprecatedVersion": "7.0.0",
         "notificationDelay": "03:00:00"
       },
-      "prompt": false
+      "prompt": false,
+      "updateState": null
     },
     "canDisconnect": true,
     "canConnect": false,
     "canDiagnose": true,
     "userReviewRecommended": 0,
     "isQuickLaunchRecommended": false,
-    "clientCountryInfo": {
-      "englishName": "United States",
-      "translatedName": "United States",
-      "countryCode": "US"
-    },
+    "isAnonymousTrackerPromptRequired": false,
+    "clientCountryCode": "US",
     "currentUiCultureInfo": {
       "code": "en",
       "nativeName": "English"
@@ -341,6 +323,7 @@
     "isNotificationEnabled": false,
     "systemPrivateDns": null,
     "isWaitingForInternalAd": false,
+    "isAdPrivacyOptionsRequired": false,
     "stateProgress": null,
     "isDiagnosing": false,
     "channelProtocol": "Tcp",
@@ -363,7 +346,12 @@
       "dnsMode": "IncludeAll",
       "unsupportedIpV6Mode": "Block"
     },
-    "vpnProfileId": "00000000-0000-4000-8000-000000000301"
+    "alwaysOnState": {
+      "status": "Off",
+      "retryTime": null,
+      "error": null
+    },
+    "isKillSwitchBlocking": false
   },
   "userSettings": {
     "isLicenseAccepted": true,
@@ -372,7 +360,6 @@
     "cultureCode": null,
     "countryCode": null,
     "vpnProfileId": "00000000-0000-4000-8000-000000000301",
-    "maxPacketChannelCount": 4,
     "splitTunneling": {
       "enabled": true,
       "appMode": "All",
@@ -423,12 +410,10 @@
       "isValidHostName": false,
       "isBuiltIn": true,
       "accessCode": null,
-      "isAccessCodeFromAccount": false,
       "locationInfos": [
         {
           "isNestedCountry": false,
           "isDefault": true,
-          "translatedCountryName": "Auto Select",
           "options": {
             "normal": 0,
             "normalByRewardedAd": null,
@@ -456,7 +441,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "United Arab Emirates",
           "options": {
             "normal": null,
             "normalByRewardedAd": null,
@@ -483,7 +467,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "Argentina",
           "options": {
             "normal": null,
             "normalByRewardedAd": null,
@@ -510,7 +493,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "Australia",
           "options": {
             "normal": null,
             "normalByRewardedAd": null,
@@ -537,7 +519,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "Brazil",
           "options": {
             "normal": null,
             "normalByRewardedAd": null,
@@ -564,7 +545,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "Canada",
           "options": {
             "normal": 0,
             "normalByRewardedAd": null,
@@ -591,7 +571,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "Germany",
           "options": {
             "normal": 0,
             "normalByRewardedAd": null,
@@ -618,7 +597,6 @@
         {
           "isNestedCountry": true,
           "isDefault": false,
-          "translatedCountryName": "Germany",
           "options": {
             "normal": null,
             "normalByRewardedAd": null,
@@ -645,7 +623,6 @@
         {
           "isNestedCountry": true,
           "isDefault": false,
-          "translatedCountryName": "Germany",
           "options": {
             "normal": 0,
             "normalByRewardedAd": null,
@@ -670,7 +647,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "Spain",
           "options": {
             "normal": 0,
             "normalByRewardedAd": null,
@@ -695,7 +671,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "France",
           "options": {
             "normal": 0,
             "normalByRewardedAd": null,
@@ -722,7 +697,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "United Kingdom",
           "options": {
             "normal": 0,
             "normalByRewardedAd": null,
@@ -749,7 +723,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "Iraq",
           "options": {
             "normal": null,
             "normalByRewardedAd": null,
@@ -776,7 +749,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "Mexico",
           "options": {
             "normal": null,
             "normalByRewardedAd": null,
@@ -803,7 +775,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "Pakistan",
           "options": {
             "normal": null,
             "normalByRewardedAd": null,
@@ -830,7 +801,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "Poland",
           "options": {
             "normal": 0,
             "normalByRewardedAd": null,
@@ -857,7 +827,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "Russia",
           "options": {
             "normal": null,
             "normalByRewardedAd": null,
@@ -884,7 +853,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "Singapore",
           "options": {
             "normal": null,
             "normalByRewardedAd": null,
@@ -911,7 +879,6 @@
         {
           "isNestedCountry": false,
           "isDefault": false,
-          "translatedCountryName": "United States",
           "options": {
             "normal": 0,
             "normalByRewardedAd": null,
@@ -939,7 +906,6 @@
         {
           "isNestedCountry": true,
           "isDefault": false,
-          "translatedCountryName": "United States",
           "options": {
             "normal": 0,
             "normalByRewardedAd": null,
@@ -964,7 +930,6 @@
         {
           "isNestedCountry": true,
           "isDefault": false,
-          "translatedCountryName": "United States",
           "options": {
             "normal": 0,
             "normalByRewardedAd": null,
@@ -992,7 +957,6 @@
         {
           "isNestedCountry": true,
           "isDefault": false,
-          "translatedCountryName": "United States",
           "options": {
             "normal": null,
             "normalByRewardedAd": null,
@@ -1024,7 +988,6 @@
       "selectedLocationInfo": {
         "isNestedCountry": false,
         "isDefault": true,
-        "translatedCountryName": "Auto Select",
         "options": {
           "normal": 0,
           "normalByRewardedAd": null,
@@ -1064,8 +1027,7 @@
         "pbe": false,
         "pbp": true,
         "pbc": true,
-        "pur_url": "https://www.vpnhood.com/free-vpn/go-premium",
-        "pur_url_f": 0
+        "pur_url": "https://www.vpnhood.com/free-vpn/go-premium"
       },
       "accessCodeRefusal": null,
       "canImportAccessCode": false,
