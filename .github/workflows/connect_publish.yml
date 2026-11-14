@@ -70,7 +70,7 @@ on:
         description: "Upload the Apple TV's .ipa beside the iPhone's (only applies when publish_appstore is on)"
         type: boolean
         required: false
-        default: false
+        default: true
       rollout:
         description: "Google Play audience ratio (%) for a PRODUCTION release (1-100; 100 = full). Ignored on prerelease/alpha."
         required: false
