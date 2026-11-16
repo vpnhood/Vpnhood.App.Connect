@@ -69,5 +69,5 @@ overwritten by the next run.
 
 The full maintainer's map of the screenshot and listing pipeline — how the tools fit together, the
 invariants, and how to verify a change — lives in
-[`src/Apps/Tools/StoreListing/README.md`](https://github.com/vpnhood/VpnHood/blob/develop/src/Apps/Tools/StoreListing/README.md)
+[`tools/StoreListing/README.md`](https://github.com/vpnhood/VpnHood/blob/develop/tools/StoreListing/README.md)
 in the main repo, which owns the tooling.

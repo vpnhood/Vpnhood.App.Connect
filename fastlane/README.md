@@ -68,7 +68,7 @@ dotnet tool restore && dotnet vhtranslator      # in this repo; needs GEMINI_API
                                                 # GOOGLE_GEMINI_TRNSLATE_APP_API_KEY; locally it is
                                                 # .user/vendors/google/google_gemini_translate_app_api_key.txt)
 cd ../VpnHood
-node src/Apps/Tools/StoreListing/store-metadata.mjs --root ../Vpnhood.App.Connect    # --check validates without writing
+node tools/StoreListing/store-metadata.mjs --root ../Vpnhood.App.Connect    # --check validates without writing
 ```
 
 The compiler enforces the stores' hard character limits, per-store locale availability, complete

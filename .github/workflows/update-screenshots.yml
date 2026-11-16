@@ -4,7 +4,7 @@ name: Update Store Screenshots
 # runner so thirteen of them take the wall time of one.
 #
 # The screens are drawn by the Avalonia UI the shipped app runs, through the screenshot tool
-# beside it (vpnhood/VpnHood, src/Apps/Tools/StoreScreenshots) - no browser, no app, no VPN. What
+# beside it (vpnhood/VpnHood, tools/StoreScreenshots) - no browser, no app, no VPN. What
 # each picture shows is store/screenshots.json and store/fixture.json in THIS repo; that tool's
 # README is the maintainer's map.
 #
@@ -23,7 +23,7 @@ name: Update Store Screenshots
 #
 # The look itself - images, fonts, the words - is a submodule of that repo
 # (vpnhood/VpnHood.AppUi.Assets.Classic), so one checkout brings everything the pictures need. The
-# store TEXT tools are in that repo too (src/Apps/Tools/StoreListing).
+# store TEXT tools are in that repo too (tools/StoreListing).
 #
 # No PAT anywhere, by design: that repo is public (a read-only checkout needs no credential) and
 # the push uses this workflow's own repo-scoped GITHUB_TOKEN. The Gemini
@@ -101,13 +101,13 @@ jobs:
           global-json-file: .vh/global.json
 
       - name: Build the screenshot tool
-        run: dotnet build -c Release .vh/src/Apps/Tools/StoreScreenshots/VpnHood.App.StoreScreenshots.csproj
+        run: dotnet build -c Release .vh/tools/StoreScreenshots/VpnHood.App.StoreScreenshots.csproj
 
       - name: Draw the screenshots (${{ matrix.locale }})
         run: >
-          .vh/src/Apps/Tools/StoreScreenshots/bin/Release/net11.0/VpnHoodStoreScreenshots generate
+          .vh/tools/StoreScreenshots/bin/Release/net11.0/VpnHoodStoreScreenshots generate
           --config "$GITHUB_WORKSPACE/store/screenshots.json"
-          --assets "$GITHUB_WORKSPACE/.vh/src/AppUi/VpnHood.AppUi.Assets.Classic/buildTransitive/ui.zip"
+          --assets "$GITHUB_WORKSPACE/.vh/src/libs/AppUi/VpnHood.AppUi.Assets.Classic/buildTransitive/ui.zip"
           --out "$GITHUB_WORKSPACE/test-results/store-screenshots"
           --locale ${{ matrix.locale }}
           ${{ inputs.platforms && format('--platform {0}', inputs.platforms) || '' }}
@@ -157,11 +157,11 @@ jobs:
           global-json-file: .vh/global.json
 
       - name: Build the screenshot tool
-        run: dotnet build -c Release .vh/src/Apps/Tools/StoreScreenshots/VpnHood.App.StoreScreenshots.csproj
+        run: dotnet build -c Release .vh/tools/StoreScreenshots/VpnHood.App.StoreScreenshots.csproj
 
       - name: Install the sets into the store trees
         run: >
-          .vh/src/Apps/Tools/StoreScreenshots/bin/Release/net11.0/VpnHoodStoreScreenshots generate
+          .vh/tools/StoreScreenshots/bin/Release/net11.0/VpnHoodStoreScreenshots generate
           --config "$GITHUB_WORKSPACE/store/screenshots.json"
           --out "$GITHUB_WORKSPACE/test-results/store-screenshots"
           --capture-only --frame-only --install --install-root "$GITHUB_WORKSPACE"
@@ -184,13 +184,13 @@ jobs:
         run: echo "::warning title=Store texts not translated::GOOGLE_GEMINI_TRNSLATE_APP_API_KEY is not set; store-i18n translations were not refreshed. Add the secret to enable translation."
 
       - name: Compile store texts
-        run: node .vh/src/Apps/Tools/StoreListing/store-metadata.mjs --root "$GITHUB_WORKSPACE"
+        run: node .vh/tools/StoreListing/store-metadata.mjs --root "$GITHUB_WORKSPACE"
 
       # Keeps the release-note fastlane files in step when the translation above also refreshed
       # release-notes keys. The SOURCE is refreshed by update-release-notes.yml (from the monorepo
       # CHANGELOG); a repo that never adopted it gets a warning and a skip, nothing more.
       - name: Compile release notes
-        run: node .vh/src/Apps/Tools/StoreListing/store-release-notes.mjs compile --root "$GITHUB_WORKSPACE" --product connect
+        run: node .vh/tools/StoreListing/store-release-notes.mjs compile --root "$GITHUB_WORKSPACE" --product connect
 
       - name: Commit and push
         run: |

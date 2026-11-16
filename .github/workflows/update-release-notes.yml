@@ -55,7 +55,7 @@ jobs:
           path: .code
           sparse-checkout: |
             CHANGELOG.md
-            src/Apps/Tools/StoreListing
+            tools/StoreListing
           sparse-checkout-cone-mode: false
 
       - name: Set up Node.js
@@ -65,7 +65,7 @@ jobs:
 
       # Node built-ins only — no npm ci needed.
       - name: Extract release notes from the CHANGELOG
-        run: node .code/src/Apps/Tools/StoreListing/store-release-notes.mjs extract --changelog .code/CHANGELOG.md --root "$GITHUB_WORKSPACE" --product connect
+        run: node .code/tools/StoreListing/store-release-notes.mjs extract --changelog .code/CHANGELOG.md --root "$GITHUB_WORKSPACE" --product connect
 
       - name: Set up .NET (vhtranslator)
         if: env.GEMINI_API_KEY != ''
@@ -85,7 +85,7 @@ jobs:
 
       - name: Compile release notes into the fastlane trees
         if: env.GEMINI_API_KEY != ''
-        run: node .code/src/Apps/Tools/StoreListing/store-release-notes.mjs compile --root "$GITHUB_WORKSPACE" --product connect
+        run: node .code/tools/StoreListing/store-release-notes.mjs compile --root "$GITHUB_WORKSPACE" --product connect
 
       - name: Commit and push
         if: env.GEMINI_API_KEY != ''
