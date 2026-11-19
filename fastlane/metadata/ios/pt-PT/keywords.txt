@@ -1,1 +1,1 @@
-vpn,vpnhood,proxy,privacidade,seguro,túnel,código aberto,firewall,censura
+vpn,vpnhood,proxy,privacidade,seguro,túnel,código aberto,firewall,censura,indetectável

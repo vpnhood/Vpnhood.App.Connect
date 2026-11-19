@@ -1,1 +1,1 @@
-vpn,vpnhood,proxy,confidentialité,sécurisé,tunnel,open source,pare-feu,censure
+vpn,vpnhood,proxy,confidentialité,sécurisé,tunnel,open source,pare-feu,censure,indétectable
