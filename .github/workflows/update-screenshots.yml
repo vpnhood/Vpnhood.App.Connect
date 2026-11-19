@@ -198,7 +198,7 @@ jobs:
           git config user.email "41898270+github-actions[bot]@users.noreply.github.com"
           # .vh must stay on disk — the runner's post-steps still read checkout metadata after
           # this step. It is excluded from the commit instead.
-          git add -A -- ':!.vh' ':!test-results'
+          git add -A -- . ':!.vh'
           if git diff --cached --quiet; then
             echo "Screenshots and texts are already up to date."
           else
