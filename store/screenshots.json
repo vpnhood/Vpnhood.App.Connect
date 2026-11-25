@@ -272,6 +272,39 @@
         { "route": "/split-tunneling/split-countries", "label": "Split Countries" },
         { "route": "/statistics", "label": "Statistics" }
       ]
+    },
+
+    // The Microsoft Store edition (Connect.Windows.Microsoft) ships PREMIUM-ONLY, as iOS: its head embeds
+    // the premium access key and no ad provider, so it has no free tier, and its listing says so. iOS's
+    // location list therefore, with the Windows baseline's own OS. The real window is a fixed 400x700
+    // (ClassicAvaloniaApp.WindowFit), far under the Store's 1366x768 floor, so the capture is composited
+    // into a desktop scene, as CLIENT's. No fastlane lane exists for this store: upload through Partner
+    // Center.
+    "windows": {
+      "label": "Microsoft Store",
+      "store": "microsoftStore",
+      "installDir": "store/microsoft/<locale>/screenshots",
+      "patchFile": "fixture.ios.json",
+      "patch": { "descriptor": { "osType": "Windows", "version": "9.1.878.0" } },
+      "devices": {
+        "windows-desktop": {
+          "label": "Windows",
+          "prefix": "",
+          "frame": "desktop",
+          "cssWidth": 400, "cssHeight": 700, "scale": 3,
+          "canvas": { "width": 1920, "height": 1080, "windowWidth": 520, "titleBar": 40 },
+          "windowTitle": "VpnHood! CONNECT"
+        }
+      },
+      "shots": [
+        { "route": "/", "label": "Home (connected)", "patch": { "state": { "connectionState": "Connected", "sessionStatus": { "speed": { "received": 10870000, "sent": 8240000 } } } } },
+        { "route": "/servers", "label": "Servers (bundled locations)" },
+        { "route": "/protocols/cloak-mode", "label": "Cloak Mode" },
+        { "route": "/protocols", "label": "Protocols", "patch": { "userSettings": { "useTcpForwarding": false } } },
+        { "route": "/split-tunneling", "label": "Split Tunneling", "hide": ["EnabledItem/WarningChip"] },
+        { "route": "/dns", "label": "DNS" },
+        { "route": "/settings/proxies", "label": "Proxies" }
+      ]
     }
   }
 }
