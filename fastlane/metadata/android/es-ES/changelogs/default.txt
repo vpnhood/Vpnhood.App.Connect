@@ -1,3 +1,3 @@
-* Mejora: La app para Android inicia de dos a cuatro veces más rápido, especialmente en móviles económicos
-* Novedad: En EEE, Reino Unido y Suiza, la app solicita consentimiento mediante formulario de Google antes de usar tus datos para anuncios; cámbialo en Ajustes > Privacidad > Opciones de privacidad de anuncios
-* Corrección: Si Google Play solo funciona a través de la VPN, la actualización de la app llega en cuanto te conectas.
+* Corrección: Si la VPN deja de responder a la app, la app muestra en segundos que se ha detenido; antes el estado se congelaba y Desconectar no hacía nada
+* Corrección: Con Dividir dominios activado, las consultas DNS ya no se atascan: casi la mitad se retenían y las apps esperaban a su propio reintento
+* Actualización: La app tiene un icono nuevo, con su nombre en una cinta en la parte superior

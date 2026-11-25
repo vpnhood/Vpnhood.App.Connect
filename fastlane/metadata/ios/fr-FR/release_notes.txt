@@ -1,14 +1,19 @@
-* Mise à jour : UDP intègre un nouveau protocole ; sur un serveur non mis à jour, l'application se connecte sans UDP
-* Amélioration : L'application dessine elle-même ses écrans au lieu de les afficher comme une page Web, et le texte est plus lisible, avec plus de contraste
-* Mise à jour : Le nom de l'application sur iOS s'écrit désormais comme sur les autres plateformes : VpnHood! CONNECT
-* Mise à jour : Sur un forfait avec limitation de vitesse, les premiers mégaoctets après une pause bénéficient de la vitesse maximale pour charger rapidement les pages, seule une utilisation intensive continue étant soumise à la limite
-* Amélioration : L'achat sur le site Web ouvre le processus de paiement dans la langue de l'application
-* Correction : Le réseau local divisé fonctionne désormais correctement. Activé, les appareils locaux comme une imprimante ou une TV sont atteints directement ; désactivé, leur trafic passe par le VPN.
-* Correction : Un VPN démarré sans ouvrir l'application respecte désormais vos derniers réglages et le serveur choisi.
-* Correction : « Rechercher des mises à jour » répond toujours correctement et affiche la notification même après avoir choisi Plus tard.
-* Correction : Si l'application était mise à jour pendant la connexion, elle s'ouvre désormais sur Déconnecté au lieu d'afficher « Le service VPN a rencontré un problème »
-* Correction : Vos paramètres et serveurs vont désormais dans la sauvegarde du téléphone et reviennent sur un nouveau téléphone, tandis que votre connexion, les journaux de l'application et ses fichiers décompressés restent sur le téléphone auquel ils appartiennent
-* Correction : Le lien « Mot de passe oublié » ouvre désormais directement la page de réinitialisation du site web.
-* Correction : Après la suppression d'un compte, les appareils connectés se déconnectent correctement au lieu d'en créer un nouveau.
-* Correctif : Un gros envoi sur connexion lente ne bloque plus le reste du trafic, comme la navigation
-* Correctif : Les jeux en ligne envoyant de grands paquets, comme Counter-Strike 2 et Dota 2, fonctionnent désormais parfaitement via le VPN
+* Correction : Une publicité avec récompense qui échoue avant la connexion du VPN est relancée une fois le VPN actif ; avant, la connexion s'arrêtait au premier échec
+* Correction : Quand le serveur n'accepte pas la publicité regardée, l'application vous le dit et n'en demande pas une deuxième
+* Correction : Quand le VPN ne répond plus à l'application, celle-ci affiche son arrêt en quelques secondes ; avant, l'état se figeait et Déconnecter ne faisait rien
+* Correction : Changer de serveur pendant que le VPN se connecte n'arrête et ne remplace plus la nouvelle connexion ; avant, l'ancienne tentative pouvait la couper en échouant ou en finissant en retard
+* Mise à jour : L'application n'accepte les mises à jour d'une clé d'accès que par un lien sécurisé (https) ; un simple lien http permettait à quiconque sur le trajet d'envoyer une mise à jour menant à son propre serveur
+* Correction : Sur un appareil en turc, les serveurs dont le code contient un « i », comme l'Iran ou l'Italie, s'affichent et se connectent correctement
+* Correction : Quand une connexion échoue avant l'ouverture du VPN, l'iPhone et l'Apple TV le savent aussitôt ; avant, ils attendaient
+* Correction : Arrêter le VPN pendant son démarrage l'arrête bien ; avant, il pouvait démarrer quand même ou laisser l'iPhone et l'Apple TV en attente
+* Amélioration : Avec une liste de proxys, l'application se connecte dès que l'un d'eux atteint votre serveur et vérifie les autres en arrière-plan ; avant, elle vérifiait d'abord toute la liste
+* Correction : Quand aucun de vos proxys ne fonctionne, l'application le dit ; avant, un proxy désactivé, jamais testé ou refusant identifiant et mot de passe lui faisait accuser le serveur. Si votre serveur est en panne derrière des proxys qui marchent, elle indique que le serveur est injoignable
+* Correction : Avec Domaines personnalisés activé, les requêtes DNS ne bloquent plus : près de la moitié étaient retenues et les applications attendaient leur propre nouvel essai
+* Correction : Avec Domaines personnalisés activé, une application dont le serveur parle en premier, comme SMTP, FTP ou MySQL, se connecte en une seconde ; avant, elle attendait jusqu'à abandonner
+* Mise à jour : Domaines personnalisés n'accepte plus `*` : `example.com` couvre le domaine et tous ses sous-domaines, comme `*.example.com`, et un `*` ailleurs, comme `*ads.example.com`, ne correspondait à rien. Une liste avec `*` est refusée à l'enregistrement et l'application indique l'entrée. Les listes déjà enregistrées perdent le `*.` en début d'entrée, sans rien changer
+* Mise à jour : Dans Domaines personnalisés, le domaine le plus précis l'emporte, pour créer des exceptions : avec `google.com` exclu et `mail.google.com` inclus, le courrier passe par le VPN et le reste de Google en dehors ; un site sous un domaine bloqué peut aussi être exclu ou inclus. Bloquer > Exclure > Inclure ne tranche que pour un même domaine
+* Amélioration : Quand une liste de répartition refuse une entrée, l'application explique pourquoi dans votre langue et nomme l'entrée ; une liste d'IP accepte désormais un commentaire commençant par des espaces
+* Amélioration : Quand une publicité échoue ou que l'adresse du serveur est introuvable, l'application le dit dans votre langue, au lieu d'un message technique en anglais
+* Mise à jour : L'application a une nouvelle icône, avec son nom sur un ruban en haut
+* Amélioration : Dans Accès distant, vous pouvez coller dans chaque champ, listes d'IP et de proxys comprises, un gestionnaire de mots de passe peut remplir votre connexion, et chaque caractère saisi s'affiche
+* Correction : Le VPN ne reste plus En attente quand votre appareil passe sur un réseau qui n'atteint pas l'adresse du serveur, comme un Wi-Fi sans IPv6 après les données mobiles : il se reconnecte seul en une minute environ

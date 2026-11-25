@@ -1,3 +1,3 @@
-* Melhoria: A aplicação Android arranca duas a quatro vezes mais rápido, especialmente em telemóveis económicos
-* Nova funcionalidade: NaEEE, Reino Unido e Suíça, a aplicação solicita consentimento antes de utilizar os seus dados para anúncios
-* Correção: Quando o Google Play funciona apenas através da VPN, a atualização da aplicação chega assim que estabelecer ligação.
+* Correção: Quando a VPN deixa de responder à aplicação, esta mostra em segundos que parou; antes o estado ficava congelado e Desligar não fazia nada
+* Correção: Com Dividir domínios ativo, as consultas DNS já não encravam: cerca de metade ficava retida e as aplicações esperavam pela sua própria nova tentativa
+* Atualização: A aplicação tem um novo ícone, com o nome numa fita no topo

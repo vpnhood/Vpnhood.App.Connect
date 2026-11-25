@@ -1,14 +1,19 @@
-* Güncelleme: UDP yeni bir protokole sahip; güncellenmemiş sunucularda uygulama UDP olmadan bağlanır
-* Geliştirme: Uygulama ekranlarını web sayfası olarak göstermek yerine kendisi çiziyor ve metinler daha yüksek kontrastla daha kolay okunuyor
-* Güncelleme: iOS'taki uygulama adı diğer platformlardaki gibi VpnHood! CONNECT olarak yazılır
-* Güncelleme: Hız sınırlı planlarda, duraklamadan sonraki ilk megabaytlar tam hızda indirilir, böylece sayfalar hızlı açılır
-* Geliştirme: Web sitesinden yapılan satın alımlar, ödeme sayfasını uygulamanın dilinde açar
-* Düzeltme: Yerel Ağ Bölme artık doğru çalışıyor: açıkken yazıcı veya TV gibi yerel cihazlara doğrudan erişilir, kapalıyken trafiğiniz VPN'de kalır.
-* Düzeltme: Uygulama açılmadan başlatılan VPN, en son ayarlarınızı ve seçtiğiniz sunucuyu takip eder.
-* Düzeltme: "Güncellemeleri kontrol et" artık her zaman yanıt verir ve "Sonra" seçilse bile bildirimi gösterir.
-* Düzeltme: Uygulama bağlıyken güncellendiğinde artık "VPN hizmeti bir sorunla karşılaştı" demek yerine Bağlantı Kesildi durumunda açılıyor
-* Düzeltme: Ayarlarınız ve sunucularınız artık telefonunuzun yedeğine giriyor ve yeni telefonda geri geliyor; oturumunuz, uygulamanın günlükleri ve açılmış dosyaları ise ait oldukları telefonda kalıyor
-* Düzeltme: Giriş ekranındaki "Şifremi unuttum" bağlantısı artık doğrudan şifre sıfırlama sayfasını açıyor.
-* Düzeltme: Hesabınızı sildikten sonra oturum açık kalan cihazların hesabı otomatik olarak kapatması sağlandı.
-* Düzeltme: Yavaş bağlantıda yapılan büyük yüklemeler gezinme gibi diğer trafiği engellemiyor
-* Düzeltme: Counter-Strike 2 ve Dota 2 gibi büyük paket gönderen çevrimiçi oyunların VPN üzerinden çalışması sağlandı
+* Düzeltme: VPN bağlanmadan önce başarısız olan ödüllü reklam, VPN açıldığında yeniden denenir; önceden bağlantı ilk hatada duruyordu
+* Düzeltme: Sunucu izlediğiniz reklamı kabul etmediğinde uygulama bunu söyler ve ikinci bir reklam istemez
+* Düzeltme: VPN uygulamaya yanıt vermeyi bıraktığında uygulama saniyeler içinde durduğunu gösterir; önceden durum donuyor ve Bağlantıyı Kes işe yaramıyordu
+* Düzeltme: VPN hâlâ bağlanırken sunucu değiştirmek yeni bağlantıyı artık durdurmaz veya değiştirmez; önceden eski deneme başarısız olarak ya da geç biterek onu sonlandırabiliyordu
+* Güncelleme: Uygulama bir erişim anahtarının güncellemelerini yalnızca güvenli (https) bağlantıdan alır; düz bir http bağlantısında yoldaki herkes bir güncelleme gönderip sizi kendi sunucusuna yönlendirebiliyordu
+* Düzeltme: Dili Türkçe olan cihazlarda kodunda “i” bulunan sunucu konumları, örneğin İran veya İtalya, doğru görünür ve bağlanır
+* Düzeltme: VPN açılmadan önce bağlantı başarısız olursa iPhone ve Apple TV bunu hemen öğrenir; önceden beklemeye devam ediyorlardı
+* Düzeltme: VPN başlarken durdurulursa artık gerçekten durur; önceden sonradan açılabiliyor ya da iPhone ve Apple TV'yi bekletebiliyordu
+* İyileştirme: Proxy listesiyle uygulama, proxy'lerden biri sunucunuza ulaşır ulaşmaz bağlanır ve kalanları arka planda denetler; önceden önce tüm listeyi denetliyordu
+* Düzeltme: Proxy'lerinizin hiçbiri çalışmadığında uygulama bunu söyler; önceden kapalı, hiç denenmemiş ya da kullanıcı adı ve şifresini reddeden bir proxy yüzünden sunucuyu suçluyordu. Sunucunuz çalışan proxy'lerin arkasında kapalıysa uygulama sunucuya ulaşılamadığını söyler
+* Düzeltme: Alan Adlarını Ayır açıkken DNS sorguları artık takılmaz: yaklaşık yarısı bekletiliyor ve uygulamalar kendi yeniden denemelerini bekliyordu
+* Düzeltme: Alan Adlarını Ayır açıkken sunucusu önce konuşan bir uygulama, örneğin SMTP, FTP veya MySQL, bir saniyede bağlanır; önceden vazgeçene kadar bekliyordu
+* Güncelleme: Alan Adlarını Ayır artık `*` kabul etmez: `example.com`, eskiden `*.example.com` gibi alan adını ve tüm alt alan adlarını kapsar; başka bir yerdeki `*`, örneğin `*ads.example.com`, hiçbir şeyle eşleşmiyordu. `*` içeren bir liste kaydedilirken reddedilir ve uygulama girdiyi belirtir. Önceden kaydedilen listelerde girdilerin başındaki `*.` kalkar, bu hiçbir şeyi değiştirmez
+* Güncelleme: Alan Adlarını Ayır'da en belirgin alan adı kazanır, böylece istisna yapabilirsiniz: `google.com` hariç tutulup `mail.google.com` dahil edilirse posta VPN'den, Google'ın geri kalanı dışından geçer; engelli bir alan adı altındaki site de hariç tutulabilir ya da dahil edilebilir. Engelle > Hariç tut > Dahil et sırası yalnızca aynı alan adı için geçerlidir
+* İyileştirme: Bir bölme listesi bir girdiyi reddettiğinde uygulama nedenini sizin dilinizde söyler ve girdiyi belirtir; IP listesi artık boşlukla başlayan yorum satırlarını reddetmez
+* İyileştirme: Bir reklam başarısız olduğunda ya da sunucu adresi bulunamadığında uygulama bunu İngilizce teknik bir mesaj yerine sizin dilinizde söyler
+* Güncelleme: Uygulamanın yeni bir simgesi var; adı üstte bir şeridin üzerinde
+* İyileştirme: Uzaktan Erişim'de IP ve proxy listeleri dahil her kutuya yapıştırabilir, şifre yöneticinizle girişinizi doldurabilirsiniz ve yazdığınız her karakter görünür
+* Düzeltme: Cihazınız sunucu adresine ulaşamayan bir ağa geçtiğinde, örneğin mobil veriden sonra IPv6'sız bir Wi-Fi'ye, VPN artık Bekliyor'da kalmaz: yaklaşık bir dakika içinde kendiliğinden yeniden bağlanır

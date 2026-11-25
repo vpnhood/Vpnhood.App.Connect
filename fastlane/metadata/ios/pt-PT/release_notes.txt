@@ -1,14 +1,19 @@
-* Atualização: O UDP tem um novo protocolo; num servidor ainda não atualizado, a aplicação liga-se sem UDP
-* Melhoria: A aplicação desenha os seus próprios ecrãs em vez de os mostrar como página web, e o texto é mais fácil de ler, com mais contraste
-* Atualização: O nome da aplicação no iOS passa a ser grafado como nas restantes plataformas: VpnHood! CONNECT
-* Atualização: Num plano com limite de velocidade, os primeiros megabytes após uma pausa beneficiam de velocidade máxima
-* Melhoria: As compras efetuadas no site abrem o pagamento no idioma da aplicação
-* Correção: A divisão de rede local funciona conforme indicado: ativada, dispositivos locais como impressoras ou TVs são acedidos diretamente; desativada, o tráfego permanece na VPN.
-* Correção: Uma VPN iniciada sem abrir a aplicação segue as suas definições mais recentes, incluindo o servidor e a localização escolhidos, nunca um servidor removido.
-* Correção: "Verificar atualizações" responde sempre e mostra o aviso de atualização mesmo após escolher Mais tarde.
-* Correção: Quando a aplicação era atualizada durante a ligação, abre agora em Desconectado em vez de dizer "O serviço VPN encontrou um problema"
-* Correção: As suas definições e servidores vão agora para a cópia de segurança do telemóvel e regressam num telemóvel novo, enquanto a sua sessão, os registos da aplicação e os seus ficheiros descompactados ficam no telemóvel a que pertencem
-* Correção: "Esqueceu-se da palavra-passe" no formulário de início de sessão abre agora a página correta de recuperação.
-* Correção: Após eliminar a conta, os dispositivos com sessão iniciada terminam a sessão em vez de criarem uma nova conta.
-* Correção: Um carregamento pesado numa ligação lenta deixa de bloquear o restante tráfego do dispositivo, como a navegação
-* Correção: Jogos online que enviam pacotes grandes, como Counter-Strike 2 e Dota 2 no Steam, funcionam através da VPN (anteriormente, pacotes superiores a 1280 bytes eram descartados). Um VpnHoodServer próprio também requer esta versão
+* Correção: Um anúncio com recompensa que falha antes de a VPN ligar é tentado de novo quando a VPN está ativa; antes a ligação parava à primeira falha
+* Correção: Quando o servidor não aceita o anúncio que viu, a aplicação di-lo e não pede outro
+* Correção: Quando a VPN deixa de responder à aplicação, esta mostra em segundos que parou; antes o estado ficava congelado e Desligar não fazia nada
+* Correção: Mudar de servidor enquanto a VPN ainda está a ligar já não para nem substitui a nova ligação; antes a tentativa anterior podia terminá-la, ao falhar ou ao acabar tarde
+* Atualização: A aplicação só aceita atualizações de uma chave de acesso por uma ligação segura (https); uma ligação http simples permitia a qualquer pessoa no caminho enviar uma atualização e levá-lo para o seu servidor
+* Correção: Em dispositivos em turco, as localizações de servidor cujo código tem um «i», como o Irão ou a Itália, aparecem e ligam corretamente
+* Correção: Quando uma ligação falha antes de a VPN abrir, o iPhone e a Apple TV sabem de imediato; antes continuavam à espera
+* Correção: Parar a VPN enquanto arranca para-a mesmo; antes podia ligar-se depois ou deixar o iPhone e a Apple TV à espera
+* Melhoria: Com uma lista de proxies, a aplicação liga-se assim que um deles chega ao seu servidor e verifica os restantes em segundo plano; antes verificava primeiro a lista toda
+* Correção: Quando nenhum dos seus proxies funciona, a aplicação di-lo; antes culpava o servidor se um proxy estava desativado, nunca testado ou recusava o utilizador e a palavra-passe. Se o seu servidor estiver em baixo atrás de proxies que funcionam, a aplicação diz que o servidor está inacessível
+* Correção: Com Dividir domínios ativo, as consultas DNS já não encravam: cerca de metade ficava retida e as aplicações esperavam pela sua própria nova tentativa
+* Correção: Com Dividir domínios ativo, uma aplicação cujo servidor fala primeiro, como SMTP, FTP ou MySQL, liga-se num segundo; antes esperava até desistir
+* Atualização: Dividir domínios já não aceita `*`: `example.com` abrange o domínio e todos os subdomínios, como `*.example.com` fazia, e um `*` noutro sítio, como `*ads.example.com`, nunca correspondia a nada. Uma lista com `*` é recusada ao guardar e a aplicação indica a entrada. As listas guardadas antes perdem o `*.` inicial das entradas, sem nada mudar
+* Atualização: Em Dividir domínios ganha o domínio mais específico, para poder criar exceções: com `google.com` excluído e `mail.google.com` incluído, o correio passa pela VPN e o resto da Google por fora; um site sob um domínio bloqueado também pode ser excluído ou incluído. Bloquear > Excluir > Incluir só decide para o mesmo domínio
+* Melhoria: Quando uma lista de divisão recusa uma entrada, a aplicação explica o motivo no seu idioma e indica a entrada; uma lista de IP já não recusa comentários que começam com espaços
+* Melhoria: Quando um anúncio falha ou o endereço do servidor não é encontrado, a aplicação di-lo no seu idioma, em vez de uma mensagem técnica em inglês
+* Atualização: A aplicação tem um novo ícone, com o nome numa fita no topo
+* Melhoria: No Acesso remoto pode colar em qualquer campo, incluindo as listas de IP e de proxies, um gestor de palavras-passe pode preencher o seu início de sessão e cada carácter escrito é mostrado
+* Correção: A VPN já não fica em A aguardar quando o dispositivo muda para uma rede que não chega ao endereço do servidor, como uma rede Wi-Fi sem IPv6 depois dos dados móveis: volta a ligar-se sozinha em cerca de um minuto

@@ -1,14 +1,19 @@
-* Update: UDP has a new protocol; on a server that has not updated to it yet, the app connects without UDP
-* Improve: The app draws its screens itself rather than as a web page, and text is easier to read, with more contrast
-* Update: The app's name on iOS is written as on its other platforms, VpnHood! CONNECT
-* Update: On a plan with a speed limit, the first megabytes after a pause go at full speed, so pages load quickly, and only steady heavy use is held to the limit
-* Improve: Buying on the website opens the checkout in the app's language
-* Fix: Split Local Network does what it says: on, local devices such as a printer or a TV are reached directly; off, their traffic stays in the VPN. It did the opposite while Allow Split Tunneling was off, or on a server that carries local addresses
-* Fix: A VPN started without opening the app - always-on, the quick-settings tile, the phone's VPN settings, or the system restarting it - follows your latest settings, "Share anonymous usage data" among them, and the server and location you chose, never a server you removed
-* Fix: "Check for update" always answers - you have the latest version, or it could not check - and shows the update's notice even after you chose Later
-* Fix: When the app was updated while connected, it now opens on Disconnected instead of saying "VPN service encountered an issue"
-* Fix: Your settings and servers now go into your phone's backup and come back on a new phone, while your sign-in, the app's logs and its unpacked files stay on the phone they belong to
-* Fix: "Forgot password" on the sign-in form opens the account website's password reset page; it opened the site's home page
-* Fix: After you delete your account, a device still signed in to it signs out, rather than quietly signing in again and making you a new account
-* Fix: A big upload over a slow connection no longer holds up the device's other traffic, such as browsing
-* Fix: Online games that send large packets, such as Counter-Strike 2 and Dota 2 on Steam, work through the VPN; every packet over 1280 bytes was dropped. A VpnHoodServer of your own needs this release too
+* Fix: A rewarded ad that fails before the VPN connects is tried again once the VPN is up, where the connect stopped at the first failure
+* Fix: When the server does not accept the ad you watched, the app tells you so and asks for no second one
+* Fix: When the VPN stops answering the app, the app shows it stopped within seconds, where its status froze and Disconnect did nothing
+* Fix: Switching servers while the VPN is still connecting no longer stops or replaces the new connection, where the old connect could end it, by failing or by finishing late
+* Update: The app takes an access key's updates only from a secure (https) link, where a plain http link could bring an update from anyone on the way, which could send you to their server
+* Fix: On a device set to Turkish, server locations whose code has an "i", as Iran or Italy, show and connect right
+* Fix: When a connect fails before the VPN opens, iPhone and Apple TV hear of it at once, where they kept waiting
+* Fix: Stopping the VPN as it starts stops it, where it could come up after, or keep iPhone and Apple TV waiting
+* Improve: With a list of proxies, the app connects as soon as one of them reaches your server, and checks the rest in the background, where it checked the whole list first
+* Fix: When none of your proxies works, the app says so, where a proxy that was turned off or never tried, or one that refused its user name and password, made it blame the server; when your server is down behind proxies that work, the app says the server cannot be reached
+* Fix: With Split Domains on, DNS lookups no longer stall: about half of them were held back, and an app waited for its own retry
+* Fix: With Split Domains on, an app whose server speaks first, as with SMTP, FTP or MySQL, connects after a second, where it waited until it gave up
+* Update: Split Domains takes no `*`: `example.com` covers the domain and all its subdomains, as `*.example.com` did, and a `*` anywhere else, as `*ads.example.com`, never matched anything. A list with one is refused when you save it, and the app says which entry. A list saved before loses the `*.` at the start of its entries, which changes nothing
+* Update: In Split Domains, the most specific domain wins, so you can make exceptions: with `google.com` excluded and `mail.google.com` included, mail goes through the VPN and the rest of Google around it, and a site under a blocked domain can be excluded or included. Block > Exclude > Include decides only for the same domain
+* Improve: When a split list refuses an entry, the app says why in your language and names the entry; an IP list no longer refuses a comment line that starts with spaces
+* Improve: When an ad fails, or the server's address cannot be found, the app says so in your language, where it showed a technical message in English
+* Update: The app has a new icon, its name on a ribbon across the top
+* Improve: On Remote Access, you can paste into every box, IP and proxy lists included, a password manager can fill in your sign-in, and any character you type shows
+* Fix: The VPN no longer stays on Waiting after your device moves to a network that cannot reach the server's address, such as a Wi-Fi without IPv6 after mobile data: it connects again by itself within about a minute

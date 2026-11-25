@@ -1,3 +1,3 @@
-* Amélioration : L'application Android démarre deux à quatre fois plus vite, surtout sur les téléphones économiques
-* Fonctionnalité : Dans l'EEE, au Royaume-Uni et en Suisse, l'application utilise le formulaire de Google pour demander l'autorisation d'utiliser vos données publicitaires. Paramètres > Confidentialité > Choix de confidentialité des annonces permet de modifier votre réponse
-* Correction : Si Google Play ne fonctionne qu'à travers le VPN, la mise à jour s'effectue dès la connexion.
+* Correction : Quand le VPN ne répond plus à l'application, celle-ci affiche son arrêt en quelques secondes ; avant, l'état se figeait et Déconnecter ne faisait rien
+* Correction : Avec Domaines personnalisés activé, les requêtes DNS ne bloquent plus : près de la moitié étaient retenues et les applications attendaient leur propre nouvel essai
+* Mise à jour : L'application a une nouvelle icône, avec son nom sur un ruban en haut

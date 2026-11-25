@@ -1,14 +1,19 @@
-* Atualização: O UDP tem um novo protocolo; em servidores desatualizados, o app se conecta sem UDP
-* Melhoria: O app desenha as próprias telas em vez de exibi-las como página web, e o texto está mais fácil de ler, com mais contraste
-* Atualização: O nome do app no iOS agora é escrito como nas outras plataformas: VpnHood! CONNECT
-* Atualização: Em planos com limite de velocidade, os primeiros megabytes após uma pausa vão em velocidade total para carregar páginas rápido, aplicando o limite apenas no uso intenso contínuo
-* Melhoria: Comprar no site abre o checkout no idioma do app
-* Correção: A Rede Local Dividida agora funciona como esperado: ativada, dispositivos locais como impressoras ou TVs são acessados diretamente; desativada, o tráfego fica na VPN. Ela fazia o oposto quando o Túnel Dividido estava desativado ou em servidores com endereços locais
-* Correção: Uma VPN iniciada sem abrir o app (always-on, bloco de configurações rápidas, ajustes de VPN do sistema ou reinicialização) agora segue suas configurações mais recentes, incluindo o compartilhamento de dados e o servidor escolhido, nunca um servidor removido
-* Correção: "Verificar atualizações" agora sempre responde (informando que você tem a versão mais recente ou que não foi possível verificar) e exibe o aviso de atualização mesmo após escolher Mais tarde
-* Correção: Quando o app era atualizado durante a conexão, agora ele abre em Desconectado em vez de dizer "O serviço VPN encontrou um problema"
-* Correção: Suas configurações e servidores agora vão para o backup do celular e voltam em um celular novo, enquanto seu login, os logs do app e seus arquivos descompactados ficam no celular a que pertencem
-* Correção: O botão "Esqueceu a senha" na tela de login agora abre corretamente a página de redefinição de senha no site da conta, em vez da página inicial
-* Correção: Após excluir sua conta, os dispositivos conectados são desconectados automaticamente, em vez de fazer login silenciosamente e criar uma nova conta
-* Correção: Um upload grande em conexão lenta não bloqueia mais o restante do tráfego do dispositivo, como a navegação
-* Correção: Jogos online que enviam pacotes grandes, como Counter-Strike 2 e Dota 2 na Steam, funcionam pela VPN; qualquer pacote acima de 1280 bytes era descartado. Um VpnHoodServer próprio também precisa desta versão
+* Correção: Um anúncio premiado que falha antes de a VPN conectar é tentado de novo quando a VPN está ativa; antes a conexão parava na primeira falha
+* Correção: Quando o servidor não aceita o anúncio que você assistiu, o app avisa e não pede outro
+* Correção: Quando a VPN para de responder ao app, o app mostra em segundos que ela parou; antes o status congelava e Desconectar não fazia nada
+* Correção: Trocar de servidor enquanto a VPN ainda conecta não interrompe nem substitui mais a nova conexão; antes a tentativa anterior podia encerrá-la, ao falhar ou terminar atrasada
+* Atualização: O app só aceita atualizações de uma chave de acesso por um link seguro (https); um link http comum permitia que qualquer um no caminho enviasse uma atualização e levasse você ao servidor dele
+* Correção: Em aparelhos em turco, locais de servidor cujo código tem um “i”, como Irã ou Itália, aparecem e conectam corretamente
+* Correção: Quando uma conexão falha antes de a VPN abrir, o iPhone e a Apple TV sabem na hora; antes continuavam esperando
+* Correção: Parar a VPN enquanto ela inicia a para de fato; antes ela podia subir depois ou deixar o iPhone e a Apple TV esperando
+* Melhoria: Com uma lista de proxies, o app conecta assim que um deles alcança seu servidor e verifica o resto em segundo plano; antes verificava a lista toda primeiro
+* Correção: Quando nenhum dos seus proxies funciona, o app avisa; antes culpava o servidor se um proxy estava desativado, nunca testado ou recusava usuário e senha. Se o seu servidor cair atrás de proxies que funcionam, o app diz que o servidor está inacessível
+* Correção: Com Dividir Domínios ativado, as consultas DNS não travam mais: cerca de metade ficava retida e os apps esperavam a própria nova tentativa
+* Correção: Com Dividir Domínios ativado, um app cujo servidor fala primeiro, como SMTP, FTP ou MySQL, conecta em um segundo; antes esperava até desistir
+* Atualização: Dividir Domínios não aceita mais `*`: `example.com` cobre o domínio e todos os subdomínios, como `*.example.com` fazia, e um `*` em outro lugar, como `*ads.example.com`, nunca correspondia a nada. Uma lista com `*` é recusada ao salvar e o app indica a entrada. Listas salvas antes perdem o `*.` do início das entradas, sem mudar nada
+* Atualização: Em Dividir Domínios vence o domínio mais específico, então dá para criar exceções: com `google.com` excluído e `mail.google.com` incluído, o e-mail passa pela VPN e o resto do Google por fora; um site sob um domínio bloqueado também pode ser excluído ou incluído. Bloquear > Excluir > Incluir só decide para o mesmo domínio
+* Melhoria: Quando uma lista de divisão recusa uma entrada, o app explica o motivo no seu idioma e cita a entrada; listas de IP não recusam mais comentários que começam com espaços
+* Melhoria: Quando um anúncio falha ou o endereço do servidor não é encontrado, o app avisa no seu idioma, em vez de uma mensagem técnica em inglês
+* Atualização: O app tem um novo ícone, com o nome em uma faixa no topo
+* Melhoria: No Acesso Remoto você pode colar em qualquer campo, inclusive listas de IP e de proxies, um gerenciador de senhas pode preencher seu login e cada caractere digitado aparece
+* Correção: A VPN não fica mais em Aguardando quando o aparelho muda para uma rede que não alcança o endereço do servidor, como um Wi-Fi sem IPv6 depois dos dados móveis: ela reconecta sozinha em cerca de um minuto

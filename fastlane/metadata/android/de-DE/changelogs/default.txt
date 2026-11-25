@@ -1,3 +1,3 @@
-* Verbesserung: Die Android-App startet zwei- bis viermal schneller, vor allem auf Einsteigerhandys
-* Funktion: Im EWR, in UK und der Schweiz fragt die App vor der datenbasierten Werbung über ein Google-Formular nach; die Auswahl lässt sich unter Einstellungen > Datenschutz > Werbeeinstellungen ändern
-* Behebung: Wenn Google Play nur über das VPN erreichbar ist, wird das App-Update nun direkt nach dem Verbindungsaufbau geladen.
+* Fix: Antwortet das VPN der App nicht mehr, zeigt die App binnen Sekunden, dass es gestoppt ist; bisher fror der Status ein und „Trennen“ bewirkte nichts
+* Fix: Mit aktivem Domain-Filter stocken DNS-Abfragen nicht mehr: etwa die Hälfte wurde zurückgehalten, und Apps warteten auf ihren eigenen Neuversuch
+* Update: Die App hat ein neues Symbol, mit ihrem Namen auf einem Band oben

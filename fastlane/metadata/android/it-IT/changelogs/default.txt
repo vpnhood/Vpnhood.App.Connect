@@ -1,3 +1,3 @@
-* Miglioramento: l'app per Android si avvia da due a quattro volte più velocemente, soprattutto sui telefoni economici
-* Nuova funzione: in SEE, Regno Unito e Svizzera, l'app chiede il consenso tramite il modulo Google prima che gli annunci usino i tuoi dati; puoi modificarlo in Impostazioni > Privacy > Scelte privacy annunci
-* Correzione: Quando Google Play funziona solo tramite VPN, gli aggiornamenti dell'app arrivano non appena ci si connette.
+* Correzione: Se la VPN smette di rispondere all'app, l'app mostra in pochi secondi che si è fermata; prima lo stato si bloccava e Disconnetti non faceva nulla
+* Correzione: Con Gestione domini attiva, le richieste DNS non si bloccano più: circa metà venivano trattenute e le app aspettavano il proprio nuovo tentativo
+* Aggiornamento: L'app ha una nuova icona, con il nome su un nastro in alto
